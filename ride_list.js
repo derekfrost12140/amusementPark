@@ -24,6 +24,36 @@ document.addEventListener('DOMContentLoaded', () => {
             <label>
                 <input type="checkbox" id="sensoryCheckbox"> Sensory Friendly
             </label><br>
+            <label>
+                <form>
+                    <input type="range" id="sensoryTouchSlide" min="0" max="10" value="0" oninput="this.form.sensoryTouchNum.value=this.value">
+                    <input type="number" id="sensoryTouchNum" min="0" max="10" value="0" oninput="this.form.sensoryTouchSlide.value=this.value"> Touch
+                </form>
+            </label><br>
+            <label>
+                <form>
+                    <input type="range" id="sensoryTasteSlide" min="0" max="10" value="0" oninput="this.form.sensoryTasteNum.value=this.value">
+                    <input type="number" id="sensoryTasteNum" min="0" max="10" value="0" oninput="this.form.sensoryTasteSlide.value=this.value"> Taste
+                </form>
+            </label><br>
+            <label>
+                <form>
+                    <input type="range" id="sensorySoundSlide" min="0" max="10" value="0" oninput="this.form.sensorySoundNum.value=this.value">
+                    <input type="number" id="sensorySoundNum" min="0" max="10" value="0" oninput="this.form.sensorySoundSlide.value=this.value"> Sound
+                </form>
+            </label><br>
+            <label>
+                <form>
+                    <input type="range" id="sensorySmellSlide" min="0" max="10" value="0" oninput="this.form.sensorySmellNum.value=this.value">
+                    <input type="number" id="sensorySmellNum" min="0" max="10" value="0" oninput="this.form.sensorySmellSlide.value=this.value"> Smell
+                </form>
+            </label><br>
+            <label>
+                <form>
+                    <input type="range" id="sensorySightSlide" min="0" max="10" value="0" oninput="this.form.sensorySightNum.value=this.value">
+                    <input type="number" id="sensorySightNum" min="0" max="10" value="0" oninput="this.form.sensorySightSlide.value=this.value"> Sight
+                </form>
+            </label><br>
             <button id="applyFiltersBtn">Apply Filters</button>
             <button id="closeModalBtn">Close</button>
         </div>
@@ -265,3 +295,7 @@ function applyFilters() {
         }
     });
 }
+
+function updateTextInput(val) {
+    document.getElementById('textInput').value=val; 
+  }
