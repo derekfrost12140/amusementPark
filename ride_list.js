@@ -16,42 +16,36 @@ document.addEventListener('DOMContentLoaded', () => {
                 <input type="checkbox" id="serviceAnimalCheckbox"> Service Animal Friendly
             </label><br>
             <label>
-                <input type="checkbox" id="pregnant"> Show Rides Accessible to Pregnant People
-            </label><br>
-            <label>
-                <input type="checkbox" id="inaccessibleCheckbox"> Inaccessible Ride
-            </label><br>
-            <label>
-                <input type="checkbox" id="sensoryCheckbox"> Sensory Friendly
+                <input type="checkbox" id="pregnant"> Accessible to Pregnant People
             </label><br>
             <label>
                 <form>
-                    <input type="range" id="sensoryTouchSlide" min="0" max="10" value="0" oninput="this.form.sensoryTouchNum.value=this.value">
-                    <input type="number" id="sensoryTouchNum" min="0" max="10" value="0" oninput="this.form.sensoryTouchSlide.value=this.value"> Touch
+                    <input type="range" id="touchSlide" min="0" max="10" value="10" oninput="this.form.touchNum.value=this.value">
+                    <input type="number" id="touchNum" min="0" max="10" value="10" oninput="this.form.touchSlide.value=this.value"> Touch
                 </form>
             </label><br>
             <label>
                 <form>
-                    <input type="range" id="sensoryTasteSlide" min="0" max="10" value="0" oninput="this.form.sensoryTasteNum.value=this.value">
-                    <input type="number" id="sensoryTasteNum" min="0" max="10" value="0" oninput="this.form.sensoryTasteSlide.value=this.value"> Taste
+                    <input type="range" id="tasteSlide" min="0" max="10" value="10" oninput="this.form.tasteNum.value=this.value">
+                    <input type="number" id="tasteNum" min="0" max="10" value="10" oninput="this.form.tasteSlide.value=this.value"> Taste
                 </form>
             </label><br>
             <label>
                 <form>
-                    <input type="range" id="sensorySoundSlide" min="0" max="10" value="0" oninput="this.form.sensorySoundNum.value=this.value">
-                    <input type="number" id="sensorySoundNum" min="0" max="10" value="0" oninput="this.form.sensorySoundSlide.value=this.value"> Sound
+                    <input type="range" id="soundSlide" min="0" max="10" value="10" oninput="this.form.soundNum.value=this.value">
+                    <input type="number" id="soundNum" min="0" max="10" value="10" oninput="this.form.soundSlide.value=this.value"> Sound
                 </form>
             </label><br>
             <label>
                 <form>
-                    <input type="range" id="sensorySmellSlide" min="0" max="10" value="0" oninput="this.form.sensorySmellNum.value=this.value">
-                    <input type="number" id="sensorySmellNum" min="0" max="10" value="0" oninput="this.form.sensorySmellSlide.value=this.value"> Smell
+                    <input type="range" id="smellSlide" min="0" max="10" value="10" oninput="this.form.smellNum.value=this.value">
+                    <input type="number" id="smellNum" min="0" max="10" value="10" oninput="this.form.smellSlide.value=this.value"> Smell
                 </form>
             </label><br>
             <label>
                 <form>
-                    <input type="range" id="sensorySightSlide" min="0" max="10" value="0" oninput="this.form.sensorySightNum.value=this.value">
-                    <input type="number" id="sensorySightNum" min="0" max="10" value="0" oninput="this.form.sensorySightSlide.value=this.value"> Sight
+                    <input type="range" id="sightSlide" min="0" max="10" value="10" oninput="this.form.sightNum.value=this.value">
+                    <input type="number" id="sightNum" min="0" max="10" value="10" oninput="this.form.sightSlide.value=this.value"> Sight
                 </form>
             </label><br>
             <button id="applyFiltersBtn">Apply Filters</button>
@@ -70,8 +64,11 @@ document.addEventListener('DOMContentLoaded', () => {
             wheelchair: document.getElementById('wheelchairCheckbox').checked,
             serviceAnimal: document.getElementById('serviceAnimalCheckbox').checked,
             pregnant: document.getElementById('pregnant').checked,
-            inaccessible: document.getElementById('inaccessibleCheckbox').checked,
-            sensory: document.getElementById('sensoryCheckbox').checked
+            touch: document.getElementById('touchSlide').value,
+            taste: document.getElementById('tasteSlide').value,
+            sound: document.getElementById('soundSlide').value,
+            smell: document.getElementById('smellSlide').value,
+            sight: document.getElementById('sightSlide').value
         };
     });
 
@@ -80,8 +77,11 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('wheelchairCheckbox').checked = previousFilterState.wheelchair;
         document.getElementById('serviceAnimalCheckbox').checked = previousFilterState.serviceAnimal;
         document.getElementById('pregnant').checked = previousFilterState.pregnant;
-        document.getElementById('inaccessibleCheckbox').checked = previousFilterState.inaccessible;
-        document.getElementById('sensoryCheckbox').checked = previousFilterState.sensory;
+        document.getElementById('touchSlide').value = previousFilterState.touch;
+        document.getElementById('tasteSlide').value = previousFilterState.taste;
+        document.getElementById('soundSlide').value = previousFilterState.sound;
+        document.getElementById('smellSlide').value = previousFilterState.smell;
+        document.getElementById('sightSlide').value = previousFilterState.sight;
 
         // Close the modal
         preferencesModal.style.display = 'none';
@@ -95,14 +95,15 @@ document.addEventListener('DOMContentLoaded', () => {
         const wheelchairChecked = document.getElementById('wheelchairCheckbox').checked;
         const serviceAnimalChecked = document.getElementById('serviceAnimalCheckbox').checked;
         const pregnantChecked = document.getElementById('pregnant').checked;
-        const inaccessibleChecked = document.getElementById('inaccessibleCheckbox').checked;
-        const sensoryChecked = document.getElementById('sensoryCheckbox').checked;
+        const touchVal = document.getElementById('touchSlide').value;
+        const tasteVal = document.getElementById('tasteSlide').value;
+        const soundVal = document.getElementById('soundSlide').value;
+        const smellVal = document.getElementById('smellSlide').value;
+        const sightVal = document.getElementById('sightSlide').value;
 
         console.log('Wheelchair:', wheelchairChecked);
         console.log('Service Animal:', serviceAnimalChecked);
-        console.log('Short Wait:', pregnantChecked);
-        console.log('Inaccessible:', inaccessibleChecked);
-        console.log('Sensory:', sensoryChecked);
+        console.log('Pregnant:', pregnantChecked);
 
         // Get all the ride containers
         const rideContainers = document.querySelectorAll('.ride-container');
@@ -113,16 +114,22 @@ document.addEventListener('DOMContentLoaded', () => {
             const hasWheelchair = ride.getAttribute('data-wheelchair') === 'true';
             const hasServiceAnimal = ride.getAttribute('data-serviceAnimal') === 'true';
             const hasPregnant = ride.getAttribute('data-pregnant') === 'true';
-            const hasInaccessible = ride.getAttribute('data-inaccessible') === 'true';
-            const hasSensory = ride.getAttribute('data-sensory') === 'true';
+            const touchData = parseInt(ride.getAttribute('data-touch'), 10);
+            const tasteData = parseInt(ride.getAttribute('data-taste'), 10);
+            const soundData = parseInt(ride.getAttribute('data-sound'), 10);
+            const smellData = parseInt(ride.getAttribute('data-smell'), 10);
+            const sightData = parseInt(ride.getAttribute('data-sight'), 10);
 
             // Check if the ride matches the selected filters
             const matchesFilter = 
                 (!wheelchairChecked || hasWheelchair) &&
                 (!serviceAnimalChecked || hasServiceAnimal) &&
                 (!pregnantChecked || hasPregnant) &&
-                (!inaccessibleChecked || hasInaccessible) &&
-                (!sensoryChecked || hasSensory);
+                (touchData <= touchVal) &&
+                (tasteData <= tasteVal) &&
+                (soundData <= soundVal) &&
+                (smellData <= smellVal) &&
+                (sightData <= sightVal);
 
             // Show or hide the ride container based on the match
             if (matchesFilter) {
@@ -143,8 +150,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const wheelchair = ride.getAttribute('data-wheelchair');
         const serviceAnimal = ride.getAttribute('data-serviceAnimal');
         const pregnant = ride.getAttribute('data-pregnant');
-        const inaccessible = ride.getAttribute('data-inaccessible');
-        const sensory = ride.getAttribute('data-sensory');
+        const touch = ride.getAttribute('data-touch');
+        const taste = ride.getAttribute('data-taste');
+        const sound = ride.getAttribute('data-sound');
+        const smell = ride.getAttribute('data-smell');
+        const sight = ride.getAttribute('data-sight');
 
         // Find the span where the accessibility data will be injected
         const accessibilityData = ride.querySelector('.accessibility-data');
@@ -160,14 +170,13 @@ document.addEventListener('DOMContentLoaded', () => {
             accessibilityText.push("<span class='filter-tag' data-filter='serviceAnimal'>Service Animal Allowed</span>");
         }
         if (pregnant === 'true') {
-            accessibilityText.push("<span class='filter-tag' data-filter='pregnant'>Show Rides Accessible to Pregnant People</span>");
+            accessibilityText.push("<span class='filter-tag' data-filter='pregnant'>Accessible to Pregnant People</span>");
         }
-        if (inaccessible === 'true') {
-            accessibilityText.push("<span class='filter-tag' data-filter='inaccessible'>Inaccessible</span>");
-        }
-        if (sensory === 'true') {
-            accessibilityText.push("<span class='filter-tag' data-filter='sensory'>Sensory Accessible</span>");
-        }
+        accessibilityText.push("<span class='filter-tag' data-filter='touch'> Touch Level: " +touch+ "</span>");
+        accessibilityText.push("<span class='filter-tag' data-filter='taste'> Taste Level: " +taste+ "</span>");
+        accessibilityText.push("<span class='filter-tag' data-filter='sound'> Sound Level: " +sound+ "</span>");
+        accessibilityText.push("<span class='filter-tag' data-filter='smell'> Smell Level: " +smell+ "</span>");
+        accessibilityText.push("<span class='filter-tag' data-filter='sight'> Sight Level: " +sight+ "</span>");
         // Join the text array into a single string and insert it into the span
         accessibilityData.innerHTML = accessibilityText.join('') || "No accessibility information available";
     });
@@ -259,11 +268,24 @@ document.addEventListener('DOMContentLoaded', () => {
 document.addEventListener('click', (event) => {
     if (event.target && event.target.classList.contains('filter-tag')) {
         const filterType = event.target.getAttribute('data-filter');
-        const filterCheckbox = document.getElementById(`${filterType}Checkbox`);
+        const filterValue = parseInt(event.target.textContent, 10); // !!!FIX/TODO: Get the number from the tag's text content and parse it to an integer
 
-        filterCheckbox.checked = !filterCheckbox.checked;
+        // Find the corresponding input element (checkbox or number box)
+        const filterElement = document.getElementById(`${filterType}Checkbox`) || document.getElementById(`${filterType}Num`);
 
-        applyFilters();
+        // If the element is a checkbox
+        if (filterElement && filterElement.type === 'checkbox') {
+            // Toggle checkbox state if it's a checkbox
+            filterElement.checked = !filterElement.checked;
+        }
+        
+        // If the element is a number box
+        else if (filterElement && filterElement.type === 'number') {
+            // Set the number input value to the value inside the filter tag
+            filterElement.value = filterValue;
+        }
+
+        applyFilters();  // Re-apply filters after the change
     }
 });
 
@@ -272,21 +294,32 @@ function applyFilters() {
     const wheelchairChecked = document.getElementById('wheelchairCheckbox').checked;
     const serviceAnimalChecked = document.getElementById('serviceAnimalCheckbox').checked;
     const pregnantChecked = document.getElementById('pregnant').checked;
-    const inaccessibleChecked = document.getElementById('inaccessibleCheckbox').checked;
+    const touchVal = document.getElementById('touchNum').value;
+    const tasteVal = document.getElementById('tasteNum').value;
+    const soundVal = document.getElementById('soundNum').value;
+    const smellVal = document.getElementById('smellNum').value;
+    const sightVal = document.getElementById('sightNum').value;
 
     const rideContainers = document.querySelectorAll('.ride-container');
     rideContainers.forEach(ride => {
         const hasWheelchair = ride.getAttribute('data-wheelchair') === 'true';
         const hasServiceAnimal = ride.getAttribute('data-serviceAnimal') === 'true';
         const hasPregnant = ride.getAttribute('data-pregnant') === 'true';
-        const hasInaccessible = ride.getAttribute('data-inaccessible') === 'true';
+        const touch = parseInt(ride.getAttribute('data-touch'), 10);
+        const taste = parseInt(ride.getAttribute('data-taste'), 10);
+        const sound = parseInt(ride.getAttribute('data-sound'), 10);
+        const smell = parseInt(ride.getAttribute('data-smell'), 10);
+        const sight = parseInt(ride.getAttribute('data-sight'), 10);
 
         const matchesFilter =
             (!wheelchairChecked || hasWheelchair) &&
             (!serviceAnimalChecked || hasServiceAnimal) &&
-            (!pregnantChecked || hasPregnant) &&
-            (!inaccessibleChecked || hasInaccessible) &&
-            (!sensoryChecked || hasSensory);
+            (!pregnantChecked || hasPregnant);
+            (touch <= touchVal) &&
+            (taste <= tasteVal) &&
+            (sound <= soundVal) &&
+            (smell <= smellVal) &&
+            (sight <= sightVal);
 
         if (matchesFilter) {
             ride.style.display = 'flex';
