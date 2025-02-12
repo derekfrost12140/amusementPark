@@ -1,334 +1,90 @@
-document.addEventListener('DOMContentLoaded', () => {
-    // Handle the filter button click event
-    const filterBtn = document.getElementById('filterBtn');
-    const preferencesModal = document.createElement('div'); // Create the modal dynamically
+// Firebase Configuration
+const firebaseConfig = {
+    apiKey: "AIzaSyBn7xE-jaEuixzyDROnbHrQo6-YtOR5LaU",
+    authDomain: "amusement-park-4039d.firebaseapp.com",
+    projectId: "amusement-park-4039d",
+    storageBucket: "amusement-park-4039d.appspot.com",
+    messagingSenderId: "625618396056",
+    appId: "1:625618396056:web:ff2907be3a1958ed9041ed",
+    measurementId: "G-6QHBHT0PPE"
+};
 
-    preferencesModal.classList.add('preferences-modal');
-    preferencesModal.innerHTML = `
-        <div class="preferences-modal-content">
-            
+// Initialize Firebase
+const app = firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore(app);
+const ridesContainer = document.getElementById('ridesContainer');
 
-            <h2>Filter Preferences</h2>
-            <label>
-                <input type="checkbox" id="wheelchairCheckbox"> Wheelchair Accessible
-            </label><br>
-            <label>
-                <input type="checkbox" id="serviceAnimalCheckbox"> Service Animal Friendly
-            </label><br>
-            <label>
-                <input type="checkbox" id="pregnant"> Accessible to Pregnant People
-            </label><br>
-            <label>
-                <form>
-                    <input type="range" id="touchSlide" min="0" max="10" value="10" oninput="this.form.touchNum.value=this.value">
-                    <input type="number" id="touchNum" min="0" max="10" value="10" oninput="this.form.touchSlide.value=this.value"> Touch
-                </form>
-            </label><br>
-            <label>
-                <form>
-                    <input type="range" id="tasteSlide" min="0" max="10" value="10" oninput="this.form.tasteNum.value=this.value">
-                    <input type="number" id="tasteNum" min="0" max="10" value="10" oninput="this.form.tasteSlide.value=this.value"> Taste
-                </form>
-            </label><br>
-            <label>
-                <form>
-                    <input type="range" id="soundSlide" min="0" max="10" value="10" oninput="this.form.soundNum.value=this.value">
-                    <input type="number" id="soundNum" min="0" max="10" value="10" oninput="this.form.soundSlide.value=this.value"> Sound
-                </form>
-            </label><br>
-            <label>
-                <form>
-                    <input type="range" id="smellSlide" min="0" max="10" value="10" oninput="this.form.smellNum.value=this.value">
-                    <input type="number" id="smellNum" min="0" max="10" value="10" oninput="this.form.smellSlide.value=this.value"> Smell
-                </form>
-            </label><br>
-            <label>
-                <form>
-                    <input type="range" id="sightSlide" min="0" max="10" value="10" oninput="this.form.sightNum.value=this.value">
-                    <input type="number" id="sightNum" min="0" max="10" value="10" oninput="this.form.sightSlide.value=this.value"> Sight
-                </form>
-            </label><br>
-            <button id="applyFiltersBtn">Apply Filters</button>
-            <button id="closeModalBtn">Close</button>
-        </div>
-    `;
-    let previousFilterState = {};
-
-    // Append modal to body
-    document.body.appendChild(preferencesModal);
-
-    // Show the modal when filter button is clicked
-    filterBtn.addEventListener('click', () => {
-        preferencesModal.style.display = 'flex';
-        previousFilterState = {
-            wheelchair: document.getElementById('wheelchairCheckbox').checked,
-            serviceAnimal: document.getElementById('serviceAnimalCheckbox').checked,
-            pregnant: document.getElementById('pregnant').checked,
-            touch: document.getElementById('touchSlide').value,
-            taste: document.getElementById('tasteSlide').value,
-            sound: document.getElementById('soundSlide').value,
-            smell: document.getElementById('smellSlide').value,
-            sight: document.getElementById('sightSlide').value
-        };
-    });
-
-    // Close the modal when the "Close" button is clicked
-    document.getElementById('closeModalBtn').addEventListener('click', () => {
-        document.getElementById('wheelchairCheckbox').checked = previousFilterState.wheelchair;
-        document.getElementById('serviceAnimalCheckbox').checked = previousFilterState.serviceAnimal;
-        document.getElementById('pregnant').checked = previousFilterState.pregnant;
-        document.getElementById('touchSlide').value = previousFilterState.touch;
-        document.getElementById('tasteSlide').value = previousFilterState.taste;
-        document.getElementById('soundSlide').value = previousFilterState.sound;
-        document.getElementById('smellSlide').value = previousFilterState.smell;
-        document.getElementById('sightSlide').value = previousFilterState.sight;
-
-        // Close the modal
-        preferencesModal.style.display = 'none';
-
-        // Reapply the filters with the previous state
-        applyFilters();
-    });
-
-    // Handle the filter logic when Apply Filters is clicked
-    document.getElementById('applyFiltersBtn').addEventListener('click', () => {
-        const wheelchairChecked = document.getElementById('wheelchairCheckbox').checked;
-        const serviceAnimalChecked = document.getElementById('serviceAnimalCheckbox').checked;
-        const pregnantChecked = document.getElementById('pregnant').checked;
-        const touchVal = document.getElementById('touchSlide').value;
-        const tasteVal = document.getElementById('tasteSlide').value;
-        const soundVal = document.getElementById('soundSlide').value;
-        const smellVal = document.getElementById('smellSlide').value;
-        const sightVal = document.getElementById('sightSlide').value;
-
-        console.log('Wheelchair:', wheelchairChecked);
-        console.log('Service Animal:', serviceAnimalChecked);
-        console.log('Pregnant:', pregnantChecked);
-
-        // Get all the ride containers
-        const rideContainers = document.querySelectorAll('.ride-container');
-
-        // Loop through each ride and check if it matches the selected preferences
-        rideContainers.forEach(ride => {
-            // Extract data attributes from the ride container
-            const hasWheelchair = ride.getAttribute('data-wheelchair') === 'true';
-            const hasServiceAnimal = ride.getAttribute('data-serviceAnimal') === 'true';
-            const hasPregnant = ride.getAttribute('data-pregnant') === 'true';
-            const touchData = parseInt(ride.getAttribute('data-touch'), 10);
-            const tasteData = parseInt(ride.getAttribute('data-taste'), 10);
-            const soundData = parseInt(ride.getAttribute('data-sound'), 10);
-            const smellData = parseInt(ride.getAttribute('data-smell'), 10);
-            const sightData = parseInt(ride.getAttribute('data-sight'), 10);
-
-            // Check if the ride matches the selected filters
-            const matchesFilter = 
-                (!wheelchairChecked || hasWheelchair) &&
-                (!serviceAnimalChecked || hasServiceAnimal) &&
-                (!pregnantChecked || hasPregnant) &&
-                (touchData <= touchVal) &&
-                (tasteData <= tasteVal) &&
-                (soundData <= soundVal) &&
-                (smellData <= smellVal) &&
-                (sightData <= sightVal);
-
-            // Show or hide the ride container based on the match
-            if (matchesFilter) {
-                ride.style.display = 'flex';  // Show the ride
-            } else {
-                ride.style.display = 'none';  // Hide the ride
-            }
+// Function to Load Rides from Firestore
+function loadRidesFromFirestore() {
+    db.collection("locations").get().then((querySnapshot) => {
+        ridesContainer.innerHTML = ''; // Clear container
+        querySnapshot.forEach((doc) => {
+            const data = doc.data();
+            const rideElement = createRideElement(data);
+            ridesContainer.appendChild(rideElement);
         });
-
-        // Close the modal after applying the filter
-        preferencesModal.style.display = 'none';
-    });
-
-    // Loop through each ride container and extract accessibility data
-    const rideContainers = document.querySelectorAll('.ride-container');
-    rideContainers.forEach((ride) => {
-        // Grab the data-* attributes
-        const wheelchair = ride.getAttribute('data-wheelchair');
-        const serviceAnimal = ride.getAttribute('data-serviceAnimal');
-        const pregnant = ride.getAttribute('data-pregnant');
-        const touch = ride.getAttribute('data-touch');
-        const taste = ride.getAttribute('data-taste');
-        const sound = ride.getAttribute('data-sound');
-        const smell = ride.getAttribute('data-smell');
-        const sight = ride.getAttribute('data-sight');
-
-        // Find the span where the accessibility data will be injected
-        const accessibilityData = ride.querySelector('.accessibility-data');
-        
-        // Create an array to hold the accessibility features
-        let accessibilityText = [];
-
-        // Check each attribute and add the appropriate text
-        if (wheelchair === 'true') {
-            accessibilityText.push("<span class='filter-tag' data-filter='wheelchair'>Wheelchair Accessible</span>");
-        }
-        if (serviceAnimal === 'true') {
-            accessibilityText.push("<span class='filter-tag' data-filter='serviceAnimal'>Service Animal Allowed</span>");
-        }
-        if (pregnant === 'true') {
-            accessibilityText.push("<span class='filter-tag' data-filter='pregnant'>Accessible to Pregnant People</span>");
-        }
-        accessibilityText.push("<span class='filter-tag' data-filter='touch'> Touch Level: " +touch+ "</span>");
-        accessibilityText.push("<span class='filter-tag' data-filter='taste'> Taste Level: " +taste+ "</span>");
-        accessibilityText.push("<span class='filter-tag' data-filter='sound'> Sound Level: " +sound+ "</span>");
-        accessibilityText.push("<span class='filter-tag' data-filter='smell'> Smell Level: " +smell+ "</span>");
-        accessibilityText.push("<span class='filter-tag' data-filter='sight'> Sight Level: " +sight+ "</span>");
-        // Join the text array into a single string and insert it into the span
-        accessibilityData.innerHTML = accessibilityText.join('') || "No accessibility information available";
-    });
-
-    // Handle the sort button click event
-    const sortBtn = document.getElementById('sortBtn');
-    const sortModal = document.createElement('div'); // Create the modal dynamically
-    sortModal.classList.add('sort-modal');
-    sortModal.innerHTML = `
-        <div class="sort-modal-content">
-            <h2>Sort Preferences</h2>
-            <div class="sort-options">
-                <label>
-                    <input type="radio" name="sortOption" id="sortByName" checked> Sort by Name
-                </label><br>
-                <label>
-                    <input type="radio" name="sortOption" id="sortByHeight"> Sort by Minimum Height
-                </label><br>
-                <label>
-                    <input type="radio" name="sortOption" id="sortByDuration"> Sort by Duration
-                </label><br>
-            </div>
-            <div class="sort-order">
-                <label>
-                    <input type="radio" name="sortOrder" id="sortAsc" checked> Ascending (A-Z)
-                </label><br>
-                <label>
-                    <input type="radio" name="sortOrder" id="sortDesc"> Descending (Z-A)
-                </label><br>
-            </div>
-            <button id="applySortBtn">Apply Sort</button>
-            <button id="closeSortModalBtn">Close</button>
-        </div>
-    `;
-    document.body.appendChild(sortModal);
-
-    // Show the modal when sort button is clicked
-    sortBtn.addEventListener('click', () => {
-        sortModal.style.display = 'flex';
-    });
-
-    // Close the modal when the "Close" button is clicked
-    document.getElementById('closeSortModalBtn').addEventListener('click', () => {
-        sortModal.style.display = 'none';
-    });
-
-    // Handle the sort logic when Apply Sort is clicked
-    document.getElementById('applySortBtn').addEventListener('click', () => {
-        const sortByName = document.getElementById('sortByName').checked;
-        const sortByHeight = document.getElementById('sortByHeight').checked;
-        const sortByDuration = document.getElementById('sortByDuration').checked;
-        const sortAsc = document.getElementById('sortAsc').checked;  // Ascending order
-        const sortDesc = document.getElementById('sortDesc').checked; // Descending order
-
-        const rideArray = Array.from(rideContainers);
-        let sortOrder = sortAsc ? 1 : -1; // 1 for ascending, -1 for descending
-
-        if (sortByName) {
-            rideArray.sort((a, b) => {
-                const nameA = a.querySelector('h2').textContent.toLowerCase();
-                const nameB = b.querySelector('h2').textContent.toLowerCase();
-                return nameA.localeCompare(nameB) * sortOrder;  // Apply sort order
-            });
-        } else if (sortByHeight) {
-            rideArray.sort((a, b) => {
-                const heightA = parseInt(a.getAttribute('data-minHeight'));
-                const heightB = parseInt(b.getAttribute('data-minHeight'));
-                return (heightA - heightB) * sortOrder;  // Apply sort order
-            });
-        } else if (sortByDuration) {
-            rideArray.sort((a, b) => {
-                const durationA = parseInt(a.getAttribute('data-duration'));
-                const durationB = parseInt(b.getAttribute('data-duration'));
-                return (durationA - durationB) * sortOrder;  // Apply sort order
-            });
-        }
-
-        // Append the sorted rides back to the container
-        const ridesContainer = document.querySelector('.rides-container');
-        rideArray.forEach(ride => {
-            ridesContainer.appendChild(ride);
-        });
-
-        // Close the sort modal
-        sortModal.style.display = 'none';
-    });
-});
-
-document.addEventListener('click', (event) => {
-    if (event.target && event.target.classList.contains('filter-tag')) {
-        const filterType = event.target.getAttribute('data-filter');
-        const filterValue = parseInt(event.target.textContent, 10); // !!!FIX/TODO: Get the number from the tag's text content and parse it to an integer
-
-        // Find the corresponding input element (checkbox or number box)
-        const filterElement = document.getElementById(`${filterType}Checkbox`) || document.getElementById(`${filterType}Num`);
-
-        // If the element is a checkbox
-        if (filterElement && filterElement.type === 'checkbox') {
-            // Toggle checkbox state if it's a checkbox
-            filterElement.checked = !filterElement.checked;
-        }
-        
-        // If the element is a number box
-        else if (filterElement && filterElement.type === 'number') {
-            // Set the number input value to the value inside the filter tag
-            filterElement.value = filterValue;
-        }
-
-        applyFilters();  // Re-apply filters after the change
-    }
-});
-
-// Apply the filter
-function applyFilters() {
-    const wheelchairChecked = document.getElementById('wheelchairCheckbox').checked;
-    const serviceAnimalChecked = document.getElementById('serviceAnimalCheckbox').checked;
-    const pregnantChecked = document.getElementById('pregnant').checked;
-    const touchVal = document.getElementById('touchNum').value;
-    const tasteVal = document.getElementById('tasteNum').value;
-    const soundVal = document.getElementById('soundNum').value;
-    const smellVal = document.getElementById('smellNum').value;
-    const sightVal = document.getElementById('sightNum').value;
-
-    const rideContainers = document.querySelectorAll('.ride-container');
-    rideContainers.forEach(ride => {
-        const hasWheelchair = ride.getAttribute('data-wheelchair') === 'true';
-        const hasServiceAnimal = ride.getAttribute('data-serviceAnimal') === 'true';
-        const hasPregnant = ride.getAttribute('data-pregnant') === 'true';
-        const touch = parseInt(ride.getAttribute('data-touch'), 10);
-        const taste = parseInt(ride.getAttribute('data-taste'), 10);
-        const sound = parseInt(ride.getAttribute('data-sound'), 10);
-        const smell = parseInt(ride.getAttribute('data-smell'), 10);
-        const sight = parseInt(ride.getAttribute('data-sight'), 10);
-
-        const matchesFilter =
-            (!wheelchairChecked || hasWheelchair) &&
-            (!serviceAnimalChecked || hasServiceAnimal) &&
-            (!pregnantChecked || hasPregnant);
-            (touch <= touchVal) &&
-            (taste <= tasteVal) &&
-            (sound <= soundVal) &&
-            (smell <= smellVal) &&
-            (sight <= sightVal);
-
-        if (matchesFilter) {
-            ride.style.display = 'flex';
-        } else {
-            ride.style.display = 'none';
-        }
+    }).catch(error => {
+        console.error("Error loading rides: ", error);
     });
 }
 
-function updateTextInput(val) {
-    document.getElementById('textInput').value=val; 
-  }
+// Function to Create a Ride Element
+function createRideElement(data) {
+    const rideDiv = document.createElement('div');
+    rideDiv.classList.add('ride-container');
+    rideDiv.setAttribute('data-wheelchair', data.wheelchair);
+    rideDiv.setAttribute('data-serviceAnimal', data.serviceAnimal);
+    rideDiv.setAttribute('data-pregnant', data.pregnant);
+    rideDiv.setAttribute('data-touch', data.touch);
+    rideDiv.setAttribute('data-taste', data.taste);
+    rideDiv.setAttribute('data-sound', data.sound);
+    rideDiv.setAttribute('data-smell', data.smell);
+    rideDiv.setAttribute('data-sight', data.sight);
+    rideDiv.setAttribute('data-name', data.title);
+    rideDiv.setAttribute('data-minHeight', data.minHeight);
+    rideDiv.setAttribute('data-duration', data.duration);
+
+    rideDiv.innerHTML = `
+        <img src="rideImages/${data.image}" alt="${data.title}" class="ride-container-image">
+        <div class="ride-container-text">
+            <h2>${data.title}</h2>
+            <p>${data.description}</p>
+            <p><u>Minimum height</u>: ${data.minHeight}"</p>
+            <p><u>Duration</u>: ${Math.floor(data.duration / 60)} min ${data.duration % 60} sec</p>
+            <p><b>Accessibility Constraints: </b><span class="accessibility-data"></span></p>
+            <div class="button-container">
+                <a href="mapNav.html?lat=${data.lat}&lng=${data.lng}" class="directions-button">Directions</a> 
+            </div>
+        </div>
+    `;
+    return rideDiv;
+}
+
+// Function to Populate Firestore with Default Rides (If Empty)
+function addDefaultRidesToFirestore() {
+    db.collection("locations").get().then((querySnapshot) => {
+        if (querySnapshot.empty) {
+            const defaultRides = [
+                { title: "Aquaman: Power Wave", lat: 32.7569477466, lng: -97.0685863495, category: "A", minHeight: 48, duration: 80, wheelchair: true, serviceAnimal: false, pregnant: false, touch: 4, taste: 1, sound: 4, smell: 1, sight: 3, image: "Aquaman.png", description: "Experience the powerful force of this aquatic attraction as you’re pulled back and forth, mimicking the mighty waves of the ocean." },
+                { title: "Batman The Ride", lat: 32.7586795651, lng: -97.0665944558, category: "B", minHeight: 54, duration: 135, wheelchair: true, serviceAnimal: false, pregnant: false, touch: 8, taste: 1, sound: 7, smell: 1, sight: 8, image: "Batman.jpg", description: "See what it’s like behind the mask on this deeply inaccessible, 50-mph juggernaut as you star in your own GOTHAM adventure." },
+                { title: "Batwing", lat: 32.7575623165, lng: -97.0670548914, category: "C", minHeight: 48, duration: 105, wheelchair: true, serviceAnimal: false, pregnant: false, touch: 3, taste: 1, sound: 2, smell: 1, sight: 3, image: "Batwing.png", description: "Here’s a ride fit for brave young batboys and batgirls, perfect for toddlers and young children seeking adventure." }
+            ];
+
+            defaultRides.forEach(ride => {
+                db.collection("locations").add(ride).then(() => {
+                    console.log(`Ride "${ride.title}" added successfully.`);
+                }).catch(error => {
+                    console.error("Error adding ride: ", error);
+                });
+            });
+        }
+    }).catch(error => {
+        console.error("Error checking Firestore rides: ", error);
+    });
+}
+
+// Run Firestore Setup and Load Rides on Page Load
+document.addEventListener('DOMContentLoaded', () => {
+    addDefaultRidesToFirestore();
+    loadRidesFromFirestore();
+});
