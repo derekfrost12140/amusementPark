@@ -127,7 +127,10 @@ function navigateToMarker(lat, lng) {
 
 // Function to calculate and display the route
 function calculateAndDisplayRoute(destination) {
+    
     var start = { lat: 32.7561025211987, lng: -97.07243375722175 };
+    directionsRenderer.setDirections({ routes: [] });
+
 
     directionsService.route(
         {
@@ -184,7 +187,6 @@ window.addEventListener('storage', function (event) {
 });
 
 // Load the map when the page is ready
-window.onload = initMap;
 
 </script>
 
