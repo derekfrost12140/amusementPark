@@ -1,8 +1,4 @@
-// Import Firebase modules
-import { initializeApp } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js";
-import { getFirestore, collection, getDocs, addDoc } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore.js";
-
-// Firebase Configuration
+// Firebase configuration
 const firebaseConfig = {
     apiKey: "AIzaSyBn7xE-jaEuixzyDROnbHrQo6-YtOR5LaU",
     authDomain: "amusement-park-4039d.firebaseapp.com",
@@ -14,14 +10,14 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
 
 // Function to Fetch Rides from Firestore
 async function fetchRides() {
-    const ridesCollection = collection(db, "rides");
+    const ridesCollection = db.collection("rides");
     try {
-        const querySnapshot = await getDocs(ridesCollection);
+        const querySnapshot = await ridesCollection.get();
         if (querySnapshot.empty) {
             console.log("No rides found. Adding default rides...");
             await addDefaultRides();
@@ -35,7 +31,7 @@ async function fetchRides() {
 
 // Function to Add Default Rides if "rides" Collection is Empty
 async function addDefaultRides() {
-    const ridesCollection = collection(db, "rides");
+    const ridesCollection = db.collection("rides");
 
     const ridesData = [
         { name: "Aquaman: Power Wave", minHeight: 48, duration: 80, wheelchair: true, serviceAnimal: false, pregnant: false },
@@ -45,7 +41,7 @@ async function addDefaultRides() {
 
     try {
         for (let ride of ridesData) {
-            await addDoc(ridesCollection, ride);
+            await ridesCollection.add(ride);
             console.log(`Added: ${ride.name}`);
         }
         console.log("Default rides added! Refreshing...");
