@@ -6,8 +6,6 @@ document.addEventListener('DOMContentLoaded', () => {
     preferencesModal.classList.add('preferences-modal');
     preferencesModal.innerHTML = `
         <div class="preferences-modal-content">
-            
-
             <h2>Filter Preferences</h2>
             <label>
                 <input type="checkbox" id="wheelchairCheckbox"> Wheelchair Accessible
@@ -125,11 +123,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 (!wheelchairChecked || hasWheelchair) &&
                 (!serviceAnimalChecked || hasServiceAnimal) &&
                 (!pregnantChecked || hasPregnant) &&
-                (touchData <= touchVal) &&
-                (tasteData <= tasteVal) &&
-                (soundData <= soundVal) &&
-                (smellData <= smellVal) &&
-                (sightData <= sightVal);
+                (parseInt(touchData, 10) <= parseInt(touchVal, 10)) &&
+                (parseInt(tasteData, 10) <= parseInt(tasteVal, 10)) &&
+                (parseInt(soundData, 10) <= parseInt(soundVal, 10)) &&
+                (parseInt(smellData, 10) <= parseInt(smellVal, 10)) &&
+                (parseInt(sightData, 10) <= parseInt(sightVal, 10));
 
             // Show or hide the ride container based on the match
             if (matchesFilter) {
@@ -172,11 +170,11 @@ document.addEventListener('DOMContentLoaded', () => {
         if (pregnant === 'true') {
             accessibilityText.push("<span class='filter-tag' data-filter='pregnant'>Accessible to Pregnant People</span>");
         }
-        accessibilityText.push("<span class='filter-tag' data-filter='touch'> Touch Level: " +touch+ "</span>");
-        accessibilityText.push("<span class='filter-tag' data-filter='taste'> Taste Level: " +taste+ "</span>");
-        accessibilityText.push("<span class='filter-tag' data-filter='sound'> Sound Level: " +sound+ "</span>");
-        accessibilityText.push("<span class='filter-tag' data-filter='smell'> Smell Level: " +smell+ "</span>");
-        accessibilityText.push("<span class='filter-tag' data-filter='sight'> Sight Level: " +sight+ "</span>");
+        accessibilityText.push(`<span class='filter-tag' data-filter='touch' data-number='${touch}'> Touch Level: ` +touch+ `</span>`); //TODO: add the val (touch) to the span
+        accessibilityText.push(`<span class='filter-tag' data-filter='taste' data-number='${taste}'> Taste Level: ` +taste+ `</span>`);
+        accessibilityText.push(`<span class='filter-tag' data-filter='sound' data-number='${sound}'> Sound Level: ` +sound+ `</span>`);
+        accessibilityText.push(`<span class='filter-tag' data-filter='smell' data-number='${smell}'> Smell Level: ` +smell+ `</span>`);
+        accessibilityText.push(`<span class='filter-tag' data-filter='sight' data-number='${sight}'> Sight Level: ` +sight+ `</span>`);
         // Join the text array into a single string and insert it into the span
         accessibilityData.innerHTML = accessibilityText.join('') || "No accessibility information available";
     });
@@ -268,8 +266,9 @@ document.addEventListener('DOMContentLoaded', () => {
 document.addEventListener('click', (event) => {
     if (event.target && event.target.classList.contains('filter-tag')) {
         const filterType = event.target.getAttribute('data-filter');
-        const filterValue = parseInt(event.target.textContent, 10); // !!!FIX/TODO: Get the number from the tag's text content and parse it to an integer
+        const filterValue = event.target.getAttribute('data-number');
 
+        console.log(`Tag clicked: ${filterType}, Value: ${filterValue}`);
         // Find the corresponding input element (checkbox or number box)
         const filterElement = document.getElementById(`${filterType}Checkbox`) || document.getElementById(`${filterType}Num`);
 
@@ -283,9 +282,10 @@ document.addEventListener('click', (event) => {
         else if (filterElement && filterElement.type === 'number') {
             // Set the number input value to the value inside the filter tag
             filterElement.value = filterValue;
+            document.getElementById(`${filterType}Slide`).value = filterValue;
+            //FIX: clicking tag does not apply the filter (only to slider options)
         }
-
-        applyFilters();  // Re-apply filters after the change
+        applyFilters();
     }
 });
 
@@ -294,41 +294,43 @@ function applyFilters() {
     const wheelchairChecked = document.getElementById('wheelchairCheckbox').checked;
     const serviceAnimalChecked = document.getElementById('serviceAnimalCheckbox').checked;
     const pregnantChecked = document.getElementById('pregnant').checked;
-    const touchVal = document.getElementById('touchNum').value;
-    const tasteVal = document.getElementById('tasteNum').value;
-    const soundVal = document.getElementById('soundNum').value;
-    const smellVal = document.getElementById('smellNum').value;
-    const sightVal = document.getElementById('sightNum').value;
+    const touchVal = document.getElementById('touchSlide').value;
+    const tasteVal = document.getElementById('tasteSlide').value;
+    const soundVal = document.getElementById('soundSlide').value;
+    const smellVal = document.getElementById('smellSlide').value;
+    const sightVal = document.getElementById('sightSlide').value;
 
+    // Get all the ride containers
     const rideContainers = document.querySelectorAll('.ride-container');
+
+    // Loop through each ride and check if it matches the selected preferences
     rideContainers.forEach(ride => {
+        // Extract data attributes from the ride container
         const hasWheelchair = ride.getAttribute('data-wheelchair') === 'true';
         const hasServiceAnimal = ride.getAttribute('data-serviceAnimal') === 'true';
         const hasPregnant = ride.getAttribute('data-pregnant') === 'true';
-        const touch = parseInt(ride.getAttribute('data-touch'), 10);
-        const taste = parseInt(ride.getAttribute('data-taste'), 10);
-        const sound = parseInt(ride.getAttribute('data-sound'), 10);
-        const smell = parseInt(ride.getAttribute('data-smell'), 10);
-        const sight = parseInt(ride.getAttribute('data-sight'), 10);
+        const touchData = parseInt(ride.getAttribute('data-touch'), 10);
+        const tasteData = parseInt(ride.getAttribute('data-taste'), 10);
+        const soundData = parseInt(ride.getAttribute('data-sound'), 10);
+        const smellData = parseInt(ride.getAttribute('data-smell'), 10);
+        const sightData = parseInt(ride.getAttribute('data-sight'), 10);
 
-        const matchesFilter =
+        // Check if the ride matches the selected filters
+        const matchesFilter = 
             (!wheelchairChecked || hasWheelchair) &&
             (!serviceAnimalChecked || hasServiceAnimal) &&
-            (!pregnantChecked || hasPregnant);
-            (touch <= touchVal) &&
-            (taste <= tasteVal) &&
-            (sound <= soundVal) &&
-            (smell <= smellVal) &&
-            (sight <= sightVal);
+            (!pregnantChecked || hasPregnant) &&
+            (parseInt(touchData, 10) <= parseInt(touchVal, 10)) &&
+            (parseInt(tasteData, 10) <= parseInt(tasteVal, 10)) &&
+            (parseInt(soundData, 10) <= parseInt(soundVal, 10)) &&
+            (parseInt(smellData, 10) <= parseInt(smellVal, 10)) &&
+            (parseInt(sightData, 10) <= parseInt(sightVal, 10));
 
+        // Show or hide the ride container based on the match
         if (matchesFilter) {
-            ride.style.display = 'flex';
+            ride.style.display = 'flex';  // Show the ride
         } else {
-            ride.style.display = 'none';
+            ride.style.display = 'none';  // Hide the ride
         }
     });
 }
-
-function updateTextInput(val) {
-    document.getElementById('textInput').value=val; 
-  }
