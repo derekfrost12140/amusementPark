@@ -39,7 +39,7 @@ body::before {
 
 .left-nav .nav-link {
     margin: 0 15px; 
-    color: white;
+    color: rgb(249, 237, 237);
     padding: 15px 10px;
     text-decoration: none; 
     font-size: 18px;
@@ -154,4 +154,58 @@ input:checked + .slider {
 
 input:checked + .slider:before {
     transform: translateX(20px);
+}
+.save-button-container{
+    position: absolute;
+    bottom: 30px;
+    right: 30px;
+    transform: skewY(2.5deg);
+}
+
+.save-button {
+    display: inline-block;
+    background-color: #4CAF50   ; 
+    color: rgb(255, 255, 255); 
+    padding: 10px 20px; 
+    margin-right: 10px; 
+    text-decoration: none; 
+    border-radius: 5px; 
+    transition: background-color 0.3s;
+}
+
+.save-button:hover{
+    background-color: #1f7122;
+}
+
+.close-button {
+    display: inline-block;
+    background-color: #ffffff   ; 
+    color: rgb(0, 0, 0); 
+    padding: 10px 20px; 
+    margin-right: 10px; 
+    text-decoration: none; 
+    border-radius: 5px; 
+    transition: background-color 0.3s;
+}
+
+.close-button:hover{
+    background-color: #9a9a9a;
+}
+
+/* Description styling */
+.settings-description {
+    margin: 20px 0;
+    font-size: 18px;
+    color: white;
+    line-height: 1.6;
+    transform: skewY(2.5deg);
+}
+
+.settings-description a {
+    color: #4CAF50;
+    text-decoration: underline;
+}
+
+.settings-description a:hover {
+    color: #1f7122;
 }

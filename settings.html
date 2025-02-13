@@ -23,10 +23,22 @@
     <div class="background">
         <div class="settings-panel">
             <h2>Settings</h2>
+            <!-- Explanation Section -->
+            <div class="settings-description">
+                <p>
+                    Use the toggles above to customize your ride preferences. 
+                    Your settings are saved by pressing the save button.
+                </p>
+                <p>
+                    Once you've made your selections, navigate to the 
+                    <a href="mapNav.html">Map</a> page to view rides that match your preferences.
+                </p>
+            </div>
+
             <div class="setting">
                 <span>Show Wheelchair Accessible Rides</span>
                 <label class="switch">
-                    <input type="checkbox" id="categoryA" onchange="updateSetting('A', this.checked)">
+                    <input type="checkbox" id="categoryA">
                     <span class="slider round"></span>
                 </label>
             </div>
@@ -34,7 +46,7 @@
             <div class="setting">
                 <span>Show Service Animal Friendly Rides</span>
                 <label class="switch">
-                    <input type="checkbox" id="categoryB" onchange="updateSetting('B', this.checked)">
+                    <input type="checkbox" id="categoryB">
                     <span class="slider round"></span>
                 </label>
             </div>
@@ -42,7 +54,7 @@
             <div class="setting">
                 <span>Show Rides Accessible to Pregnant People</span>
                 <label class="switch">
-                    <input type="checkbox" id="categoryC" onchange="updateSetting('C', this.checked)">
+                    <input type="checkbox" id="categoryC">
                     <span class="slider round"></span>
                 </label>
             </div>
@@ -50,7 +62,7 @@
             <div class="setting">
                 <span>Show Inaccessible Rides</span>
                 <label class="switch">
-                    <input type="checkbox" id="categoryD" onchange="updateSetting('D', this.checked)">
+                    <input type="checkbox" id="categoryD">
                     <span class="slider round"></span>
                 </label>
             </div>
@@ -58,26 +70,35 @@
             <div class="setting">
                 <span>Show Sensory Friendly Rides</span>
                 <label class="switch">
-                    <input type="checkbox" id="categoryD" onchange="updateSetting('E', this.checked)">
+                    <input type="checkbox" id="categoryE">
                     <span class="slider round"></span>
                 </label>
+            </div>
+            
+            <div class="save-button-container">
+                <a href="ride_list.html" class="close-button">Close</a>
+                <a href="mapNav.html" class="save-button" onclick="saveSettings()">Save</a>  
             </div>
         </div>
     </div>
     
 <script>
         // Function to update localStorage with the selected category setting
-        function updateSetting(category, isChecked) {
-            localStorage.setItem(`showCategory${category}`, isChecked);
+        function saveSettings() {
+            localStorage.setItem('showCategoryA', document.getElementById('categoryA').checked);
+            localStorage.setItem('showCategoryB', document.getElementById('categoryB').checked);
+            localStorage.setItem('showCategoryC', document.getElementById('categoryC').checked);
+            localStorage.setItem('showCategoryD', document.getElementById('categoryD').checked);
+            localStorage.setItem('showCategoryE', document.getElementById('categoryE').checked);
         }
-// Ensuring checkboxes are updated based on local storage on page load
-    window.onload = function() {
-        document.getElementById('categoryA').checked = localStorage.getItem('showCategoryA') === 'true';
-        document.getElementById('categoryB').checked = localStorage.getItem('showCategoryB') === 'true';
-        document.getElementById('categoryC').checked = localStorage.getItem('showCategoryC') === 'true';
-        document.getElementById('categoryD').checked = localStorage.getItem('showCategoryD') === 'true';
-        document.getElementById('categoryE').checked = localStorage.getItem('showCategoryD') === 'true';
-    };
+        // Ensuring checkboxes are updated based on local storage on page load
+        window.onload = function() {
+            document.getElementById('categoryA').checked = localStorage.getItem('showCategoryA') === 'true';
+            document.getElementById('categoryB').checked = localStorage.getItem('showCategoryB') === 'true';
+            document.getElementById('categoryC').checked = localStorage.getItem('showCategoryC') === 'true';
+            document.getElementById('categoryD').checked = localStorage.getItem('showCategoryD') === 'true';
+            document.getElementById('categoryE').checked = localStorage.getItem('showCategoryE') === 'true';
+        };
  </script>
 </body>
 </html>
