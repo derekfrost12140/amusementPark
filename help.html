@@ -4,30 +4,45 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Settings Page</title>
-    <link rel="stylesheet" href="help.css">
+    <link rel="stylesheet" href="./src/output.css">
 </head>
-<body>
-    <!-- Navigation Bar -->
-    <div class="navbar">
-        <div class="left-nav">
-            <a href="home.html" class="nav-link">Home</a> 
-            <a href="ride_list.html" class="nav-link">Rides</a>
-            <a href="mapNav.html" class="nav-link">Map</a>
-            <a href="help.html" class="nav-link">Help</a>
-        </div>
-        <div class="right-nav">
-            <a href="settings.html" class="nav-link">Settings</a> 
-        </div> 
-    </div>
-    
-    <div class="background">
-        <div class="text-panel">
-            <h2>Help</h2>
-            <div class="description">
-                Enter description here.
-            </div>
-        </div>
-    </div>
+<body class="bg-green-700 relative">
+    <!-- Background Blur Image -->
+    <div class="fixed inset-0 bg-green-700 bg-cover bg-center filter blur-md -z-10" style="background-image: url('Image.webp');"></div>
 
+    <!-- Navigation Bar -->
+    <header class="bg-amber-800 text-white shadow-lg rounded-xl">
+        <nav class="container mx-auto flex justify-between items-center py-4 px-4">
+            <div class="flex space-x-6">
+                <a href="signup.html" class="text-lg px-1 font-semibold hover:text-white hover:scale-150 transition-transform duration-200">Signup</a>
+                <a href="login.html" class="text-lg px-1 font-semibold hover:text-white hover:scale-150 transition-transform duration-200">Sign in</a>
+                <a href="mapNav.html" class="text-lg px-1 font-semibold hover:text-white hover:scale-150 transition-transform duration-200">Map</a>
+                <a href="ride_list.html" class="text-lg px-1 font-semibold hover:text-white hover:scale-150 transition-transform duration-200">Rides</a>
+            </div>
+            <div>
+                <a href="settings.html" class="bg-amber-950 text-white px-5 py-3 rounded-full shadow-lg hover:scale-105 hover:bg-white hover:text-black hover:shadow-xl transition-transform duration-200">Settings</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Centered Help Section with Top Margin -->
+    <div class="flex justify-center items-center mt-8">
+        <div class="text-white max-w-xl w-full p-8 md:p-10 text-center">
+            <h2 class="text-3xl mx-40 font-bold text-amber-900 mb-4">Help</h2>
+            <p class="text-lg mx-7 text-gray-700 leading-relaxed">
+                Welcome to <span class="font-semibold text-amber-800">Amusement Park Navigator</span>.
+                This application was created to help navigate <span class="font-semibold">Six Flags Over Texas.</span>
+                <br><br>
+                To use this app, explore the <span class="text-amber-800 font-semibold">Ride List Page</span> or the
+                <span class="text-amber-800 font-semibold">Settings & Map</span> pages. On the Ride List page, you can apply
+                <span class="text-green-700 font-semibold">Sort & Filter</span> options to find the best rides. Once you find
+                a ride, simply click <span class="text-blue-700 font-semibold">"Directions"</span> and the map will take you to it.
+                <br><br>
+                In the <span class="font-semibold text-amber-800">Settings</span> and <span class="font-semibold text-amber-800">Map</span>
+                pages, you can customize which ride types appear on the map. Clicking a ride’s pin will show its details, and
+                settings updates will reflect automatically.
+            </p>
+        </div>
+    </div>
 </body>
 </html>

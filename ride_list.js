@@ -16,10 +16,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 <input type="checkbox" id="serviceAnimalCheckbox"> Service Animal Friendly
             </label><br>
             <label>
-                <input type="checkbox" id="blankCheckbox"> Show _____
+                <input type="checkbox" id="pregnant"> Show Rides Accessible to Pregnant People
             </label><br>
             <label>
                 <input type="checkbox" id="inaccessibleCheckbox"> Inaccessible Ride
+            </label><br>
+            <label>
+                <input type="checkbox" id="sensoryCheckbox"> Sensory Friendly
             </label><br>
             <button id="applyFiltersBtn">Apply Filters</button>
             <button id="closeModalBtn">Close</button>
@@ -36,8 +39,9 @@ document.addEventListener('DOMContentLoaded', () => {
         previousFilterState = {
             wheelchair: document.getElementById('wheelchairCheckbox').checked,
             serviceAnimal: document.getElementById('serviceAnimalCheckbox').checked,
-            blank: document.getElementById('blankCheckbox').checked,
-            inaccessible: document.getElementById('inaccessibleCheckbox').checked
+            pregnant: document.getElementById('pregnant').checked,
+            inaccessible: document.getElementById('inaccessibleCheckbox').checked,
+            sensory: document.getElementById('sensoryCheckbox').checked
         };
     });
 
@@ -45,8 +49,9 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('closeModalBtn').addEventListener('click', () => {
         document.getElementById('wheelchairCheckbox').checked = previousFilterState.wheelchair;
         document.getElementById('serviceAnimalCheckbox').checked = previousFilterState.serviceAnimal;
-        document.getElementById('blankCheckbox').checked = previousFilterState.blank;
+        document.getElementById('pregnant').checked = previousFilterState.pregnant;
         document.getElementById('inaccessibleCheckbox').checked = previousFilterState.inaccessible;
+        document.getElementById('sensoryCheckbox').checked = previousFilterState.sensory;
 
         // Close the modal
         preferencesModal.style.display = 'none';
@@ -59,13 +64,15 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('applyFiltersBtn').addEventListener('click', () => {
         const wheelchairChecked = document.getElementById('wheelchairCheckbox').checked;
         const serviceAnimalChecked = document.getElementById('serviceAnimalCheckbox').checked;
-        const blankChecked = document.getElementById('blankCheckbox').checked;
+        const pregnantChecked = document.getElementById('pregnant').checked;
         const inaccessibleChecked = document.getElementById('inaccessibleCheckbox').checked;
+        const sensoryChecked = document.getElementById('sensoryCheckbox').checked;
 
         console.log('Wheelchair:', wheelchairChecked);
         console.log('Service Animal:', serviceAnimalChecked);
-        console.log('Short Wait:', blankChecked);
+        console.log('Short Wait:', pregnantChecked);
         console.log('Inaccessible:', inaccessibleChecked);
+        console.log('Sensory:', sensoryChecked);
 
         // Get all the ride containers
         const rideContainers = document.querySelectorAll('.ride-container');
@@ -75,15 +82,17 @@ document.addEventListener('DOMContentLoaded', () => {
             // Extract data attributes from the ride container
             const hasWheelchair = ride.getAttribute('data-wheelchair') === 'true';
             const hasServiceAnimal = ride.getAttribute('data-serviceAnimal') === 'true';
-            const hasBlank = ride.getAttribute('data-blank') === 'true';
+            const hasPregnant = ride.getAttribute('data-pregnant') === 'true';
             const hasInaccessible = ride.getAttribute('data-inaccessible') === 'true';
+            const hasSensory = ride.getAttribute('data-sensory') === 'true';
 
             // Check if the ride matches the selected filters
             const matchesFilter = 
                 (!wheelchairChecked || hasWheelchair) &&
                 (!serviceAnimalChecked || hasServiceAnimal) &&
-                (!blankChecked || hasBlank) &&
-                (!inaccessibleChecked || hasInaccessible);
+                (!pregnantChecked || hasPregnant) &&
+                (!inaccessibleChecked || hasInaccessible) &&
+                (!sensoryChecked || hasSensory);
 
             // Show or hide the ride container based on the match
             if (matchesFilter) {
@@ -103,8 +112,9 @@ document.addEventListener('DOMContentLoaded', () => {
         // Grab the data-* attributes
         const wheelchair = ride.getAttribute('data-wheelchair');
         const serviceAnimal = ride.getAttribute('data-serviceAnimal');
-        const blank = ride.getAttribute('data-blank');
+        const pregnant = ride.getAttribute('data-pregnant');
         const inaccessible = ride.getAttribute('data-inaccessible');
+        const sensory = ride.getAttribute('data-sensory');
 
         // Find the span where the accessibility data will be injected
         const accessibilityData = ride.querySelector('.accessibility-data');
@@ -119,13 +129,15 @@ document.addEventListener('DOMContentLoaded', () => {
         if (serviceAnimal === 'true') {
             accessibilityText.push("<span class='filter-tag' data-filter='serviceAnimal'>Service Animal Allowed</span>");
         }
-        if (blank === 'true') {
-            accessibilityText.push("<span class='filter-tag' data-filter='blank'>Show _____</span>");
+        if (pregnant === 'true') {
+            accessibilityText.push("<span class='filter-tag' data-filter='pregnant'>Show Rides Accessible to Pregnant People</span>");
         }
         if (inaccessible === 'true') {
             accessibilityText.push("<span class='filter-tag' data-filter='inaccessible'>Inaccessible</span>");
         }
-
+        if (sensory === 'true') {
+            accessibilityText.push("<span class='filter-tag' data-filter='sensory'>Sensory Accessible</span>");
+        }
         // Join the text array into a single string and insert it into the span
         accessibilityData.innerHTML = accessibilityText.join('') || "No accessibility information available";
     });
@@ -229,21 +241,22 @@ document.addEventListener('click', (event) => {
 function applyFilters() {
     const wheelchairChecked = document.getElementById('wheelchairCheckbox').checked;
     const serviceAnimalChecked = document.getElementById('serviceAnimalCheckbox').checked;
-    const blankChecked = document.getElementById('blankCheckbox').checked;
+    const pregnantChecked = document.getElementById('pregnant').checked;
     const inaccessibleChecked = document.getElementById('inaccessibleCheckbox').checked;
 
     const rideContainers = document.querySelectorAll('.ride-container');
     rideContainers.forEach(ride => {
         const hasWheelchair = ride.getAttribute('data-wheelchair') === 'true';
         const hasServiceAnimal = ride.getAttribute('data-serviceAnimal') === 'true';
-        const hasBlank = ride.getAttribute('data-blank') === 'true';
+        const hasPregnant = ride.getAttribute('data-pregnant') === 'true';
         const hasInaccessible = ride.getAttribute('data-inaccessible') === 'true';
 
         const matchesFilter =
             (!wheelchairChecked || hasWheelchair) &&
             (!serviceAnimalChecked || hasServiceAnimal) &&
-            (!blankChecked || hasBlank) &&
-            (!inaccessibleChecked || hasInaccessible);
+            (!pregnantChecked || hasPregnant) &&
+            (!inaccessibleChecked || hasInaccessible) &&
+            (!sensoryChecked || hasSensory);
 
         if (matchesFilter) {
             ride.style.display = 'flex';
