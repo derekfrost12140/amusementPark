@@ -132,7 +132,10 @@ function addMarker({ lat, lng, title, categories }) {
 
     // Add a click event to show marker info
     google.maps.event.addListener(marker, 'click', function () {
-        infoWindow.setContent(title + '<br><button onclick="navigateToMarker(' + lat + ', ' + lng + ')">Navigate Here</button>');
+        infoWindow.setContent(
+    title + 
+    '<br><button onclick="navigateToMarker(' + lat + ', ' + lng + ')" style="border: 2px solid #007bff; background-color: #007bff; color: white; padding: 5px 10px; border-radius: 5px; cursor: pointer;">Navigate Here</button>'
+);
         infoWindow.open(map, marker);
     });
 }
