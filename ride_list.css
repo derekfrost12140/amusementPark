@@ -142,17 +142,18 @@ body::before {
 
 .directions-button {
     display: inline-block;
-    background-color: #000000; 
+    background-color: #000000;
     color: rgb(255, 255, 255); 
     padding: 10px 20px; 
     margin-right: 10px; 
     text-decoration: none; 
-    border-radius: 5px; 
+    border-radius: 9999px; 
     transition: background-color 0.3s;
 }
 
 .directions-button:hover {
-    background-color: #505050;
+    background-color: #ffffff;
+    color: rgb(0, 0, 0); 
 }
 
 /* Modal styling */
@@ -247,7 +248,7 @@ input[type="radio"] {
     color: rgb(255, 255, 255);
     padding: 5px 10px;
     margin: 5px;
-    border-radius: 10px;
+    border-radius: 9999px;
     cursor: pointer;
     font-size: 14px;
     text-transform: capitalize;
