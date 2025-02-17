@@ -1,5 +1,6 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     height: 100vh;
     margin: 0;
     display: flex;
@@ -12,8 +13,8 @@ body::before {
     position: fixed;
     top: 0;
     left: 0;
-    background-color: #6CB11B;
-    background-image: url('back.png'); 
+    background-color: #008236;
+    background-image: url('Image.webp');
     background-size: cover;
     background-position: center;
     height: 100vh;
@@ -22,61 +23,79 @@ body::before {
     filter: blur(2px);
 }
 
-header {
-    background: #a0674f;
-    color: rgba(255, 255, 255, 0.744);
-    padding: 10px 20px;
-    text-align: center;
-    position: fixed;
-    width: 100%;
-    top: 0;
-    left: 0;
-    z-index: 1;
+.header {
+    background-color: #973C00; /* amber-800 */
+    color: white;
+    border-radius: 12px;
 }
 
-.navbar {
-    background-color: #a0674f;
-    padding: 0 10px;
+/* Navbar container */
+.nav {
     display: flex;
-    justify-content: space-between; 
+    justify-content: flex-start;
     align-items: center;
+    padding: 1.125rem 1.125rem;
+    max-width: 1500px;
+    margin: 0 auto;
 }
 
-.left-nav,
-.right-nav {
+/* Navbar links */
+.nav-links {
     display: flex;
+    gap: 24px;
+    margin-left: 0;
 }
 
-.left-nav .nav-link {
-    margin: 0 15px; 
+/* Individual link */
+.nav-link {
+    font-size: 1.125rem;
+    padding: 0.25rem 0.25rem;
+    font-weight: 648;
+    text-decoration: none;
     color: white;
-    padding: 15px 10px;
-    text-decoration: none; 
-    font-size: 18px;
-    font-weight: bold; 
-    align-self: center;
+    transition: transform 0.2s, color 0.2s;
 }
 
-.right-nav .nav-link {
-    margin: 0 15px; 
+.nav-link:hover {
     color: white;
-    padding: 15px 38px 10px 10px;
-    text-decoration: none; 
-    font-size: 18px;
-    font-weight: bold; 
-    align-self: center;
+    transform: scale(1.5);
 }
 
+/* Settings button container */
+.settings-btn-container {
+    display: flex;
+    margin-left: auto;
+}
 
-.right-nav .preference {
+/* Settings button */
+.settings-btn {
+    background-color: #461901; /* amber-950 */
+    color: white;
+    margin: 0 15px;
+    padding: 0.75rem 1.25rem;
+    border-radius: 9999px;
+    transition: transform 0.2s, background-color 0.2s, color 0.2s, box-shadow 0.2s;
+    text-decoration: none;
+    font-size: 1rem;
+}
+
+.settings-btn:hover {
+    transform: scale(1);
+    background-color: white;
+    color: black;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.preference {
     margin: 0 15px;
     display: inline-block;
     background-color: #ffae00;
     color: rgb(0, 0, 0);
-    padding: 15px 30px;
-    font-size: 18px;
+    padding: 0.75rem 1.25rem;
+    font-size: 1rem;
     font-weight: bold; 
-    border-radius: 8px;
+    border-radius: 9999px;
+    transition: transform 0.2s, background-color 0.2s, color 0.2s, box-shadow 0.2s;
     text-decoration: none;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
@@ -86,9 +105,7 @@ header {
     color: rgb(250, 250, 250);
 }
 
-.nav-link:hover {
-    color:rgb(0, 0, 0);
-}
+
 
 .blank{
     margin-top: 75px;
