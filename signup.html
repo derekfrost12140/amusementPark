@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Get Started Now</title> 
-    <link rel="stylesheet" href="./src/output.css"> 
+    <title>Get Started Now</title>
+    <link rel="stylesheet" href="loginstyle.css">
 
     <!-- Firebase SDK with non-module URLs -->
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
@@ -26,62 +26,22 @@
         firebase.initializeApp(firebaseConfig);
     </script>
 </head>
+<body>
+    <!-- Background Blur Overlay with Green Background -->
+    <div style="
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #6CB11B;
+        background-image: url('back.png');
+        background-size: cover;
+        background-position: center;
+        filter: blur(2px);
+        z-index: -1;">
+    </div>
 
-<body class="bg-green-700 relative">
-    <div class="background-overlay"></div>
-
-    <header class="bg-amber-800 text-white shadow-lg rounded-xl">
-        <nav class="container mx-auto flex justify-between items-center py-4 px-4">
-            <div class="flex space-x-6">
-                <a href="home.html" class="text-xl px-1 font-semibold hover:text-white hover:scale-150 transition-transform duration-200">Home</a>
-                <a href="mapNav.html" class="text-xl px-1 font-semibold hover:text-white hover:scale-150 transition-transform duration-200">Map</a>
-                <a href="help.html" class="text-xl px-1 font-semibold hover:text-white hover:scale-150 transition-transform duration-200">Help</a>
-            </div>
-            <div class="flex space-x-4">
-                <a href="settings.html" class="bg-amber-950 text-white px-5 py-3 rounded-full shadow-lg hover:scale-100 hover:bg-white hover:text-black hover:shadow-xl transition-transform duration-200">Settings</a>
-            </div>
-        </nav>
-    </header>
-    <style>
-        .wrapper {
-        width: 350px; /* Adjusted width to better fit the content */
-        padding: 20px;
-        background: rgba(255, 255, 255, 0.6); /* More transparency */
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        border-radius: 10px; /* Rounded corners */
-        backdrop-filter: blur(10px); /* Stronger blur effect */
-    }
-    
-    .form-container h2 {
-        text-align: center;
-        color: #333;
-        margin-bottom: 20px;
-        font-size: 25px; /* Larger text for visibility */
-    }
-    
-    form {
-        display: flex;
-        flex-direction: column;
-    }
-    .form-container p {
-        text-align: center;
-        margin-top: 15px; /* Existing margin, adjust if necessary */
-        font-size: 14px; /* Reduced font size for smaller appearance */
-        color: #666; /* Optional: a lighter color to make it less prominent */
-    }
-    
-    
-    input[type="text"], input[type="email"], input[type="password"] {
-        padding: 15px; /* Larger padding for easier interaction */
-        margin-bottom: 10px;
-        border: none; /* Removes border */
-        border-bottom: 2px solid #ccc; /* Adds underline */
-        border-radius: 0; /* Removes rounded corners */
-        background: transparent; /* Ensures inputs do not detract from transparency */
-    }
-    
-    
-    </style>
     <!-- Main Content Wrapper -->
     <div class="wrapper">
         <div class="form-container">

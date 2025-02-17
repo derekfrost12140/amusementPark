@@ -4,36 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rides List</title>
-    <link rel="stylesheet" href="./src/output.css"> 
     <link rel="stylesheet" href="ride_list.css"> 
- 
-
-<body class="bg-green-700 relative">
-        <div class="fixed top-0 left-0 w-full h-full bg-green-700 bg-cover bg-center filter blur-md -z-10" style="background-image: url('Image.webp');"></div>
-        
-    <header class="bg-amber-800 text-white shadow-lg rounded-xl">
-        <nav class="container mx-auto flex justify-between items-center py-4 px-4">
-            <div class="flex space-x-6">
-                <a href="signup.html" class="text-lg px-1 font-semibold hover:text-white hover:scale-150 transition-transform duration-200">Signup</a>
-                <a href="login.html" class="text-lg px-1 font-semibold hover:text-white hover:scale-150 transition-transform duration-200">Sign in</a>
-                <a href="mapNav.html" class="text-lg px-1 font-semibold hover:text-white hover:scale-150 transition-transform duration-200">Map</a>
-                <a href="help.html" class="text-lg px-1 font-semibold hover:text-white hover:scale-150 transition-transform duration-200">Help</a>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-links">
+                <a href="home.html" class="nav-link">Home</a>
+                <a href="ride_list.html" class="nav-link">Rides</a>
+                <a href="mapNav.html" class="nav-link">Map</a>
+                <a href="signup.html" class="nav-link">Sign Up</a>
+                <a href="login.html" class="nav-link">Sign In</a>
+                <a href="help.html" class="nav-link">Help</a>
             </div>
-            <div class="flex space-x-4">  
-                <a href="#" class="bg-amber-950 text-white px-5 py-3 rounded-full shadow-lg hover:scale-100 hover:bg-white hover:text-black hover:shadow-xl transition-transform duration-200" id="filterBtn">Filter</a> 
-                <a href="#" class="bg-amber-950 text-white px-5 py-3 rounded-full shadow-lg hover:scale-100 hover:bg-white hover:text-black hover:shadow-xl transition-transform duration-200" id="sortBtn">Sort</a> 
-                <a href="settings.html" class="bg-amber-950 text-white px-5 py-3 rounded-full shadow-lg hover:scale-100 hover:bg-white hover:text-black hover:shadow-xl transition-transform duration-200">Settings</a>
-            </div>
-            
+            <div class="settings-btn-container">
+                <a href="#" class="preference" id="filterBtn">Filter</a> 
+                <a href="#" class="preference" id="sortBtn">Sort</a> 
+                <a href="settings.html" class="settings-btn">Settings</a>
+            </div> 
         </nav>
-        
     </header>
 
-    <div class="blank">
-    </div>
     <div class="rides-container">
-        <div class="ride-container bg-green-900" data-wheelchair="false" data-serviceAnimal="true" data-pregnant="false" data-inaccessible="true"  data-sensory="false" data-name="Aquaman: Power Wave" data-minHeight="48" data-duration="80">
-            <img src="rideImages/Aquaman.png" alt="Ride Image" class="ride-container-image rounded-xl">
+        <div class="ride-container" data-wheelchair="true" data-serviceAnimal="false" data-pregnant="false" data-touch="4" data-taste="1" data-sound="4"   
+        data-smell="1" data-sight="3" data-name="Aquaman: Power Wave" data-minHeight="48" data-duration="80">
+            <img src="rideImages/Aquaman.png" alt="Ride Image" class="ride-container-image">
             <div class="ride-container-text">
                 <h2>AQUAMAN: Power Wave</h2>
                 <p>
@@ -52,16 +46,17 @@
                 <p><u>Minimum height</u>: 48"</p>
                 <p><u>Duration</u>: 1 min 20 sec</p>
                 <p><b>Accessibility Constraints: </b><span class="accessibility-data"></span></p>
-                <div class="button-container bg-green-950 text-white hover:scale-125 hover:bg-amber-950 rounded-2xl">
+                <div class="button-container">
                     
                     <a href="mapNav.html?lat=32.75694774660049&lng=-97.06858634954958" class="directions-button">Directions</a> 
                 </div>
             </div>
         </div>
 
-        <div class="ride-container" data-wheelchair="true" data-serviceAnimal="false" data-pregnant="false" data-inaccessible="true" data-sensory="false" data-name="Batman The Ride" data-minHeight="54" data-duration="135">
+        <div class="ride-container" data-wheelchair="true" data-serviceAnimal="false" data-pregnant="false" data-touch="8" data-taste="1" data-sound="7"   
+        data-smell="1" data-sight="8" data-name="Batman The Ride" data-minHeight="54" data-duration="135">
             
-            <img src="rideImages/Batman.jpg" alt="Ride Image" class="ride-container-image rounded-xl">
+            <img src="rideImages/Batman.jpg" alt="Ride Image" class="ride-container-image">
             <div class="ride-container-text">
                 <h2>BATMAN&trade; The Ride</h2>
                 <p> 
@@ -83,15 +78,16 @@
                 <p><u>Minimum height</u>: 54"</p>
                 <p><u>Duration</u>: 2 min 15 sec</p>
                 <p><b>Accessibility Constraints:</b><span class="accessibility-data"></span></p>
-                <div class="button-container bg-green-950 text-white hover:scale-125 hover:bg-amber-950 rounded-2xl">
+                <div class="button-container">
                     <a href="mapNav.html?lat=32.75867956518985&lng=-97.0665944558818" class="directions-button">Directions</a> 
                 </div>
             </div>
         </div>
 
-        <div class="ride-container" data-wheelchair="true" data-serviceAnimal="true" data-pregnant="false" data-inaccessible="true" data-sensory="false" data-name="Batwing" data-minHeight="48" data-duration="105">
+        <div class="ride-container" data-wheelchair="true" data-serviceAnimal="false" data-pregnant="false" data-touch="3" data-taste="1" data-sound="2"   
+        data-smell="1" data-sight="3" data-name="Batwing" data-minHeight="48" data-duration="105">
             
-            <img src="rideImages/Batwing.png" alt="Ride Image" class="ride-container-image rounded-xl">
+            <img src="rideImages/Batwing.png" alt="Ride Image" class="ride-container-image">
             <div class="ride-container-text">
                 <h2>BATWING</h2>
                 <p>
@@ -105,14 +101,15 @@
                 <p><u>Minimum height</u>: None with adult, 48" to ride alone</p>
                 <p><u>Duration</u>: 1 min 45 sec</p>
                 <p><b>Accessibility Constraints:</b><span class="accessibility-data"></span></p>
-                <div class="button-container bg-green-950 text-white hover:scale-125 hover:bg-amber-950 rounded-2xl">
+                <div class="button-container">
                     <a href="mapNav.html?lat=32.757562316535875&lng=-97.067054891455" class="directions-button">Directions</a>
                 </div>
             </div>
         </div>
 
-        <div class="ride-container" data-wheelchair="true" data-serviceAnimal="true" data-pregnant="true" data-inaccessible="false" data-sensory="false" data-name="Boomtown Depot" data-minHeight="0" data-duration="480">
-            <img src="rideImages/BoomtownDepot.jpg" alt="Ride Image" class="ride-container-image rounded-xl">
+        <div class="ride-container" data-wheelchair="true" data-serviceAnimal="true" data-pregnant="true" data-touch="2" data-taste="1" data-sound="3"   
+        data-smell="1" data-sight="3" data-name="Boomtown Depot" data-minHeight="0" data-duration="480">
+            <img src="rideImages/BoomtownDepot.jpg" alt="Ride Image" class="ride-container-image">
             <div class="ride-container-text">
                 <h2>Boomtown Depot</h2>
                 <p>Climb aboard one of our most classic and cherished amusement park train rides for a scenic cruise around the park. 
@@ -125,14 +122,15 @@
                 <p><u>Minimum height</u>: None</p>
                 <p><u>Duration</u>: 8 min</p>
                 <p><b>Accessibility Constraints:</b><span class="accessibility-data"></span></p>
-                      <div class="button-container bg-green-950 text-white hover:scale-125 hover:bg-amber-950 rounded-2xl">
+                <div class="button-container">
                     <a href="mapNav.html?lat=32.75775980664769&lng=-97.06749839143542" class="directions-button">Directions</a>
                 </div>
             </div>
         </div>
 
-        <div class="ride-container" data-wheelchair="true" data-serviceAnimal="true" data-pregnant="true" data-inaccessible="true" data-sensory="false" data-name="Boot Scootin'" data-minHeight="36" data-duration="105">
-            <img src="rideImages/BootScootin.jpg" alt="Ride Image" class="ride-container-image rounded-xl">
+        <div class="ride-container" data-wheelchair="true" data-serviceAnimal="false" data-pregnant="false" data-touch="3" data-taste="1" data-sound="3"   
+        data-smell="1" data-sight="3" data-name="Boot Scootin'" data-minHeight="36" data-duration="105">
+            <img src="rideImages/BootScootin.jpg" alt="Ride Image" class="ride-container-image">
             <div class="ride-container-text">
                 <h2>Boot Scootin'</h2>
                 <p>
@@ -146,14 +144,15 @@
                 <p><u>Minimum height</u>: None with adult, 36" to ride alone</p>
                 <p><u>Duration</u>: 1 min 45 sec</p>
                 <p><b>Accessibility Constraints:</b><span class="accessibility-data"></span></p>
-                      <div class="button-container bg-green-950 text-white hover:scale-125 hover:bg-amber-950 rounded-2xl">
+                <div class="button-container">
                     <a href="mapNav.html?lat=32.757154197253314&lng=-97.0720959368577" class="directions-button">Directions</a>
                 </div>
             </div>
         </div>
 
-        <div class="ride-container" data-wheelchair="true" data-serviceAnimal="true" data-pregnant="true" data-inaccessible="true" data-sensory="false" data-name="Bugs Bunny Cloud Bouncer" data-minHeight="42" data-duration="60">
-            <img src="rideImages/BugsBunnyCloud.jpg" alt="Ride Image" class="ride-container-image rounded-xl"> 
+        <div class="ride-container" data-wheelchair="true" data-serviceAnimal="false" data-pregnant="false" data-touch="3" data-taste="1" data-sound="3"   
+        data-smell="1" data-sight="3" data-name="Bugs Bunny Cloud Bouncer" data-minHeight="42" data-duration="60">
+            <img src="rideImages/BugsBunnyCloud.jpg" alt="Ride Image" class="ride-container-image"> 
             <div class="ride-container-text">
                 <h2>Bugs Bunny Cloud Bouncer</h2>
                 <p>
@@ -167,14 +166,15 @@
                 <p><u>Minimum height</u>: None with adult, 42" to ride alone</p>
                 <p><u>Duration</u>: 1 min</p>
                 <p><b>Accessibility Constraints:</b><span class="accessibility-data"></span></p>
-                      <div class="button-container bg-green-950 text-white hover:scale-125 hover:bg-amber-950 rounded-2xl">
+                <div class="button-container">
                     <a href="mapNav.html?lat=32.75637875518429&lng=-97.06841704130149" class="directions-button">Directions</a>
                 </div>
             </div>
         </div>
 
-        <div class="ride-container" data-wheelchair="true" data-serviceAnimal="true" data-pregnant="false" data-inaccessible="true" data-sensory="false" data-name="Catwoman Whip" data-minHeight="48" data-duration="240">
-            <img src="rideImages/Catwoman.jpg" alt="Ride Image" class="ride-container-image rounded-xl"> 
+        <div class="ride-container" data-wheelchair="true" data-serviceAnimal="false" data-pregnant="false" data-touch="7" data-taste="1" data-sound="7"   
+        data-smell="1" data-sight="7" data-name="Catwoman Whip" data-minHeight="48" data-duration="240">
+            <img src="rideImages/Catwoman.jpg" alt="Ride Image" class="ride-container-image"> 
             <div class="ride-container-text">
                 <h2>CATWOMAN Whip</h2>
                 <p>
@@ -190,14 +190,15 @@
                 <p><u>Minimum height</u>: 48"</p>
                 <p><u>Duration</u>: 4 min</p>
                 <p><b>Accessibility Constraints:</b><span class="accessibility-data"></span></p>
-                      <div class="button-container bg-green-950 text-white hover:scale-125 hover:bg-amber-950 rounded-2xl">
+                <div class="button-container">
                     <a href="mapNav.html?lat=32.75726920754156&lng=-97.06628719155061" class="directions-button">Directions</a>
                 </div>
             </div>
         </div>
 
-        <div class="ride-container" data-wheelchair="true" data-serviceAnimal="true" data-pregnant="true" data-inaccessible="true" data-sensory="false" data-name="Cloud Bouncer" data-minHeight="42" data-duration="120">
-            <img src="rideImages/CloudBouncer.jpg" alt="Ride Image" class="ride-container-image rounded-xl"> 
+        <div class="ride-container" data-wheelchair="true" data-serviceAnimal="false" data-pregnant="false" data-touch="3" data-taste="1" data-sound="2"   
+        data-smell="1" data-sight="3" data-name="Cloud Bouncer" data-minHeight="42" data-duration="120">
+            <img src="rideImages/CloudBouncer.jpg" alt="Ride Image" class="ride-container-image"> 
             <div class="ride-container-text">
                 <h2>Cloud Bouncer</h2>
                 <p>
@@ -212,14 +213,15 @@
                 <p><u>Minimum height</u>: None with adult, 42" to ride alone</p>
                 <p><u>Duration</u>: 2 min</p>
                 <p><b>Accessibility Constraints:</b><span class="accessibility-data"></span></p>
-                      <div class="button-container bg-green-950 text-white hover:scale-125 hover:bg-amber-950 rounded-2xl">
+                <div class="button-container">
                     <a href="mapNav.html?lat=32.75687916891457&lng=-97.06778361202024" class="directions-button">Directions</a>
                 </div>
             </div>
         </div>
 
-        <div class="ride-container" data-wheelchair="true" data-serviceAnimal="true" data-pregnant="true" data-inaccessible="true" data-sensory="false" data-name="Daffy Duck Bucket Blasters" data-minHeight="48" data-duration="100">
-            <img src="rideImages/BucketBlasters.jpg" alt="Ride Image" class="ride-container-image rounded-xl"> 
+        <div class="ride-container" data-wheelchair="true" data-serviceAnimal="false" data-pregnant="false" data-touch="5" data-taste="2" data-sound="4"   
+        data-smell="2" data-sight="4" data-name="Daffy Duck Bucket Blasters" data-minHeight="48" data-duration="100">
+            <img src="rideImages/BucketBlasters.jpg" alt="Ride Image" class="ride-container-image"> 
             <div class="ride-container-text">
                 <h2>Daffy Duck Bucket Blasters</h2>
                 <p>
@@ -236,15 +238,16 @@
                 <p><u>Minimum height</u>: 36" with adult, 48" to ride alone</p>
                 <p><u>Duration</u>: 1 min 40 sec</p>
                 <p><b>Accessibility Constraints:</b><span class="accessibility-data"></span></p>
-                      <div class="button-container bg-green-950 text-white hover:scale-125 hover:bg-amber-950 rounded-2xl">
+                <div class="button-container">
                     <a href="mapNav.html?lat=32.75912726546584&lng=-97.06800230384427" class="directions-button">Directions</a>
                 </div>
             </div>
         </div>
 
-        <div class="ride-container" data-wheelchair="true" data-serviceAnimal="true" data-pregnant="false" data-inaccessible="true" data-sensory="false" data-name="El Diablo" data-minHeight="48" data-duration="90">
+        <div class="ride-container" data-wheelchair="true" data-serviceAnimal="false" data-pregnant="false" data-touch="7" data-taste="1" data-sound="7"   
+        data-smell="1" data-sight="6" data-name="El Diablo" data-minHeight="48" data-duration="90">
             
-            <img src="rideImages/ElDiablo.png" alt="Ride Image" class="ride-container-image rounded-xl">
+            <img src="rideImages/ElDiablo.png" alt="Ride Image" class="ride-container-image">
             <div class="ride-container-text">
                 <h2>El Diablo</h2>
                 <p>
@@ -259,14 +262,15 @@
                 <p><u>Minimum height</u>: 48"</p>
                 <p><u>Duration</u>: 1 min 30 sec</p>
                 <p><b>Accessibility Constraints:</b><span class="accessibility-data"></span></p>
-                      <div class="button-container bg-green-950 text-white hover:scale-125 hover:bg-amber-950 rounded-2xl">
+                <div class="button-container">
                     <a href="mapNav.html?lat=32.755825529397704&lng=-97.07200652921023" class="directions-button">Directions</a>
                 </div>
             </div>
         </div>
 
-        <div class="ride-container" data-wheelchair="true" data-serviceAnimal="true" data-pregnant="false" data-inaccessible="true" data-sensory="false" data-name="El Sombrero" data-minHeight="42" data-duration="60">
-            <img src="rideImages/Sombrero.png" alt="Ride Image" class="ride-container-image rounded-xl"> 
+        <div class="ride-container" data-wheelchair="true" data-serviceAnimal="false" data-pregnant="false" data-touch="3" data-taste="1" data-sound="4"   
+        data-smell="1" data-sight="2" data-name="El Sombrero" data-minHeight="42" data-duration="60">
+            <img src="rideImages/Sombrero.png" alt="Ride Image" class="ride-container-image"> 
             <div class="ride-container-text">
                 <h2>El Sombrero</h2>
                 <p>
@@ -279,14 +283,15 @@
                 <p><u>Minimum height</u>: None with adult, 42" to ride alone</p>
                 <p><u>Duration</u>: 1 min</p>
                 <p><b>Accessibility Constraints:</b><span class="accessibility-data"></span></p>
-                      <div class="button-container bg-green-950 text-white hover:scale-125 hover:bg-amber-950 rounded-2xl">
+                <div class="button-container">
                     <a href="mapNav.html?lat=32.755489433620255&lng=-97.0709131848416" class="directions-button">Directions</a>
                 </div>
             </div>
         </div>
 
-        <div class="ride-container" data-wheelchair="true" data-serviceAnimal="true" data-pregnant="false" data-inaccessible="true" data-sensory="false" data-name="Gunslinger" data-minHeight="42" data-duration="100">
-            <img src="rideImages/Gunslinger.jpg" alt="Ride Image" class="ride-container-image rounded-xl"> 
+        <div class="ride-container" data-wheelchair="true" data-serviceAnimal="false" data-pregnant="false" data-touch="5" data-taste="1" data-sound="5"   
+        data-smell="1" data-sight="5" data-name="Gunslinger" data-minHeight="42" data-duration="100">
+            <img src="rideImages/Gunslinger.jpg" alt="Ride Image" class="ride-container-image"> 
             <div class="ride-container-text">
                 <h2>Gunslinger</h2>
                 <p>
@@ -301,14 +306,15 @@
                 <p><u>Minimum height</u>: 42"</p>
                 <p><u>Duration</u>: 1 min 40 sec</p>
                 <p><b>Accessibility Constraints:</b><span class="accessibility-data"></span></p>
-                      <div class="button-container bg-green-950 text-white hover:scale-125 hover:bg-amber-950 rounded-2xl">
+                <div class="button-container">
                     <a href="mapNav.html?lat=32.75323847916851&lng=-97.06802371184325" class="directions-button">Directions</a>
                 </div>
             </div>
         </div>
 
-        <div class="ride-container" data-wheelchair="true" data-serviceAnimal="true" data-pregnant="true" data-inaccessible="true" data-sensory="false" data-name="Justice League: Battle for Metropolis" data-minHeight="48" data-duration="240">
-            <img src="rideImages/JusticeLeague.jpg" alt="Ride Image" class="ride-container-image rounded-xl"> 
+        <div class="ride-container" data-wheelchair="true" data-serviceAnimal="false" data-pregnant="false" data-touch="5" data-taste="1" data-sound="5"   
+        data-smell="1" data-sight="6" data-name="Justice League: Battle for Metropolis" data-minHeight="48" data-duration="240">
+            <img src="rideImages/JusticeLeague.jpg" alt="Ride Image" class="ride-container-image"> 
             <div class="ride-container-text">
                 <h2>JUSTICE LEAGUE&trade;: Battle for METROPOLIS</h2>
                 <p>
@@ -322,14 +328,15 @@
                 <p><u>Minimum height</u>: 42" with adult over 54", 48" to ride alone</p>
                 <p><u>Duration</u>: 4 min</p>
                 <p><b>Accessibility Constraints:</b><span class="accessibility-data"></span></p>
-                      <div class="button-container bg-green-950 text-white hover:scale-125 hover:bg-amber-950 rounded-2xl">
+                <div class="button-container">
                     <a href="mapNav.html?lat=32.757991473958874&lng=-97.0677503492011" class="directions-button">Directions</a>
                 </div>
             </div>
         </div>
 
-        <div class="ride-container" data-wheelchair="true" data-serviceAnimal="true" data-pregnant="true" data-inaccessible="true" data-sensory="false" data-name="La Fiesta de las Tazas" data-minHeight="42" data-duration="90">
-            <img src="rideImages/TeaCups.png" alt="Ride Image" class="ride-container-image rounded-xl"> 
+        <div class="ride-container" data-wheelchair="true" data-serviceAnimal="false" data-pregnant="false" data-touch="3" data-taste="1" data-sound="2"   
+        data-smell="1" data-sight="3" data-name="La Fiesta de las Tazas" data-minHeight="42" data-duration="90">
+            <img src="rideImages/TeaCups.png" alt="Ride Image" class="ride-container-image"> 
             <div class="ride-container-text">
                 <h2>La Fiesta de las Tazas</h2>
                 <p>
@@ -343,14 +350,15 @@
                 <p><u>Minimum height</u>: None with adult, 42" to ride alone</p>
                 <p><u>Duration</u>: 1 min 30 sec</p>
                 <p><b>Accessibility Constraints:</b><span class="accessibility-data"></span></p>
-                      <div class="button-container bg-green-950 text-white hover:scale-125 hover:bg-amber-950 rounded-2xl">
+                <div class="button-container">
                     <a href="mapNav.html?lat=32.75731315275531&lng=-97.06689389616429" class="directions-button">Directions</a>
                 </div>
             </div>
         </div>
 
-        <div class="ride-container" data-wheelchair="true" data-serviceAnimal="true" data-pregnant="false" data-inaccessible="true" data-sensory="false" data-name="La Vibora" data-minHeight="42" data-duration="100">
-            <img src="rideImages/Vibora.jpg" alt="Ride Image" class="ride-container-image rounded-xl"> 
+        <div class="ride-container" data-wheelchair="true" data-serviceAnimal="false" data-pregnant="false" data-touch="7" data-taste="1" data-sound="6"   
+        data-smell="1" data-sight="6" data-name="La Vibora" data-minHeight="42" data-duration="100">
+            <img src="rideImages/Vibora.jpg" alt="Ride Image" class="ride-container-image"> 
             <div class="ride-container-text">
                 <h2>La Vibora</h2>
                 <p>
@@ -365,15 +373,16 @@
                 <p><u>Minimum height</u>: 42"</p>
                 <p><u>Duration</u>: 1 min 40 sec</p>
                 <p><b>Accessibility Constraints:</b><span class="accessibility-data"></span></p>
-                      <div class="button-container bg-green-950 text-white hover:scale-125 hover:bg-amber-950 rounded-2xl">
+                <div class="button-container">
                     <a href="mapNav.html?lat=32.755669332272035&lng=-97.07129106781014" class="directions-button">Directions</a>
                 </div>
             </div>
         </div>
 
-        <div class="ride-container" data-wheelchair="true" data-serviceAnimal="true" data-pregnant="false" data-inaccessible="true" data-sensory="false" data-name="Mr. Freeze" data-minHeight="54" data-duration="90">
+        <div class="ride-container" data-wheelchair="false" data-serviceAnimal="false" data-pregnant="false" data-touch="8" data-taste="1" data-sound="8"   
+        data-smell="1" data-sight="8" data-name="Mr. Freeze" data-minHeight="54" data-duration="90">
             
-            <img src="rideImages/Freeze.png" alt="Ride Image" class="ride-container-image rounded-xl">
+            <img src="rideImages/Freeze.png" alt="Ride Image" class="ride-container-image">
             <div class="ride-container-text">
                 <h2>Mr. Freeze</h2>
                 <p>
@@ -388,14 +397,15 @@
                 <p><u>Minimum height</u>: 54"</p>
                 <p><u>Duration</u>: 1 min 30 sec</p>
                 <p><b>Accessibility Constraints:</b><span class="accessibility-data"></span></p>
-                      <div class="button-container bg-green-950 text-white hover:scale-125 hover:bg-amber-950 rounded-2xl">
+                <div class="button-container">
                     <a href="mapNav.html?lat=32.75548781011889&lng=-97.07155711109925" class="directions-button">Directions</a>
                 </div>
             </div>
         </div>
 
-        <div class="ride-container" data-wheelchair="true" data-serviceAnimal="true" data-pregnant="true" data-inaccessible="true" data-sensory="false" data-name="Oil Derrick" data-minHeight="0" data-duration="90">
-            <img src="rideImages/OilDerrick.png" alt="Ride Image" class="ride-container-image rounded-xl"> 
+        <div class="ride-container" data-wheelchair="true" data-serviceAnimal="true" data-pregnant="false" data-touch="3" data-taste="1" data-sound="3"   
+        data-smell="1" data-sight="3" data-name="Oil Derrick" data-minHeight="0" data-duration="90">
+            <img src="rideImages/OilDerrick.png" alt="Ride Image" class="ride-container-image"> 
             <div class="ride-container-text">
                 <h2>Oil Derrick</h2>
                 <p>
@@ -406,14 +416,15 @@
                 <p><u>Minimum height</u>: None</p>
                 <p><u>Duration</u>: 1 min 30 sec</p>
                 <p><b>Accessibility Constraints:</b><span class="accessibility-data"></span></p>
-                      <div class="button-container bg-green-950 text-white hover:scale-125 hover:bg-amber-950 rounded-2xl">
+                <div class="button-container">
                     <a href="mapNav.html?lat=32.75784178390764&lng=-97.06661224784125" class="directions-button">Directions</a>
                 </div>
             </div>
         </div>
 
-        <div class="ride-container" data-wheelchair="true" data-serviceAnimal="true" data-pregnant="false" data-inaccessible="true" data-sensory="false" data-name="Silver Star Carousel" data-minHeight="42" data-duration="210">
-            <img src="rideImages/SilverStar.jpg" alt="Ride Image" class="ride-container-image rounded-xl"> 
+        <div class="ride-container" data-wheelchair="true" data-serviceAnimal="true" data-pregnant="false" data-touch="3" data-taste="1" data-sound="2"   
+        data-smell="1" data-sight="3" data-name="Silver Star Carousel" data-minHeight="42" data-duration="210">
+            <img src="rideImages/SilverStar.jpg" alt="Ride Image" class="ride-container-image"> 
             <div class="ride-container-text">
                 <h2>Silver Star Carousel</h2>
                 <p>
@@ -428,14 +439,15 @@
                 <p><u>Minimum height</u>: None with adult, 42" to ride alone</p>
                 <p><u>Duration</u>: 3 min 30 sec</p>
                 <p><b>Accessibility Constraints:</b><span class="accessibility-data"></span></p>
-                      <div class="button-container bg-green-950 text-white hover:scale-125 hover:bg-amber-950 rounded-2xl">
+                <div class="button-container">
                     <a href="mapNav.html?lat=32.758886637131965&lng=-97.07057433567623" class="directions-button">Directions</a>
                 </div>
             </div>
         </div>
 
-        <div class="ride-container" data-wheelchair="true" data-serviceAnimal="true" data-pregnant="false" data-inaccessible="true" data-sensory="false" data-name="Superman: Tower of Power" data-minHeight="52" data-duration="120">
-            <img src="rideImages/Superman.png" alt="Ride Image" class="ride-container-image rounded-xl"> 
+        <div class="ride-container" data-wheelchair="true" data-serviceAnimal="false" data-pregnant="false" data-touch="8" data-taste="1" data-sound="7"   
+        data-smell="1" data-sight="7" data-name="Superman: Tower of Power" data-minHeight="52" data-duration="120">
+            <img src="rideImages/Superman.png" alt="Ride Image" class="ride-container-image"> 
             <div class="ride-container-text">
                 <h2>SUPERMAN: Tower of Power</h2>
                 <p>
@@ -448,14 +460,15 @@
                 <p><u>Minimum height</u>: 52"</p>
                 <p><u>Duration</u>: 2 min</p>
                 <p><b>Accessibility Constraints:</b><span class="accessibility-data"></span></p>
-                      <div class="button-container bg-green-950 text-white hover:scale-125 hover:bg-amber-950 rounded-2xl">
+                <div class="button-container">
                     <a href="mapNav.html?lat=32.758384840744206&lng=-97.06868454595156" class="directions-button">Directions</a>
                 </div>
             </div>
         </div>
 
-        <div class="ride-container" data-wheelchair="true" data-serviceAnimal="true" data-pregnant="true" data-inaccessible="true" data-sensory="false" data-name="Texas Depot" data-minHeight="0" data-duration="480">
-            <img src="rideImages/TexasDepot.jpg" alt="Ride Image" class="ride-container-image rounded-xl"> 
+        <div class="ride-container" data-wheelchair="true" data-serviceAnimal="true" data-pregnant="true" data-touch="2" data-taste="1" data-sound="3"   
+        data-smell="1" data-sight="3" data-name="Texas Depot" data-minHeight="0" data-duration="480">
+            <img src="rideImages/TexasDepot.jpg" alt="Ride Image" class="ride-container-image"> 
             <div class="ride-container-text">
                 <h2>Texas Depot</h2>
                 <p>
@@ -471,14 +484,15 @@
                 <p><u>Minimum height</u>: None</p>
                 <p><u>Duration</u>: 8 min</p>
                 <p><b>Accessibility Constraints:</b><span class="accessibility-data"></span></p>
-                      <div class="button-container bg-green-950 text-white hover:scale-125 hover:bg-amber-950 rounded-2xl">
+                <div class="button-container">
                     <a href="mapNav.html?lat=32.7570749439281&lng=-97.07255299151078" class="directions-button">Directions</a>
                 </div>
             </div>
         </div>
 
-        <div class="ride-container" data-wheelchair="true" data-serviceAnimal="true" data-pregnant="false" data-inaccessible="true" data-sensory="false" data-name="Texas SkyScreamer" data-minHeight="48" data-duration="165">
-            <img src="rideImages/SkyScreamer.png" alt="Ride Image" class="ride-container-image rounded-xl"> 
+        <div class="ride-container" data-wheelchair="true" data-serviceAnimal="false" data-pregnant="false" data-touch="7" data-taste="1" data-sound="5"   
+        data-smell="1" data-sight="6" data-name="Texas SkyScreamer" data-minHeight="48" data-duration="165">
+            <img src="rideImages/SkyScreamer.png" alt="Ride Image" class="ride-container-image"> 
             <div class="ride-container-text">
                 <h2>Texas SkyScreamer</h2>
                 <p>
@@ -493,14 +507,15 @@
                 <p><u>Minimum height</u>: 48"</p>
                 <p><u>Duration</u>: 2 min 45 sec</p>
                 <p><b>Accessibility Constraints:</b><span class="accessibility-data"></span></p>
-                      <div class="button-container bg-green-950 text-white hover:scale-125 hover:bg-amber-950 rounded-2xl">
+                <div class="button-container">
                     <a href="mapNav.html?lat=32.75676784036096&lng=-97.0658927520594" class="directions-button">Directions</a>
                 </div>
             </div>
         </div>
 
-        <div class="ride-container" data-wheelchair="true" data-serviceAnimal="true" data-pregnant="false" data-inaccessible="true" data-sensory="false" data-name="The Riddler Revenege" data-minHeight="52" data-duration="180">
-            <img src="rideImages/Riddler.png" alt="Ride Image" class="ride-container-image rounded-xl"> 
+        <div class="ride-container" data-wheelchair="true" data-serviceAnimal="false" data-pregnant="false" data-touch="8" data-taste="1" data-sound="8"   
+        data-smell="1" data-sight="8" data-name="The Riddler Revenege" data-minHeight="52" data-duration="180">
+            <img src="rideImages/Riddler.png" alt="Ride Image" class="ride-container-image"> 
             <div class="ride-container-text">
                 <h2>THE RIDDLER Revenege</h2>
                 <p>
@@ -515,14 +530,15 @@
                 <p><u>Minimum height</u>: 52"</p>
                 <p><u>Duration</u>: 3 min</p>
                 <p><b>Accessibility Constraints:</b><span class="accessibility-data"></span></p>
-                      <div class="button-container bg-green-950 text-white hover:scale-125 hover:bg-amber-950 rounded-2xl">
+                <div class="button-container">
                     <a href="mapNav.html?lat=32.75685106292408&lng=-97.0652765520594" class="directions-button">Directions</a>
                 </div>
             </div>
         </div>
 
-        <div class="ride-container" data-wheelchair="true" data-serviceAnimal="true" data-pregnant="false" data-inaccessible="true" data-sensory="true" data-name="Titan" data-minHeight="48" data-duration="200">
-            <img src="rideImages/Titan.jpg" alt="Ride Image" class="ride-container-image rounded-xl"> 
+        <div class="ride-container" data-wheelchair="true" data-serviceAnimal="false" data-pregnant="false" data-touch="8" data-taste="1" data-sound="7"   
+        data-smell="1" data-sight="7" data-name="Titan" data-minHeight="48" data-duration="200">
+            <img src="rideImages/Titan.jpg" alt="Ride Image" class="ride-container-image"> 
             <div class="ride-container-text">
                 <h2>Titan</h2>
                 <p>
@@ -537,7 +553,7 @@
                 <p><u>Minimum height</u>: 48"</p>
                 <p><u>Duration</u>: 3 min 20 sec</p>
                 <p><b>Accessibility Constraints:</b><span class="accessibility-data"></span></p>
-                      <div class="button-container bg-green-950 text-white hover:scale-125 hover:bg-amber-950 rounded-2xl">
+                <div class="button-container">
                     <a href="mapNav.html?lat=32.7557677102804&lng=-97.07418512037097" class="directions-button">Directions</a>
                 </div>
             </div>
