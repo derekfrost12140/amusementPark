@@ -30,18 +30,12 @@
 
 .directions-button {
     display: inline-block;
-    background-color: #000000;
     color: rgb(255, 255, 255); 
     padding: 10px 20px; 
     margin-right: 10px; 
     text-decoration: none; 
     border-radius: 9999px; 
     transition: background-color 0.3s;
-}
-
-.directions-button:hover {
-    background-color: #ffffff;
-    color: rgb(0, 0, 0); 
 }
 
 /* Modal styling */
