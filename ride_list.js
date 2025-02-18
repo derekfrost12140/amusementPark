@@ -406,4 +406,16 @@ document.addEventListener('DOMContentLoaded', async () => {
             sight: 7
           }
         ];
-      
+        
+        async function seedRidesIfEmpty() {
+            const snapshot = await db.collection("rides").get();
+            if (snapshot.empty) {
+              console.log("No rides found in Firestore. Seeding default data...");
+              for (const ride of defaultRidesData) {
+                await db.collection("rides").add(ride);
+              }
+              console.log("Seeding complete. Refreshing page or continuing to load data...");
+            } else {
+              console.log("Rides collection is not empty. Skipping seeding.");
+            }
+          }
