@@ -8,17 +8,21 @@
 </head>
 <body>
     <!-- Navigation Bar -->
-    <div class="navbar">
-        <div class="left-nav">
-            <a href="home.html" class="nav-link">Home</a> 
-            <a href="ride_list.html" class="nav-link">Rides</a>
-            <a href="mapNav.html" class="nav-link">Map</a>
-            <a href="help.html" class="nav-link">Help</a>
-        </div>
-        <div class="right-nav">
-            <a href="settings.html" class="nav-link">Settings</a> 
-        </div> 
-    </div>
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-links">
+                <a href="home.html" class="nav-link">Home</a>
+                <a href="ride_list.html" class="nav-link">Rides</a>
+                <a href="mapNav.html" class="nav-link">Map</a>
+                <a href="signup.html" class="nav-link">Sign Up</a>
+                <a href="login.html" class="nav-link">Sign In</a>
+                <a href="help.html" class="nav-link">Help</a>
+            </div>
+            <div class="settings-btn-container">
+                <a href="settings.html" class="settings-btn">Settings</a>
+            </div>
+        </nav>
+    </header>
 
     <div class="background">
         <div class="settings-panel">
@@ -38,7 +42,7 @@
             <div class="setting">
                 <span>Show Wheelchair Accessible Rides</span>
                 <label class="switch">
-                    <input type="checkbox" id="categoryA">
+                    <input type="checkbox" id="categoryA" checked="checked">
                     <span class="slider round"></span>
                 </label>
             </div>
@@ -46,7 +50,7 @@
             <div class="setting">
                 <span>Show Service Animal Friendly Rides</span>
                 <label class="switch">
-                    <input type="checkbox" id="categoryB">
+                    <input type="checkbox" id="categoryB" checked="checked">
                     <span class="slider round"></span>
                 </label>
             </div>
@@ -54,7 +58,7 @@
             <div class="setting">
                 <span>Show Rides Accessible to Pregnant People</span>
                 <label class="switch">
-                    <input type="checkbox" id="categoryC">
+                    <input type="checkbox" id="categoryC" checked="checked">
                     <span class="slider round"></span>
                 </label>
             </div>
@@ -62,40 +66,40 @@
             <div class="setting">
                 <span>Touch Sensory Level</span>
                 <span>
-                    <input type="range" id="sensoryTouchSlide" min="0" max="10" value="0" oninput="this.form.sensoryTouchNum.value=this.value">
-                    <input type="number" id="sensoryTouchNum" min="0" max="10" value="0" oninput="this.form.sensoryTouchSlide.value=this.value">
+                    <input type="range" id="sensoryTouchSlide" min="0" max="10" value="10" oninput="this.form.sensoryTouchNum.value=this.value">
+                    <input type="number" id="sensoryTouchNum" min="0" max="10" value="10" oninput="this.form.sensoryTouchSlide.value=this.value">
                 </span>
             </div>
 
             <div class="setting">
                 <span>Taste Sensory Level</span>
                 <span>
-                    <input type="range" id="sensoryTastSlide" min="0" max="10" value="0" oninput="this.form.sensoryTasteNum.value=this.value">
-                    <input type="number" id="sensoryTasteNum" min="0" max="10" value="0" oninput="this.form.sensoryTastSlide.value=this.value">
+                    <input type="range" id="sensoryTastSlide" min="0" max="10" value="10" oninput="this.form.sensoryTasteNum.value=this.value">
+                    <input type="number" id="sensoryTasteNum" min="0" max="10" value="10" oninput="this.form.sensoryTastSlide.value=this.value">
                 </span>
             </div>
 
             <div class="setting">
                 <span>Sound Sensory Level</span>
                 <span>
-                    <input type="range" id="sensorySoundSlide" min="0" max="10" value="0" oninput="this.form.sensorySoundNum.value=this.value">
-                    <input type="number" id="sensorySoundNum" min="0" max="10" value="0" oninput="this.form.sensorySoundSlide.value=this.value">
+                    <input type="range" id="sensorySoundSlide" min="0" max="10" value="10" oninput="this.form.sensorySoundNum.value=this.value">
+                    <input type="number" id="sensorySoundNum" min="0" max="10" value="10" oninput="this.form.sensorySoundSlide.value=this.value">
                 </span>
             </div>
 
             <div class="setting">
                 <span>Smell Sensory Level</span>
                 <span>
-                    <input type="range" id="sensorySmellSlide" min="0" max="10" value="0" oninput="this.form.sensorySmellNum.value=this.value">
-                    <input type="number" id="sensorySmellNum" min="0" max="10" value="0" oninput="this.form.sensorySmellSlide.value=this.value">
+                    <input type="range" id="sensorySmellSlide" min="0" max="10" value="10" oninput="this.form.sensorySmellNum.value=this.value">
+                    <input type="number" id="sensorySmellNum" min="0" max="10" value="10" oninput="this.form.sensorySmellSlide.value=this.value">
                 </span>
             </div>
 
             <div class="setting">
                 <span>Sight Sensory Level</span>
                 <span>
-                    <input type="range" id="sensorySightSlide" min="0" max="10" value="0" oninput="this.form.sensorySightNum.value=this.value">
-                    <input type="number" id="sensorySightNum" min="0" max="10" value="0" oninput="this.form.sensorySightSlide.value=this.value">
+                    <input type="range" id="sensorySightSlide" min="0" max="10" value="10" oninput="this.form.sensorySightNum.value=this.value">
+                    <input type="number" id="sensorySightNum" min="0" max="10" value="10" oninput="this.form.sensorySightSlide.value=this.value">
                 </span>
             </div>
             

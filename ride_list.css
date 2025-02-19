@@ -1,98 +1,3 @@
-body {
-    font-family: Arial, sans-serif;
-    height: 100vh;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    position: relative;
-}
-
-body::before {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    background-color: #6CB11B;
-    background-image: url('back.png'); 
-    background-size: cover;
-    background-position: center;
-    height: 100vh;
-    width: 100vw;
-    z-index: -1;
-    filter: blur(2px);
-}
-
-header {
-    background: #a0674f;
-    color: rgba(255, 255, 255, 0.744);
-    padding: 10px 20px;
-    text-align: center;
-    position: fixed;
-    width: 100%;
-    top: 0;
-    left: 0;
-    z-index: 1;
-}
-
-.navbar {
-    background-color: #a0674f;
-    padding: 0 10px;
-    display: flex;
-    justify-content: space-between; 
-    align-items: center;
-}
-
-.left-nav,
-.right-nav {
-    display: flex;
-}
-
-.left-nav .nav-link {
-    margin: 0 15px; 
-    color: white;
-    padding: 15px 10px;
-    text-decoration: none; 
-    font-size: 18px;
-    font-weight: bold; 
-    align-self: center;
-}
-
-.right-nav .nav-link {
-    margin: 0 15px; 
-    color: white;
-    padding: 15px 38px 10px 10px;
-    text-decoration: none; 
-    font-size: 18px;
-    font-weight: bold; 
-    align-self: center;
-}
-
-
-.right-nav .preference {
-    margin: 0 15px;
-    display: inline-block;
-    background-color: #ffae00;
-    color: rgb(0, 0, 0);
-    padding: 15px 30px;
-    font-size: 18px;
-    font-weight: bold; 
-    border-radius: 8px;
-    text-decoration: none;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-}
-
-.preference:hover{
-    background-color: #9a6900;
-    color: rgb(250, 250, 250);
-}
-
-.nav-link:hover {
-    color:rgb(0, 0, 0);
-}
-
-.blank{
-    margin-top: 75px;
-}
 
 .ride-container {
     background-color: #cff7d3;
@@ -125,17 +30,12 @@ header {
 
 .directions-button {
     display: inline-block;
-    background-color: #000000; 
     color: rgb(255, 255, 255); 
     padding: 10px 20px; 
     margin-right: 10px; 
     text-decoration: none; 
-    border-radius: 5px; 
+    border-radius: 9999px; 
     transition: background-color 0.3s;
-}
-
-.directions-button:hover {
-    background-color: #505050;
 }
 
 /* Modal styling */
@@ -230,13 +130,10 @@ input[type="radio"] {
     color: rgb(255, 255, 255);
     padding: 5px 10px;
     margin: 5px;
-    border-radius: 10px;
+    border-radius: 9999px;
     cursor: pointer;
     font-size: 14px;
     text-transform: capitalize;
     transition: background-color 0.3s ease;
 }
 
-.filter-tag:hover {
-    background-color: #1700e6;
-}

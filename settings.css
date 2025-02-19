@@ -2,8 +2,10 @@
 body, html {
     margin: 0;
     padding: 0;
-    font-family: Arial, sans-serif;
+    font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     box-sizing: border-box;
+    overflow-y: hidden; 
 }
 
 body::before {
@@ -11,8 +13,8 @@ body::before {
     position: fixed;
     top: 0;
     left: 0;
-    background-color: #6CB11B;
-    background-image: url('back.png'); 
+    background-color: #008236;
+    background-image: url('Image.webp');
     background-size: cover;
     background-position: center;
     height: 100vh;
@@ -21,49 +23,67 @@ body::before {
     filter: blur(2px);
 }
 
-/* Navbar styling */
-.navbar {
-    background-color: #a0674f;
-    padding: 10px 30px;
+/* Header */
+.header {
+    background-color: #973C00; /* amber-800 */
+    color: white;
+    border-radius: 12px;
+}
+
+/* Navbar container */
+.nav {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
-    position: fixed;
-    width: 100%;
+    padding: 1.125rem 1.125rem;
+    max-width: 1500px;
+    margin: 0 auto;
 }
 
-.left-nav,
-.right-nav {
+/* Navbar links */
+.nav-links {
     display: flex;
+    gap: 24px;
+    margin-left: 0;
 }
 
-.left-nav .nav-link {
-    margin: 0 15px; 
+/* Individual link */
+.nav-link {
+    font-size: 1.125rem;
+    padding: 0.25rem 0.25rem;
+    font-weight: 648;
+    text-decoration: none;
     color: white;
-    padding: 15px 10px;
-    text-decoration: none; 
-    font-size: 18px;
-    font-weight: bold; 
-    align-self: center;
-}
-
-.right-nav .nav-link {
-    margin: 0 15px; 
-    color: white;
-    padding: 15px 75px 10px 10px;
-    text-decoration: none; 
-    font-size: 18px;
-    font-weight: bold; 
-    align-self: center;
-}
-
-.preference:hover{
-    background-color: #9a6900;
-    color: rgb(250, 250, 250);
+    transition: transform 0.2s, color 0.2s;
 }
 
 .nav-link:hover {
-    color:rgb(0, 0, 0);
+    color: white;
+    transform: scale(1.5);
+}
+
+/* Settings button container */
+.settings-btn-container {
+    display: flex;
+    margin-left: auto;
+}
+
+/* Settings button */
+.settings-btn {
+    background-color: #461901; /* amber-950 */
+    color: white;
+    padding: 0.75rem 1.25rem;
+    border-radius: 9999px;
+    transition: transform 0.2s, background-color 0.2s, color 0.2s, box-shadow 0.2s;
+    text-decoration: none;
+    font-size: 1rem;
+}
+
+.settings-btn:hover {
+    transform: scale(1);
+    background-color: white;
+    color: black;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
 }
 
 
@@ -78,7 +98,7 @@ body::before {
 
 /* Settings panel styling */
 .settings-panel {
-    margin-top: 80px;
+    margin-top: -96px;
     background-color: rgba(160, 103, 79, 0.95); 
     padding: 30px;
     border-radius: 30px;

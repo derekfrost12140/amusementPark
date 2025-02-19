@@ -3,38 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="mapstyles.css">
-    <title>Map</title>
+    <title>Theme Park Map</title>
+    <link rel="stylesheet" href="./src/output.css">
     <style>
-        #map {
+        .map-container {
             height: 500px;
             width: 100%;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
         }
-        #directionsPanel {
-            margin-top: 20px;
-            font-family: Arial, sans-serif;
-        }
+
+        .directions-panel {
+            background-color: rgba(255, 255, 255, 0.5); /* Darker background for better contrast */
+            color: #ffffff; /* White text for visibility */
+            padding: 20px; /* Spacing inside the panel */
+            border-radius: 10px; /* Rounded corners */
+            margin-top: 15px;
+            text-align: center;
+            font-size: 1.8rem; /* Slightly larger font */
+            font-weight: 700; /* Make text bolder */
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); /* Improve text readability */
+            line-height: 1.5; /* Improve text spacing */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Add a shadow for depth */
+            border: 2px solid rgba(255, 255, 255, 0.2); /* Soft white border */
+            max-width: 90%; /* Prevent panel from stretching too much */
+            margin-left: auto;
+            margin-right: auto;
+}
+
     </style>
 </head>
-<body>
-    <div class="navbar">
-        <div class="left-nav">
-            <a href="home.html" class="nav-link">Home</a> 
-            <a href="ride_list.html" class="nav-link">Rides</a>
-            
-            <a href="help.html" class="nav-link">Help</a>
-        </div>
-        <div class="right-nav">
-            <a href="settings.html" class="nav-link">Settings</a> 
-        </div> 
-    </div>
-<h3>Rides Map</h3>
-<div id="map"></div>
-<div class="brown-window">
-    <div id="directionsPanel"><strong>Directions:</strong> Follow the steps below to navigate.</div>
-</div>
-<script>
-// Global variables to hold map and markers
+<body class="bg-green-700 relative">
+    <div class="fixed top-0 left-0 w-full h-full bg-green-700 bg-cover bg-center filter blur-md -z-10" style="background-image: url('Image.webp');"></div>
+    
+    <header class="bg-amber-800 text-white shadow-lg rounded-xl">
+        <nav class="container mx-auto flex justify-between items-center py-4 px-4">
+            <div class="flex space-x-6">
+                <a href="home.html" class="text-lg px-1 font-semibold hover:text-white hover:scale-150 transition-transform duration-200">Home</a>
+                <a href="ride_list.html" class="text-lg px-1 font-semibold hover:text-white hover:scale-150 transition-transform duration-200">Rides</a>
+                <a href="mapNav.html" class="text-lg px-1 font-semibold hover:text-white hover:scale-150 transition-transform duration-200">Map</a>
+                <a href="signup.html" class="text-lg px-1 font-semibold hover:text-white hover:scale-150 transition-transform duration-200">Sign Up</a>
+                <a href="login.html" class="text-lg px-1 font-semibold hover:text-white hover:scale-150 transition-transform duration-200">Sign In</a>
+                <a href="help.html" class="text-lg px-1 font-semibold hover:text-white hover:scale-150 transition-transform duration-200">Help</a>
+            </div>
+            <div class="flex space-x-4"></div>
+                <a href="settings.html" class="bg-amber-950  text-white px-5 py-3 rounded-full shadow-lg hover:scale-100 hover:bg-white hover:text-black hover:shadow-xl transition-transform duration-200">Settings</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container mx-auto mt-10 p-6 text-center">
+        <h1 class="text-white text-5xl font-bold">Park Map</h1>
+        <p class="text-white text-lg mt-2">Find your way to the best rides!</p>
+        <div id="map" class="map-container mt-6"></div>
+        <div id="directionsPanel" class="directions-panel">Follow the directions to your destination.</div>
+    </main>
+
+    <script>
 var map;
 var markers = [];
 var infoWindow;
@@ -114,7 +140,10 @@ function addMarker({ lat, lng, title, categories }) {
 
     // Add a click event to show marker info
     google.maps.event.addListener(marker, 'click', function () {
-        infoWindow.setContent(title + '<br><button onclick="navigateToMarker(' + lat + ', ' + lng + ')">Navigate Here</button>');
+        infoWindow.setContent(
+    title + 
+    '<br><button onclick="navigateToMarker(' + lat + ', ' + lng + ')" style="border: 2px solid #007bff; background-color: #007bff; color: white; padding: 5px 10px; border-radius: 5px; cursor: pointer;">Navigate Here</button>'
+);
         infoWindow.open(map, marker);
     });
 }
@@ -127,7 +156,10 @@ function navigateToMarker(lat, lng) {
 
 // Function to calculate and display the route
 function calculateAndDisplayRoute(destination) {
+    
     var start = { lat: 32.7561025211987, lng: -97.07243375722175 };
+    directionsRenderer.setDirections({ routes: [] });
+
 
     directionsService.route(
         {
@@ -184,7 +216,7 @@ window.addEventListener('storage', function (event) {
 });
 
 // Load the map when the page is ready
-window.onload = initMap;
+//window.onload = initMap;
 
 </script>
 
