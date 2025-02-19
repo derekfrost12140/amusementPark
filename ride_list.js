@@ -19,9 +19,402 @@ document.addEventListener('DOMContentLoaded', async () => {
      *    (Used for seeding if empty)
      *********************************/
     const defaultRidesData = [
-      // ... All your ride objects exactly as you have them ...
+      {
+        name: "AQUAMAN: Power Wave",
+        description: "Experience the powerful force of this aquatic attraction as you’re pulled back and forth, mimicking the mighty waves of the ocean.",
+        imageUrl: "rideImages/Aquaman.png",
+        lat: 32.75694774660049,
+        lng: -97.06858634954958,
+        minHeight: 48,
+        duration: 80,
+        wheelchair: true,
+        serviceAnimal: false,
+        pregnant: false,
+        touch: 4,
+        taste: 1,
+        sound: 4,
+        smell: 1,
+        sight: 3
+      },
+      {
+        name: "BATMAN The Ride",
+        description: "See what it’s like behind the mask on this 50-mph juggernaut as you star in your own GOTHAM adventure.",
+        imageUrl: "rideImages/Batman.jpg",
+        lat: 32.75867956518985,
+        lng: -97.0665944558818,
+        minHeight: 54,
+        duration: 135,
+        wheelchair: true,
+        serviceAnimal: false,
+        pregnant: false,
+        touch: 8,
+        taste: 1,
+        sound: 7,
+        smell: 1,
+        sight: 8
+      },
+      {
+        name: "BATWING",
+        description: "Here’s a ride fit for brave young batboys and batgirls, perfect for toddlers and young children seeking adventure.",
+        imageUrl: "rideImages/Batwing.png",
+        lat: 32.757562316535875,
+        lng: -97.067054891455,
+        minHeight: 48,
+        duration: 105,
+        wheelchair: true,
+        serviceAnimal: false,
+        pregnant: false,
+        touch: 3,
+        taste: 1,
+        sound: 2,
+        smell: 1,
+        sight: 3
+      },
+      {
+        name: "Boomtown Depot",
+        description: "Climb aboard our classic train for a scenic cruise around the park. Enjoy the novelty of traveling by authentic steam engine.",
+        imageUrl: "rideImages/BoomtownDepot.jpg",
+        lat: 32.75775980664769,
+        lng: -97.06749839143542,
+        minHeight: 0,
+        duration: 480,
+        wheelchair: true,
+        serviceAnimal: true,
+        pregnant: true,
+        touch: 2,
+        taste: 1,
+        sound: 3,
+        smell: 1,
+        sight: 3
+      },
+      {
+        name: "Boot Scootin'",
+        description: "No spurs or lasso required for this gently ‘bucking’ ride, perfect for young riders. Enjoy the west without too much 'wild.'",
+        imageUrl: "rideImages/BootScootin.jpg",
+        lat: 32.757154197253314,
+        lng: -97.0720959368577,
+        minHeight: 36,
+        duration: 105,
+        wheelchair: true,
+        serviceAnimal: false,
+        pregnant: false,
+        touch: 3,
+        taste: 1,
+        sound: 3,
+        smell: 1,
+        sight: 3
+      },
+      {
+        name: "Bugs Bunny Cloud Bouncer",
+        description: "Soar to new heights with this gentle beginner drop tower ride for young thrill-seekers, offering soft, cushioned drops.",
+        imageUrl: "rideImages/BugsBunnyCloud.jpg",
+        lat: 32.75637875518429,
+        lng: -97.06841704130149,
+        minHeight: 42,
+        duration: 60,
+        wheelchair: true,
+        serviceAnimal: false,
+        pregnant: false,
+        touch: 3,
+        taste: 1,
+        sound: 3,
+        smell: 1,
+        sight: 3
+      },
+      {
+        name: "CATWOMAN Whip",
+        description: "Hold onto the whip’s handle as this GOTHAM ride spins you around at heights up to 68 feet, swirling and twirling unpredictably!",
+        imageUrl: "rideImages/Catwoman.jpg",
+        lat: 32.75726920754156,
+        lng: -97.06628719155061,
+        minHeight: 48,
+        duration: 240,
+        wheelchair: true,
+        serviceAnimal: false,
+        pregnant: false,
+        touch: 7,
+        taste: 1,
+        sound: 7,
+        smell: 1,
+        sight: 7
+      },
+      {
+        name: "Cloud Bouncer",
+        description: "Hop into a hot air balloon and circle above Goodtimes Square. Spin the center disk to control how fast you twirl!",
+        imageUrl: "rideImages/CloudBouncer.jpg",
+        lat: 32.75687916891457,
+        lng: -97.06778361202024,
+        minHeight: 42,
+        duration: 120,
+        wheelchair: true,
+        serviceAnimal: false,
+        pregnant: false,
+        touch: 3,
+        taste: 1,
+        sound: 2,
+        smell: 1,
+        sight: 3
+      },
+      {
+        name: "Daffy Duck Bucket Blasters",
+        description: "Spin round and round in water barrels equipped with water guns! Splash each other and nearby guests in this wacky water battle.",
+        imageUrl: "rideImages/BucketBlasters.jpg",
+        lat: 32.75912726546584,
+        lng: -97.06800230384427,
+        minHeight: 48,
+        duration: 100,
+        wheelchair: true,
+        serviceAnimal: false,
+        pregnant: false,
+        touch: 5,
+        taste: 2,
+        sound: 4,
+        smell: 2,
+        sight: 4
+      },
+      {
+        name: "El Diablo",
+        description: "A super loop coaster that throws you around for six full 180s at a breathtaking speed. Face-to-face seating adds extra thrills!",
+        imageUrl: "rideImages/ElDiablo.png",
+        lat: 32.755825529397704,
+        lng: -97.07200652921023,
+        minHeight: 48,
+        duration: 90,
+        wheelchair: true,
+        serviceAnimal: false,
+        pregnant: false,
+        touch: 7,
+        taste: 1,
+        sound: 7,
+        smell: 1,
+        sight: 7
+      },
+      {
+        name: "El Sombrero",
+        description: "Hang on to your hats! This giant spinning sombrero tilts and whips riders in a carousel-style swirl. Viva la fiesta!",
+        imageUrl: "rideImages/Sombrero.png",
+        lat: 32.755489433620255,
+        lng: -97.0709131848416,
+        minHeight: 42,
+        duration: 60,
+        wheelchair: true,
+        serviceAnimal: false,
+        pregnant: false,
+        touch: 3,
+        taste: 1,
+        sound: 4,
+        smell: 1,
+        sight: 2
+      },
+      {
+        name: "Gunslinger",
+        description: "Holster yourself into a bucket seat and dangle as the ride spins, flinging you outward the faster it goes. Yee-haw!",
+        imageUrl: "rideImages/Gunslinger.jpg",
+        lat: 32.75323847916851,
+        lng: -97.06802371184325,
+        minHeight: 42,
+        duration: 100,
+        wheelchair: true,
+        serviceAnimal: false,
+        pregnant: false,
+        touch: 5,
+        taste: 1,
+        sound: 5,
+        smell: 1,
+        sight: 5
+      },
+      {
+        name: "JUSTICE LEAGUE: Battle for METROPOLIS",
+        description: "Fight THE JOKER and LEX LUTHOR with a laser gun in this immersive 4D ride to save the JUSTICE LEAGUE!",
+        imageUrl: "rideImages/JusticeLeague.jpg",
+        lat: 32.757991473958874,
+        lng: -97.0677503492011,
+        minHeight: 48,
+        duration: 240,
+        wheelchair: true,
+        serviceAnimal: false,
+        pregnant: false,
+        touch: 5,
+        taste: 1,
+        sound: 5,
+        smell: 1,
+        sight: 6
+      },
+      {
+        name: "La Fiesta de las Tazas",
+        description: "Spin inside giant teacups that are spinning on top of something else spinning—triple spinning madness for the whole family!",
+        imageUrl: "rideImages/TeaCups.png",
+        lat: 32.75731315275531,
+        lng: -97.06689389616429,
+        minHeight: 42,
+        duration: 90,
+        wheelchair: true,
+        serviceAnimal: false,
+        pregnant: false,
+        touch: 3,
+        taste: 1,
+        sound: 2,
+        smell: 1,
+        sight: 3
+      },
+      {
+        name: "La Vibora",
+        description: "Bobsled-style coaster that slithers like a snake, with winding track that slides you up the walls around each twist!",
+        imageUrl: "rideImages/Vibora.jpg",
+        lat: 32.755669332272035,
+        lng: -97.07129106781014,
+        minHeight: 42,
+        duration: 100,
+        wheelchair: true,
+        serviceAnimal: false,
+        pregnant: false,
+        touch: 7,
+        taste: 1,
+        sound: 6,
+        smell: 1,
+        sight: 6
+      },
+      {
+        name: "Mr. Freeze",
+        description: "Launch from 0-70 mph in 3.8 seconds, fly up a 236-foot tower, then do it all in reverse! Beware the cold!",
+        imageUrl: "rideImages/Freeze.png",
+        lat: 32.75548781011889,
+        lng: -97.07155711109925,
+        minHeight: 54,
+        duration: 90,
+        wheelchair: false,
+        serviceAnimal: false,
+        pregnant: false,
+        touch: 8,
+        taste: 1,
+        sound: 8,
+        smell: 1,
+        sight: 8
+      },
+      {
+        name: "Oil Derrick",
+        description: "Ascend 300+ feet in this observation tower for an expansive bird’s eye view of the entire park and skyline!",
+        imageUrl: "rideImages/OilDerrick.png",
+        lat: 32.75784178390764,
+        lng: -97.06661224784125,
+        minHeight: 0,
+        duration: 90,
+        wheelchair: true,
+        serviceAnimal: true,
+        pregnant: false,
+        touch: 3,
+        taste: 1,
+        sound: 3,
+        smell: 1,
+        sight: 3
+      },
+      {
+        name: "Silver Star Carousel",
+        description: "Iconic vintage carousel with over 60 horses. A beautiful, nostalgic ride right near the front gate!",
+        imageUrl: "rideImages/SilverStar.jpg",
+        lat: 32.758886637131965,
+        lng: -97.07057433567623,
+        minHeight: 42,
+        duration: 210,
+        wheelchair: true,
+        serviceAnimal: true,
+        pregnant: false,
+        touch: 3,
+        taste: 1,
+        sound: 2,
+        smell: 1,
+        sight: 3
+      },
+      {
+        name: "SUPERMAN: Tower of Power",
+        description: "Rocket up 325 feet, then plunge multiple 10+ story drops. Experience extreme G-forces in free-fall!",
+        imageUrl: "rideImages/Superman.png",
+        lat: 32.758384840744206,
+        lng: -97.06868454595156,
+        minHeight: 52,
+        duration: 120,
+        wheelchair: true,
+        serviceAnimal: true,
+        pregnant: false,
+        touch: 8,
+        taste: 1,
+        sound: 7,
+        smell: 1,
+        sight: 7
+      },
+      {
+        name: "Texas Depot",
+        description: "Board the Sam Houston steam engine for a pleasant and scenic tour around the park. All aboard!",
+        imageUrl: "rideImages/TexasDepot.jpg",
+        lat: 32.7570749439281,
+        lng: -97.07255299151078,
+        minHeight: 0,
+        duration: 480,
+        wheelchair: true,
+        serviceAnimal: true,
+        pregnant: true,
+        touch: 2,
+        taste: 1,
+        sound: 3,
+        smell: 1,
+        sight: 3
+      },
+      {
+        name: "Texas SkyScreamer",
+        description: "Like a giant swing ride, but 400 feet in the air! Spin high above the park for a thrilling view.",
+        imageUrl: "rideImages/SkyScreamer.png",
+        lat: 32.75676784036096,
+        lng: -97.0658927520594,
+        minHeight: 48,
+        duration: 165,
+        wheelchair: true,
+        serviceAnimal: false,
+        pregnant: false,
+        touch: 7,
+        taste: 1,
+        sound: 5,
+        smell: 1,
+        sight: 6
+      },
+      {
+        name: "THE RIDDLER Revenge",
+        description: "A giant swinging pendulum ride that spins and swoops at up to 70 mph, disorienting you in multiple axes!",
+        imageUrl: "rideImages/Riddler.png",
+        lat: 32.75685106292408,
+        lng: -97.0652765520594,
+        minHeight: 52,
+        duration: 180,
+        wheelchair: true,
+        serviceAnimal: false,
+        pregnant: false,
+        touch: 8,
+        taste: 1,
+        sound: 8,
+        smell: 1,
+        sight: 8
+      },
+      {
+        name: "Titan",
+        description: "One of the tallest and longest coasters in the park. 245 feet tall, 85 mph, 3.5-minute ride full of G-forces!",
+        imageUrl: "rideImages/Titan.jpg",
+        lat: 32.7557677102804,
+        lng: -97.07418512037097,
+        minHeight: 48,
+        duration: 200,
+        wheelchair: true,
+        serviceAnimal: false,
+        pregnant: false,
+        touch: 8,
+        taste: 1,
+        sound: 7,
+        smell: 1,
+        sight: 7
+      }
     ];
   
+    /*********************************
+     * 3. Seed Firestore if Empty
+     *********************************/
     async function seedRidesIfEmpty() {
       const snapshot = await db.collection("rides").get();
       if (snapshot.empty) {
@@ -34,21 +427,20 @@ document.addEventListener('DOMContentLoaded', async () => {
         console.log("Rides collection is not empty. Skipping seeding.");
       }
     }
-  
     await seedRidesIfEmpty();
   
     /*********************************
-     * 3. Dynamically Load Rides
+     * 4. Dynamically Load Rides
      *********************************/
     const ridesContainer = document.querySelector('.rides-container');
   
-    // (Optional) If you want real-time updates, use onSnapshot:
+    // Optionally use real-time updates:
     // db.collection("rides").onSnapshot((snapshot) => {
-    //   ridesContainer.innerHTML = ""; // Clear existing
+    //   ridesContainer.innerHTML = "";
     //   snapshot.forEach(doc => createRideElement(doc.data()));
     // });
   
-    // Otherwise, do a one-time load:
+    // Or do a one-time load:
     await db.collection("rides").get()
       .then(querySnapshot => {
         querySnapshot.forEach(doc => {
@@ -57,12 +449,11 @@ document.addEventListener('DOMContentLoaded', async () => {
       })
       .catch(err => console.error("Error loading rides:", err));
   
-    // Helper to create each ride's DOM
     function createRideElement(ride) {
       const rideContainer = document.createElement('div');
       rideContainer.classList.add('ride-container', 'bg-green-900');
   
-      // Set data attributes for filter & sort
+      // Data attributes for filter & sort
       rideContainer.setAttribute('data-wheelchair', ride.wheelchair);
       rideContainer.setAttribute('data-serviceAnimal', ride.serviceAnimal);
       rideContainer.setAttribute('data-pregnant', ride.pregnant);
@@ -74,6 +465,13 @@ document.addEventListener('DOMContentLoaded', async () => {
       rideContainer.setAttribute('data-name', ride.name);
       rideContainer.setAttribute('data-minHeight', ride.minHeight);
       rideContainer.setAttribute('data-duration', ride.duration);
+  
+      // Convert duration to a nicer format if you want
+      function formatDuration(seconds) {
+        const m = Math.floor(seconds / 60);
+        const s = seconds % 60;
+        return `${m} min ${s} sec`;
+      }
   
       rideContainer.innerHTML = `
         <img src="${ride.imageUrl}" alt="Ride Image" class="ride-container-image rounded-xl">
@@ -111,15 +509,8 @@ document.addEventListener('DOMContentLoaded', async () => {
       ridesContainer.appendChild(rideContainer);
     }
   
-    // Example: Convert seconds to "min sec" format
-    function formatDuration(seconds) {
-      const m = Math.floor(seconds / 60);
-      const s = seconds % 60;
-      return `${m} min ${s} sec`;
-    }
-  
     /*********************************
-     * 4. Filter Modal Logic
+     * 5. Filter Modal
      *********************************/
     const filterBtn = document.getElementById('filterBtn');
     const preferencesModal = document.createElement('div');
@@ -130,7 +521,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         <label><input type="checkbox" id="wheelchairCheckbox"> Wheelchair Accessible</label><br>
         <label><input type="checkbox" id="serviceAnimalCheckbox"> Service Animal Friendly</label><br>
         <label><input type="checkbox" id="pregnant"> Accessible to Pregnant People</label><br>
-        <!-- Sliders & numbers for touch, taste, sound, smell, sight -->
         <label>
           <form>
             <input type="range" id="touchSlide" min="0" max="10" value="10" oninput="this.form.touchNum.value=this.value">
@@ -238,7 +628,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
   
     /*********************************
-     * 5. Sort Modal Logic
+     * 6. Sort Modal
      *********************************/
     const sortBtn = document.getElementById('sortBtn');
     const sortModal = document.createElement('div');
@@ -273,7 +663,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       const sortByHeight = document.getElementById('sortByHeight').checked;
       const sortByDuration = document.getElementById('sortByDuration').checked;
       const sortAsc = document.getElementById('sortAsc').checked;
-      // const sortDesc = document.getElementById('sortDesc').checked; // not strictly needed if you use sortAsc
+      // If needed, you can read sortDesc from document.getElementById('sortDesc').checked
   
       const rideContainers = Array.from(document.querySelectorAll('.ride-container'));
       const sortOrder = sortAsc ? 1 : -1;
@@ -304,7 +694,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
   
     /*********************************
-     * 6. Tag Click -> Toggle Filter
+     * 7. Tag Click -> Update Filters
      *********************************/
     document.addEventListener('click', (event) => {
       if (event.target && event.target.classList.contains('filter-tag')) {
@@ -315,9 +705,12 @@ document.addEventListener('DOMContentLoaded', async () => {
           document.getElementById(`${filterType}Checkbox`) ||
           document.getElementById(`${filterType}Num`);
   
+        // If it's a checkbox
         if (filterElement && filterElement.type === 'checkbox') {
           filterElement.checked = !filterElement.checked;
-        } else if (filterElement && filterElement.type === 'number') {
+        }
+        // If it's a number input
+        else if (filterElement && filterElement.type === 'number') {
           filterElement.value = filterValue;
           document.getElementById(`${filterType}Slide`).value = filterValue;
         }
