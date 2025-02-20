@@ -488,18 +488,28 @@ document.addEventListener('DOMContentLoaded', async () => {
       </div>
     `;
 
-    document.querySelectorAll('.favorite-button').forEach(button => {
-        button.addEventListener('click', (e) => {
-          const rideId = e.target.getAttribute('data-ride-id');
-          toggleFavorite(rideId);
-        });
-      });
-
-    function toggleFavorite(rideId) {
-        // Assuming you have a way to keep track of favorite rides, e.g., in an array or local storage
-        console.log(`Toggling favorite for ride with ID: ${rideId}`);
-        // You can toggle the class or store favorite status accordingly
+    // Add event listener using event delegation on the rideContainer parent element
+    rideContainer.addEventListener('click', (e) => {
+      if (e.target && e.target.classList.contains('favorite-button')) {
+        const rideId = e.target.getAttribute('data-ride-id');
+        toggleFavorite(rideId, e.target);
       }
+    });
+
+    function toggleFavorite(rideId, button) {
+      // Example: You could toggle the favorite status and update the button
+      console.log(`Toggling favorite for ride with ID: ${rideId}`);
+
+      // Example: toggle the star icon or text on the button to indicate favorite status
+      if (button.classList.contains('favorited')) {
+        button.classList.remove('favorited');
+        button.textContent = '☆ Favorite';
+      } else {
+        button.classList.add('favorited');
+        button.textContent = '★ Favorited';
+      }
+    }
+
 
   
       // Insert accessibility tags
