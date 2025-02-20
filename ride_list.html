@@ -6,6 +6,55 @@
     <title>Rides List</title>
     <link rel="stylesheet" href="./src/output.css"> 
     <link rel="stylesheet" href="ride_list.css"> 
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js";
+        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
+        import { getFirestore, doc, setDoc, getDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyBn7xE-jaEuixzyDROnbHrQo6-YtOR5LaU",
+            authDomain: "amusement-park-4039d.firebaseapp.com",
+            projectId: "amusement-park-4039d",
+            storageBucket: "amusement-park-4039d.appspot.com",
+            messagingSenderId: "625618396056",
+            appId: "1:625618396056:web:ff2907be3a1958ed9041ed"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        document.addEventListener("DOMContentLoaded", () => {
+            onAuthStateChanged(auth, user => {
+                if (user) {
+                    document.querySelectorAll(".favorite-button").forEach(button => {
+                        const rideName = button.dataset.name;
+                        const rideRef = doc(db, `users/${user.uid}/favorites`, rideName);
+                        
+                        getDoc(rideRef).then(docSnap => {
+                            if (docSnap.exists()) {
+                                button.classList.add("favorited");
+                                button.innerText = "★ Favorite";
+                            }
+                        });
+
+                        button.addEventListener("click", async () => {
+                            if (button.classList.contains("favorited")) {
+                                await deleteDoc(rideRef);
+                                button.classList.remove("favorited");
+                                button.innerText = "☆ Favorite";
+                            } else {
+                                await setDoc(rideRef, { name: rideName });
+                                button.classList.add("favorited");
+                                button.innerText = "★ Favorite";
+                            }
+                        });
+                    });
+                }
+            });
+        });
+    </script>
  
 
 <body class="bg-green-700 relative">
@@ -14,8 +63,8 @@
     <header class="bg-amber-800 text-white shadow-lg rounded-xl">
         <nav class="container mx-auto flex justify-between items-center py-4 px-4">
             <div class="flex space-x-6">
-                <a href="signup.html" class="text-lg px-1 font-semibold hover:text-white hover:scale-150 transition-transform duration-200">Signup</a>
-                <a href="login.html" class="text-lg px-1 font-semibold hover:text-white hover:scale-150 transition-transform duration-200">Sign in</a>
+                <a href="signup.html" class="text-lg px-1 font-semibold hover:text-white hover:scale-150 transition-transform duration-200">Sign Up</a>
+                <a href="login.html" class="text-lg px-1 font-semibold hover:text-white hover:scale-150 transition-transform duration-200">Sign In</a>
                 <a href="mapNav.html" class="text-lg px-1 font-semibold hover:text-white hover:scale-150 transition-transform duration-200">Map</a>
                 <a href="help.html" class="text-lg px-1 font-semibold hover:text-white hover:scale-150 transition-transform duration-200">Help</a>
             </div>
@@ -54,9 +103,9 @@
                 <p><u>Duration</u>: 1 min 20 sec</p>
                 <p><b>Accessibility Constraints: </b><span class="accessibility-data"></span></p>
                 <div class="button-container bg-green-950 text-white hover:scale-125 hover:bg-amber-950 rounded-2xl">
-                    
                     <a href="mapNav.html?lat=32.75694774660049&lng=-97.06858634954958" class="directions-button">Directions</a> 
                 </div>
+                <button class="favorite-button" data-name="Aquaman: Power Wave">☆ Favorite</button>
             </div>
         </div>
 
@@ -88,6 +137,7 @@
                 <div class="button-container bg-green-950 text-white hover:scale-125 hover:bg-amber-950 rounded-2xl">
                     <a href="mapNav.html?lat=32.75867956518985&lng=-97.0665944558818" class="directions-button">Directions</a> 
                 </div>
+                <button class="favorite-button" data-name="Aquaman: Power Wave">☆ Favorite</button>
             </div>
         </div>
 
@@ -111,6 +161,7 @@
                 <div class="button-container bg-green-950 text-white hover:scale-125 hover:bg-amber-950 rounded-2xl">
                     <a href="mapNav.html?lat=32.757562316535875&lng=-97.067054891455" class="directions-button">Directions</a>
                 </div>
+                <button class="favorite-button" data-name="Aquaman: Power Wave">☆ Favorite</button>
             </div>
         </div>
 
@@ -132,6 +183,7 @@
                       <div class="button-container bg-green-950 text-white hover:scale-125 hover:bg-amber-950 rounded-2xl">
                     <a href="mapNav.html?lat=32.75775980664769&lng=-97.06749839143542" class="directions-button">Directions</a>
                 </div>
+                <button class="favorite-button" data-name="Aquaman: Power Wave">☆ Favorite</button>
             </div>
         </div>
 
@@ -154,6 +206,7 @@
                       <div class="button-container bg-green-950 text-white hover:scale-125 hover:bg-amber-950 rounded-2xl">
                     <a href="mapNav.html?lat=32.757154197253314&lng=-97.0720959368577" class="directions-button">Directions</a>
                 </div>
+                <button class="favorite-button" data-name="Aquaman: Power Wave">☆ Favorite</button>
             </div>
         </div>
 
@@ -176,6 +229,7 @@
                       <div class="button-container bg-green-950 text-white hover:scale-125 hover:bg-amber-950 rounded-2xl">
                     <a href="mapNav.html?lat=32.75637875518429&lng=-97.06841704130149" class="directions-button">Directions</a>
                 </div>
+                <button class="favorite-button" data-name="Aquaman: Power Wave">☆ Favorite</button>
             </div>
         </div>
 
@@ -200,6 +254,7 @@
                       <div class="button-container bg-green-950 text-white hover:scale-125 hover:bg-amber-950 rounded-2xl">
                     <a href="mapNav.html?lat=32.75726920754156&lng=-97.06628719155061" class="directions-button">Directions</a>
                 </div>
+                <button class="favorite-button" data-name="Aquaman: Power Wave">☆ Favorite</button>
             </div>
         </div>
 
@@ -223,6 +278,7 @@
                       <div class="button-container bg-green-950 text-white hover:scale-125 hover:bg-amber-950 rounded-2xl">
                     <a href="mapNav.html?lat=32.75687916891457&lng=-97.06778361202024" class="directions-button">Directions</a>
                 </div>
+                <button class="favorite-button" data-name="Aquaman: Power Wave">☆ Favorite</button>
             </div>
         </div>
 
@@ -248,6 +304,7 @@
                       <div class="button-container bg-green-950 text-white hover:scale-125 hover:bg-amber-950 rounded-2xl">
                     <a href="mapNav.html?lat=32.75912726546584&lng=-97.06800230384427" class="directions-button">Directions</a>
                 </div>
+                <button class="favorite-button" data-name="Aquaman: Power Wave">☆ Favorite</button>
             </div>
         </div>
 
@@ -272,6 +329,7 @@
                       <div class="button-container bg-green-950 text-white hover:scale-125 hover:bg-amber-950 rounded-2xl">
                     <a href="mapNav.html?lat=32.755825529397704&lng=-97.07200652921023" class="directions-button">Directions</a>
                 </div>
+                <button class="favorite-button" data-name="Aquaman: Power Wave">☆ Favorite</button>
             </div>
         </div>
 
@@ -293,6 +351,7 @@
                       <div class="button-container bg-green-950 text-white hover:scale-125 hover:bg-amber-950 rounded-2xl">
                     <a href="mapNav.html?lat=32.755489433620255&lng=-97.0709131848416" class="directions-button">Directions</a>
                 </div>
+                <button class="favorite-button" data-name="Aquaman: Power Wave">☆ Favorite</button>
             </div>
         </div>
 
@@ -316,6 +375,7 @@
                       <div class="button-container bg-green-950 text-white hover:scale-125 hover:bg-amber-950 rounded-2xl">
                     <a href="mapNav.html?lat=32.75323847916851&lng=-97.06802371184325" class="directions-button">Directions</a>
                 </div>
+                <button class="favorite-button" data-name="Aquaman: Power Wave">☆ Favorite</button>
             </div>
         </div>
 
@@ -338,6 +398,7 @@
                       <div class="button-container bg-green-950 text-white hover:scale-125 hover:bg-amber-950 rounded-2xl">
                     <a href="mapNav.html?lat=32.757991473958874&lng=-97.0677503492011" class="directions-button">Directions</a>
                 </div>
+                <button class="favorite-button" data-name="Aquaman: Power Wave">☆ Favorite</button>
             </div>
         </div>
 
@@ -360,6 +421,7 @@
                       <div class="button-container bg-green-950 text-white hover:scale-125 hover:bg-amber-950 rounded-2xl">
                     <a href="mapNav.html?lat=32.75731315275531&lng=-97.06689389616429" class="directions-button">Directions</a>
                 </div>
+                <button class="favorite-button" data-name="Aquaman: Power Wave">☆ Favorite</button>
             </div>
         </div>
 
@@ -383,6 +445,7 @@
                       <div class="button-container bg-green-950 text-white hover:scale-125 hover:bg-amber-950 rounded-2xl">
                     <a href="mapNav.html?lat=32.755669332272035&lng=-97.07129106781014" class="directions-button">Directions</a>
                 </div>
+                <button class="favorite-button" data-name="Aquaman: Power Wave">☆ Favorite</button>
             </div>
         </div>
 
@@ -407,6 +470,7 @@
                       <div class="button-container bg-green-950 text-white hover:scale-125 hover:bg-amber-950 rounded-2xl">
                     <a href="mapNav.html?lat=32.75548781011889&lng=-97.07155711109925" class="directions-button">Directions</a>
                 </div>
+                <button class="favorite-button" data-name="Aquaman: Power Wave">☆ Favorite</button>
             </div>
         </div>
 
@@ -426,6 +490,7 @@
                       <div class="button-container bg-green-950 text-white hover:scale-125 hover:bg-amber-950 rounded-2xl">
                     <a href="mapNav.html?lat=32.75784178390764&lng=-97.06661224784125" class="directions-button">Directions</a>
                 </div>
+                <button class="favorite-button" data-name="Aquaman: Power Wave">☆ Favorite</button>
             </div>
         </div>
 
@@ -449,6 +514,7 @@
                       <div class="button-container bg-green-950 text-white hover:scale-125 hover:bg-amber-950 rounded-2xl">
                     <a href="mapNav.html?lat=32.758886637131965&lng=-97.07057433567623" class="directions-button">Directions</a>
                 </div>
+                <button class="favorite-button" data-name="Aquaman: Power Wave">☆ Favorite</button>
             </div>
         </div>
 
@@ -470,6 +536,7 @@
                       <div class="button-container bg-green-950 text-white hover:scale-125 hover:bg-amber-950 rounded-2xl">
                     <a href="mapNav.html?lat=32.758384840744206&lng=-97.06868454595156" class="directions-button">Directions</a>
                 </div>
+                <button class="favorite-button" data-name="Aquaman: Power Wave">☆ Favorite</button>
             </div>
         </div>
 
@@ -494,6 +561,7 @@
                       <div class="button-container bg-green-950 text-white hover:scale-125 hover:bg-amber-950 rounded-2xl">
                     <a href="mapNav.html?lat=32.7570749439281&lng=-97.07255299151078" class="directions-button">Directions</a>
                 </div>
+                <button class="favorite-button" data-name="Aquaman: Power Wave">☆ Favorite</button>
             </div>
         </div>
 
@@ -517,6 +585,7 @@
                       <div class="button-container bg-green-950 text-white hover:scale-125 hover:bg-amber-950 rounded-2xl">
                     <a href="mapNav.html?lat=32.75676784036096&lng=-97.0658927520594" class="directions-button">Directions</a>
                 </div>
+                <button class="favorite-button" data-name="Aquaman: Power Wave">☆ Favorite</button>
             </div>
         </div>
 
@@ -540,6 +609,7 @@
                       <div class="button-container bg-green-950 text-white hover:scale-125 hover:bg-amber-950 rounded-2xl">
                     <a href="mapNav.html?lat=32.75685106292408&lng=-97.0652765520594" class="directions-button">Directions</a>
                 </div>
+                <button class="favorite-button" data-name="Aquaman: Power Wave">☆ Favorite</button>
             </div>
         </div>
 
@@ -563,6 +633,7 @@
                       <div class="button-container bg-green-950 text-white hover:scale-125 hover:bg-amber-950 rounded-2xl">
                     <a href="mapNav.html?lat=32.7557677102804&lng=-97.07418512037097" class="directions-button">Directions</a>
                 </div>
+                <button class="favorite-button" data-name="Aquaman: Power Wave">☆ Favorite</button>
             </div>
         </div>
     </div>
