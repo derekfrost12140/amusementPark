@@ -488,38 +488,57 @@ document.addEventListener('DOMContentLoaded', async () => {
       </div>
     `;
 
-    // Add event listener using event delegation on the rideContainer parent element
-    rideContainer.addEventListener('click', (e) => {
-      if (e.target && e.target.classList.contains('favorite-button')) {
-        const rideId = e.target.getAttribute('data-ride-id');
-        toggleFavorite(rideId, e.target);
+    document.addEventListener('DOMContentLoaded', () => {
+      const rideContainer = document.getElementById("ride-container"); // Assuming you're rendering rides here
+  
+      // Add event listener using event delegation on the rideContainer parent element
+      rideContainer.addEventListener('click', (e) => {
+        if (e.target && e.target.classList.contains('favorite-button')) {
+          const rideId = e.target.getAttribute('data-ride-id');
+          toggleFavorite(rideId, e.target);
+        }
+      });
+  
+      function toggleFavorite(rideId, button) {
+          const user = firebase.auth().currentUser;  // Get the current user
+  
+          if (!user) {
+              alert('You need to be logged in to favorite a ride!');
+              return;
+          }
+  
+          const rideRef = firebase.firestore().doc(`users/${user.uid}/favorites/${rideId}`);
+  
+          // Check if the ride is already in the user's favorites
+          rideRef.get().then((doc) => {
+              if (doc.exists) {
+                  // Ride is already a favorite, so remove it
+                  rideRef.delete().then(() => {
+                      button.classList.remove('favorited');
+                      button.textContent = '☆ Favorite';
+                      console.log(`Ride ${rideId} removed from favorites`);
+                  }).catch((error) => {
+                      console.error("Error removing favorite: ", error);
+                  });
+              } else {
+                  // Add ride to favorites
+                  rideRef.set({
+                      id: rideId,
+                      name: button.getAttribute('data-ride-name')
+                  }).then(() => {
+                      button.classList.add('favorited');
+                      button.textContent = '★ Favorited';
+                      console.log(`Ride ${rideId} added to favorites`);
+                  }).catch((error) => {
+                      console.error("Error adding favorite: ", error);
+                  });
+              }
+          }).catch((error) => {
+              console.error("Error checking favorite: ", error);
+          });
       }
-    });
-
-    function toggleFavorite(rideId, button) {
-      // Example: Get current favorites from localStorage
-      let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
-    
-      // Check if this ride is already in favorites
-      const rideIndex = favorites.findIndex(ride => ride.id === rideId);
-      
-      if (rideIndex === -1) {
-        // Add to favorites
-        favorites.push({ id: rideId, name: ride.name });
-        button.classList.add('favorited');
-        button.textContent = '★ Favorited';
-      } else {
-        // Remove from favorites
-        favorites.splice(rideIndex, 1);
-        button.classList.remove('favorited');
-        button.textContent = '☆ Favorite';
-      }
-    
-      // Save the updated favorites to localStorage
-      localStorage.setItem('favorites', JSON.stringify(favorites));
-    
-      console.log(`Favorites updated:`, favorites);
-    }
+  });
+  
     
 
 
