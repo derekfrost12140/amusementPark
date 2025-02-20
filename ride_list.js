@@ -497,18 +497,30 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
 
     function toggleFavorite(rideId, button) {
-      // Example: You could toggle the favorite status and update the button
-      console.log(`Toggling favorite for ride with ID: ${rideId}`);
-
-      // Example: toggle the star icon or text on the button to indicate favorite status
-      if (button.classList.contains('favorited')) {
-        button.classList.remove('favorited');
-        button.textContent = '☆ Favorite';
-      } else {
+      // Example: Get current favorites from localStorage
+      let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+    
+      // Check if this ride is already in favorites
+      const rideIndex = favorites.findIndex(ride => ride.id === rideId);
+      
+      if (rideIndex === -1) {
+        // Add to favorites
+        favorites.push({ id: rideId, name: ride.name });
         button.classList.add('favorited');
         button.textContent = '★ Favorited';
+      } else {
+        // Remove from favorites
+        favorites.splice(rideIndex, 1);
+        button.classList.remove('favorited');
+        button.textContent = '☆ Favorite';
       }
+    
+      // Save the updated favorites to localStorage
+      localStorage.setItem('favorites', JSON.stringify(favorites));
+    
+      console.log(`Favorites updated:`, favorites);
     }
+    
 
 
   
