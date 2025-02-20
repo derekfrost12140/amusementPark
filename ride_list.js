@@ -474,18 +474,33 @@ document.addEventListener('DOMContentLoaded', async () => {
       }
   
       rideContainer.innerHTML = `
-        <img src="${ride.imageUrl}" alt="Ride Image" class="ride-container-image rounded-xl">
-        <div class="ride-container-text">
-          <h2>${ride.name}</h2>
-          <p>${ride.description}</p>
-          <p><u>Minimum height</u>: ${ride.minHeight}"</p>
-          <p><u>Duration</u>: ${formatDuration(ride.duration)}</p>
-          <p><b>Accessibility Constraints: </b><span class="accessibility-data"></span></p>
-          <div class="button-container bg-green-950 text-white hover:scale-125 hover:bg-amber-950 rounded-2xl">
-            <a href="mapNav.html?lat=${ride.lat}&lng=${ride.lng}" class="directions-button">Directions</a>
-          </div>
+      <img src="${ride.imageUrl}" alt="Ride Image" class="ride-container-image rounded-xl">
+      <div class="ride-container-text">
+        <h2>${ride.name}</h2>
+        <p>${ride.description}</p>
+        <p><u>Minimum height</u>: ${ride.minHeight}"</p>
+        <p><u>Duration</u>: ${formatDuration(ride.duration)}</p>
+        <p><b>Accessibility Constraints: </b><span class="accessibility-data"></span></p>
+        <div class="button-container bg-green-950 text-white hover:scale-125 hover:bg-amber-950 rounded-2xl">
+          <a href="mapNav.html?lat=${ride.lat}&lng=${ride.lng}" class="directions-button">Directions</a>
         </div>
-      `;
+        <button class="favorite-button" data-ride-id="${ride.id}">☆ Favorite</button> 
+      </div>
+    `;
+
+    document.querySelectorAll('.favorite-button').forEach(button => {
+        button.addEventListener('click', (e) => {
+          const rideId = e.target.getAttribute('data-ride-id');
+          toggleFavorite(rideId);
+        });
+      });
+
+    function toggleFavorite(rideId) {
+        // Assuming you have a way to keep track of favorite rides, e.g., in an array or local storage
+        console.log(`Toggling favorite for ride with ID: ${rideId}`);
+        // You can toggle the class or store favorite status accordingly
+      }
+
   
       // Insert accessibility tags
       const accessibilityData = rideContainer.querySelector('.accessibility-data');
