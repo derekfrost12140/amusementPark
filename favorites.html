@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <header class="bg-amber-800 text-white shadow-lg rounded-xl">
+        <nav class="container mx-auto flex justify-between items-center py-4 px-4">
+            <div class="flex space-x-6">
+                <a href="home.html" class="text-lg px-1 font-semibold hover:text-white hover:scale-150 transition-transform duration-200">Home</a>
+                <a href="ride_list.html" class="text-lg px-1 font-semibold hover:text-white hover:scale-150 transition-transform duration-200">Rides</a>
+                <a href="mapNav.html" class="text-lg px-1 font-semibold hover:text-white hover:scale-150 transition-transform duration-200">Map</a>
+                <a href="signup.html" class="text-lg px-1 font-semibold hover:text-white hover:scale-150 transition-transform duration-200">Sign Up</a>
+                <a href="login.html" class="text-lg px-1 font-semibold hover:text-white hover:scale-150 transition-transform duration-200">Sign In</a>
+                <a href="help.html" class="text-lg px-1 font-semibold hover:text-white hover:scale-150 transition-transform duration-200">Help</a>
+            </div>
+            <div class="flex space-x-4"></div>
+                <a href="settings.html" class="bg-amber-950  text-white px-5 py-3 rounded-full shadow-lg hover:scale-100 hover:bg-white hover:text-black hover:shadow-xl transition-transform duration-200">Settings</a>
+            </div>
+        </nav>
+    </header>
+    <link rel="stylesheet" href="./src/output.css"> 
+    <link rel="stylesheet" href="ride_list.css"> 
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js";
+        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
+        import { getFirestore, collection, getDocs, deleteDoc, doc } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyBn7xE-jaEuixzyDROnbHrQo6-YtOR5LaU",
+            authDomain: "amusement-park-4039d.firebaseapp.com",
+            projectId: "amusement-park-4039d",
+            storageBucket: "amusement-park-4039d.appspot.com",
+            messagingSenderId: "625618396056",
+            appId: "1:625618396056:web:ff2907be3a1958ed9041ed"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const favoriteRidesContainer = document.getElementById("favorite-rides");
+
+            onAuthStateChanged(auth, async (user) => {
+                if (!user) {
+                    favoriteRidesContainer.innerHTML = "<p class='text-white text-center text-lg'>Please log in to view your favorites.</p>";
+                    return;
+                }
+
+                const favoritesRef = collection(db, `users/${user.uid}/favorites`);
+                const favoritesSnap = await getDocs(favoritesRef);
+
+                if (favoritesSnap.empty) {
+                    favoriteRidesContainer.innerHTML = "<p class='text-white text-center text-lg'>You have no favorite rides.</p>";
+                    return;
+                }
+
+                favoritesSnap.forEach(docSnap => {
+                    const rideName = docSnap.id;
+                    const rideElement = document.createElement("div");
+                    rideElement.className = "favorite-ride bg-green-900 p-4 rounded-lg shadow-lg mb-4";
+                    rideElement.innerHTML = `
+                        <h2 class="text-xl text-white font-bold">${rideName}</h2>
+                        <button class="remove-favorite bg-red-500 text-white px-3 py-1 rounded mt-2" data-name="${rideName}">Remove</button>
+                    `;
+
+                    rideElement.querySelector(".remove-favorite").addEventListener("click", async () => {
+                        await deleteDoc(doc(db, `users/${user.uid}/favorites`, rideName));
+                        rideElement.remove();
+                    });
+
+                    favoriteRidesContainer.appendChild(rideElement);
+                });
+            });
+        });
+    </script>
+</head>
+<body class="bg-green-700">
+    <div class="container mx-auto mt-6">
+        <div id="favorite-rides" class="p-4">
+            <p class="text-white text-center">Loading your favorite rides...</p>
+        </div>
+    </div>
+</body>
+</html>
