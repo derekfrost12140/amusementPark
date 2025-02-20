@@ -21,7 +21,7 @@
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js";
         import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
-        import { getFirestore, collection, getDocs, deleteDoc, doc } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
+        import { getFirestore, collection, getDocs, doc, deleteDoc } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
     
         const firebaseConfig = {
             apiKey: "AIzaSyBn7xE-jaEuixzyDROnbHrQo6-YtOR5LaU",
@@ -38,11 +38,8 @@
     
         document.addEventListener("DOMContentLoaded", () => {
             const favoriteRidesContainer = document.getElementById("favorite-rides");
-    
+            
             onAuthStateChanged(auth, async (user) => {
-                // Clear the container initially
-                favoriteRidesContainer.innerHTML = "";
-    
                 if (!user) {
                     favoriteRidesContainer.innerHTML = "<p class='text-white text-center text-lg'>Please log in to view your favorites.</p>";
                     return;
@@ -58,7 +55,6 @@
     
                 favoritesSnap.forEach(docSnap => {
                     const rideName = docSnap.id;
-                    console.log("Ride fetched:", rideName);  // Debug: Check if all rides are fetched
                     const rideElement = document.createElement("div");
                     rideElement.className = "favorite-ride bg-green-900 p-4 rounded-lg shadow-lg mb-4";
                     rideElement.innerHTML = `
@@ -67,13 +63,8 @@
                     `;
     
                     rideElement.querySelector(".remove-favorite").addEventListener("click", async () => {
-                        try {
-                            console.log("Removing ride:", rideName);  // Debug: Check if remove button works
-                            await deleteDoc(doc(db, `users/${user.uid}/favorites`, rideName));
-                            rideElement.remove();  // Remove the ride from the DOM
-                        } catch (error) {
-                            console.error("Error removing favorite ride:", error);
-                        }
+                        await deleteDoc(doc(db, `users/${user.uid}/favorites`, rideName));
+                        rideElement.remove();
                     });
     
                     favoriteRidesContainer.appendChild(rideElement);
@@ -81,6 +72,7 @@
             });
         });
     </script>
+    
     
 </head>
 <body class="bg-green-700">

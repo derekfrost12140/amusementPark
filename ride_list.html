@@ -26,49 +26,49 @@
         const db = getFirestore(app);
     
         document.addEventListener("DOMContentLoaded", () => {
-            const favoriteButtons = document.querySelectorAll(".favorite-button");
-
-            favoriteButtons.forEach(button => {
-                const rideName = button.dataset.name;
-
-                // This block ensures the user is authenticated and the button updates correctly
-                onAuthStateChanged(auth, user => {
-                    if (!user) {
+            onAuthStateChanged(auth, user => {
+                if (user) {
+                    // Check each favorite button
+                    document.querySelectorAll(".favorite-button").forEach(button => {
+                        const rideName = button.dataset.name;
+                        const rideRef = doc(db, `users/${user.uid}/favorites`, rideName);
+    
+                        // Check if the ride is favorited
+                        getDoc(rideRef).then(docSnap => {
+                            if (docSnap.exists()) {
+                                button.classList.add("favorited");
+                                button.innerText = "★ Favorite"; // Show as favorited
+                            } else {
+                                button.classList.remove("favorited");
+                                button.innerText = "☆ Favorite"; // Show as not favorited
+                            }
+                        });
+    
+                        // Add or remove favorite status on button click
+                        button.addEventListener("click", async () => {
+                            if (button.classList.contains("favorited")) {
+                                await deleteDoc(rideRef);
+                                button.classList.remove("favorited");
+                                button.innerText = "☆ Favorite";
+                            } else {
+                                await setDoc(rideRef, { name: rideName });
+                                button.classList.add("favorited");
+                                button.innerText = "★ Favorite";
+                            }
+                        });
+                    });
+                } else {
+                    // If no user is logged in, disable the buttons
+                    document.querySelectorAll(".favorite-button").forEach(button => {
                         button.addEventListener("click", () => {
                             alert("Please log in to favorite rides.");
                         });
-                        return;
-                    }
-
-                    const rideRef = doc(db, `users/${user.uid}/favorites`, rideName);
-
-                    // Check if the ride is already favorited
-                    getDoc(rideRef).then(docSnap => {
-                        if (docSnap.exists()) {
-                            button.classList.add("favorited");
-                            button.innerText = "★ Favorite";
-                        } else {
-                            button.classList.remove("favorited");
-                            button.innerText = "☆ Favorite";
-                        }
                     });
-
-                    // Add or remove favorite status on button click
-                    button.addEventListener("click", async () => {
-                        if (button.classList.contains("favorited")) {
-                            await deleteDoc(rideRef);
-                            button.classList.remove("favorited");
-                            button.innerText = "☆ Favorite";
-                        } else {
-                            await setDoc(rideRef, { name: rideName });
-                            button.classList.add("favorited");
-                            button.innerText = "★ Favorite";
-                        }
-                    });
-                });
+                }
             });
         });
     </script>
+    
 </head>
 <body class="bg-green-700 relative">
     <div class="fixed top-0 left-0 w-full h-full bg-green-700 bg-cover bg-center filter blur-md -z-10" style="background-image: url('Image.webp');"></div>
