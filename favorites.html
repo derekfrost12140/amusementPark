@@ -22,7 +22,7 @@
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js";
         import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
         import { getFirestore, collection, getDocs, deleteDoc, doc } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
-
+    
         const firebaseConfig = {
             apiKey: "AIzaSyBn7xE-jaEuixzyDROnbHrQo6-YtOR5LaU",
             authDomain: "amusement-park-4039d.firebaseapp.com",
@@ -31,50 +31,57 @@
             messagingSenderId: "625618396056",
             appId: "1:625618396056:web:ff2907be3a1958ed9041ed"
         };
-
+    
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
         const db = getFirestore(app);
-
+    
         document.addEventListener("DOMContentLoaded", () => {
             const favoriteRidesContainer = document.getElementById("favorite-rides");
-
+    
             onAuthStateChanged(auth, async (user) => {
                 // Clear the container initially
                 favoriteRidesContainer.innerHTML = "";
-
+    
                 if (!user) {
                     favoriteRidesContainer.innerHTML = "<p class='text-white text-center text-lg'>Please log in to view your favorites.</p>";
                     return;
                 }
-
+    
                 const favoritesRef = collection(db, `users/${user.uid}/favorites`);
                 const favoritesSnap = await getDocs(favoritesRef);
-
+    
                 if (favoritesSnap.empty) {
                     favoriteRidesContainer.innerHTML = "<p class='text-white text-center text-lg'>You have no favorite rides.</p>";
                     return;
                 }
-
+    
                 favoritesSnap.forEach(docSnap => {
                     const rideName = docSnap.id;
+                    console.log("Ride fetched:", rideName);  // Debug: Check if all rides are fetched
                     const rideElement = document.createElement("div");
                     rideElement.className = "favorite-ride bg-green-900 p-4 rounded-lg shadow-lg mb-4";
                     rideElement.innerHTML = `
                         <h2 class="text-xl text-white font-bold">${rideName}</h2>
                         <button class="remove-favorite bg-red-500 text-white px-3 py-1 rounded mt-2" data-name="${rideName}">Remove</button>
                     `;
-
+    
                     rideElement.querySelector(".remove-favorite").addEventListener("click", async () => {
-                        await deleteDoc(doc(db, `users/${user.uid}/favorites`, rideName));
-                        rideElement.remove();
+                        try {
+                            console.log("Removing ride:", rideName);  // Debug: Check if remove button works
+                            await deleteDoc(doc(db, `users/${user.uid}/favorites`, rideName));
+                            rideElement.remove();  // Remove the ride from the DOM
+                        } catch (error) {
+                            console.error("Error removing favorite ride:", error);
+                        }
                     });
-
+    
                     favoriteRidesContainer.appendChild(rideElement);
                 });
             });
         });
     </script>
+    
 </head>
 <body class="bg-green-700">
     <div class="container mx-auto mt-6">

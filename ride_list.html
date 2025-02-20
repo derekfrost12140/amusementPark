@@ -26,26 +26,34 @@
         const db = getFirestore(app);
     
         document.addEventListener("DOMContentLoaded", () => {
-            onAuthStateChanged(auth, user => {
-                document.querySelectorAll(".favorite-button").forEach(button => {
-                    const rideName = button.dataset.name;
-    
+            const favoriteButtons = document.querySelectorAll(".favorite-button");
+
+            favoriteButtons.forEach(button => {
+                const rideName = button.dataset.name;
+
+                // This block ensures the user is authenticated and the button updates correctly
+                onAuthStateChanged(auth, user => {
                     if (!user) {
                         button.addEventListener("click", () => {
                             alert("Please log in to favorite rides.");
                         });
                         return;
                     }
-    
+
                     const rideRef = doc(db, `users/${user.uid}/favorites`, rideName);
-    
+
+                    // Check if the ride is already favorited
                     getDoc(rideRef).then(docSnap => {
                         if (docSnap.exists()) {
                             button.classList.add("favorited");
                             button.innerText = "★ Favorite";
+                        } else {
+                            button.classList.remove("favorited");
+                            button.innerText = "☆ Favorite";
                         }
                     });
-    
+
+                    // Add or remove favorite status on button click
                     button.addEventListener("click", async () => {
                         if (button.classList.contains("favorited")) {
                             await deleteDoc(rideRef);
@@ -61,12 +69,10 @@
             });
         });
     </script>
-    
- 
-
+</head>
 <body class="bg-green-700 relative">
-        <div class="fixed top-0 left-0 w-full h-full bg-green-700 bg-cover bg-center filter blur-md -z-10" style="background-image: url('Image.webp');"></div>
-        
+    <div class="fixed top-0 left-0 w-full h-full bg-green-700 bg-cover bg-center filter blur-md -z-10" style="background-image: url('Image.webp');"></div>
+    
     <header class="bg-amber-800 text-white shadow-lg rounded-xl">
         <nav class="container mx-auto flex justify-between items-center py-4 px-4">
             <div class="flex space-x-6">
@@ -81,13 +87,10 @@
                 <a href="#" class="bg-amber-950 text-white px-5 py-3 rounded-full shadow-lg hover:scale-100 hover:bg-white hover:text-black hover:shadow-xl transition-transform duration-200" id="sortBtn">Sort</a> 
                 <a href="settings.html" class="bg-amber-950 text-white px-5 py-3 rounded-full shadow-lg hover:scale-100 hover:bg-white hover:text-black hover:shadow-xl transition-transform duration-200">Settings</a>
             </div>
-            
         </nav>
-        
     </header>
 
-    <div class="blank">
-    </div>
+    <div class="blank"></div>
     <div class="rides-container">
         <div class="ride-container bg-green-900" data-wheelchair="true" data-serviceAnimal="false" data-pregnant="false" data-touch="4" data-taste="1" data-sound="4"   
         data-smell="1" data-sight="3" data-name="Aquaman: Power Wave" data-minHeight="48" data-duration="80">
@@ -113,9 +116,10 @@
                 <div class="button-container bg-green-950 text-white hover:scale-125 hover:bg-amber-950 rounded-2xl">
                     <a href="mapNav.html?lat=32.75694774660049&lng=-97.06858634954958" class="directions-button">Directions</a> 
                 </div>
-                <button class="favorite-button" data-name="Aquaman: Power Wave">☆ Favorite</button>
+                <button class="favorite-button" data-name="Aquaman: Power Wave">☆ Favorite</button> 
             </div>
         </div>
+    </div>
 
         <div class="ride-container" data-wheelchair="true" data-serviceAnimal="false" data-pregnant="false" data-touch="8" data-taste="1" data-sound="7"   
         data-smell="1" data-sight="8" data-name="Batman The Ride" data-minHeight="54" data-duration="135">
