@@ -1,18 +1,28 @@
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+import { getFirestore, collection, getDocs, getDoc, setDoc, addDoc, doc, deleteDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
 document.addEventListener('DOMContentLoaded', async () => {
-    /*********************************
-     * 1. Initialize Firebase
-     *********************************/
-    const firebaseConfig = {
-      apiKey: "AIzaSyBn7xE-jaEuixzyDROnbHrQo6-YtOR5LaU",
-      authDomain: "amusement-park-4039d.firebaseapp.com",
-      projectId: "amusement-park-4039d",
-      storageBucket: "amusement-park-4039d.appspot.com",
-      messagingSenderId: "625618396056",
-      appId: "1:625618396056:web:ff2907be3a1958ed9041ed",
-      measurementId: "G-6QHBHT0PPE"
-    };
-    firebase.initializeApp(firebaseConfig);
-    const db = firebase.firestore();
+  /*********************************
+   * 1. Initialize Firebase
+   *********************************/
+  const firebaseConfig = {
+    apiKey: "AIzaSyBn7xE-jaEuixzyDROnbHrQo6-YtOR5LaU",
+    authDomain: "amusement-park-4039d.firebaseapp.com",
+    projectId: "amusement-park-4039d",
+    storageBucket: "amusement-park-4039d.appspot.com",
+    messagingSenderId: "625618396056",
+    appId: "1:625618396056:web:ff2907be3a1958ed9041ed",
+    measurementId: "G-6QHBHT0PPE"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig); // Correct way to initialize Firebase
+  const auth = getAuth(app); // Get Auth instance
+  const db = getFirestore(app); // Get Firestore instance
+
+  console.log(app ? "✅ Firebase initialized successfully" : "❌ Firebase NOT initialized");
+  console.log(db ? "✅ Firestore initialized" : "❌ Firestore NOT initialized");
   
     /*********************************
      * 2. Default Rides Data
@@ -416,39 +426,33 @@ document.addEventListener('DOMContentLoaded', async () => {
      * 3. Seed Firestore if Empty
      *********************************/
     async function seedRidesIfEmpty() {
-      const snapshot = await db.collection("rides").get();
+      const ridesCollectionRef = collection(db, "rides");
+      const snapshot = await getDocs(ridesCollectionRef); 
+      
       if (snapshot.empty) {
         console.log("No rides found in Firestore. Seeding default data...");
         for (const ride of defaultRidesData) {
-          await db.collection("rides").add(ride);
+          await addDoc(ridesCollectionRef, ride);
         }
         console.log("Seeding complete.");
       } else {
         console.log("Rides collection is not empty. Skipping seeding.");
       }
     }
-    await seedRidesIfEmpty();
   
     /*********************************
-     * 4. Dynamically Load Rides
+     * 3. Dynamically Load Rides
      *********************************/
     const ridesContainer = document.querySelector('.rides-container');
   
-    // Optionally use real-time updates:
-    // db.collection("rides").onSnapshot((snapshot) => {
-    //   ridesContainer.innerHTML = "";
-    //   snapshot.forEach(doc => createRideElement(doc.data()));
-    // });
-  
     // Or do a one-time load:
-    await db.collection("rides").get()
-      .then(querySnapshot => {
-        querySnapshot.forEach(doc => {
-          createRideElement(doc.data());
-        });
-      })
-      .catch(err => console.error("Error loading rides:", err));
-  
+    const ridesCollectionRef = collection(db, "rides");
+    const querySnapshot = await getDocs(ridesCollectionRef); // Use getDocs instead of db.collection("rides").get()
+    
+    querySnapshot.forEach(doc => {
+      createRideElement(doc.data()); // Create ride elements from Firestore data
+    });
+
     function createRideElement(ride) {
       const rideContainer = document.createElement('div');
       rideContainer.classList.add('ride-container', 'bg-green-900');
@@ -473,71 +477,69 @@ document.addEventListener('DOMContentLoaded', async () => {
         return `${m} min ${s} sec`;
       }
   
-      rideContainer.innerHTML = `
-      <img src="${ride.imageUrl}" alt="Ride Image" class="ride-container-image rounded-xl">
-      <div class="ride-container-text">
-        <h2>${ride.name}</h2>
-        <p>${ride.description}</p>
-        <p><u>Minimum height</u>: ${ride.minHeight}"</p>
-        <p><u>Duration</u>: ${formatDuration(ride.duration)}</p>
-        <p><b>Accessibility Constraints: </b><span class="accessibility-data"></span></p>
-        <div class="button-container bg-green-950 text-white hover:scale-125 hover:bg-amber-950 rounded-2xl">
-          <a href="mapNav.html?lat=${ride.lat}&lng=${ride.lng}" class="directions-button">Directions</a>
-        </div>
-        <button class="favorite-button" data-ride-id="${ride.id}">☆ Favorite</button> 
-      </div>
-    `;
+      // Ensure the rideContainer is defined
 
-    document.addEventListener('DOMContentLoaded', () => {
-      const rideContainer = document.getElementById("ride-container"); // Assuming you're rendering rides here
-  
-      // Add event listener using event delegation on the rideContainer parent element
+      if (!rideContainer) {
+        console.error("Error: rideContainer not found.");
+      } else {
+        // Set innerHTML for rides
+        rideContainer.innerHTML = `
+          <img src="${ride.imageUrl}" alt="Ride Image" class="ride-container-image rounded-xl">
+          <div class="ride-container-text">
+            <h2>${ride.name}</h2>
+            <p>${ride.description}</p>
+            <p><u>Minimum height</u>: ${ride.minHeight}"</p>
+            <p><u>Duration</u>: ${formatDuration(ride.duration)}</p>
+            <p><b>Accessibility Constraints: </b><span class="accessibility-data"></span></p>
+            <div class="button-container bg-green-950 text-white hover:scale-125 hover:bg-amber-950 rounded-2xl">
+              <a href="mapNav.html?lat=${ride.lat}&lng=${ride.lng}" class="directions-button">Directions</a>
+            </div>
+            <button class="favorite-button" data-ride-id="${ride.id}" data-ride-name="${ride.name}">☆ Favorite</button>
+          </div>
+        `;
+      }
+    
+      // Add event delegation directly to rideContainer
       rideContainer.addEventListener('click', (e) => {
-        if (e.target && e.target.classList.contains('favorite-button')) {
+        if (e.target.classList.contains('favorite-button')) {
           const rideId = e.target.getAttribute('data-ride-id');
           toggleFavorite(rideId, e.target);
         }
       });
-  
-      function toggleFavorite(rideId, button) {
-          const user = firebase.auth().currentUser;  // Get the current user
-  
-          if (!user) {
-              alert('You need to be logged in to favorite a ride!');
-              return;
+    
+    // Function to toggle favorite
+    function toggleFavorite(rideId, button) {
+      onAuthStateChanged(auth, (user) => {
+        if (!user) {
+          alert('You need to be logged in to favorite a ride!');
+          return;
+        }
+    
+        const rideRef = doc(db, `users/${user.uid}/favorites/${rideId}`);
+    
+        getDoc(rideRef).then((docSnap) => {
+          if (docSnap.exists()) {
+            // Remove from favorites
+            deleteDoc(rideRef).then(() => {
+              button.classList.remove('favorited');
+              button.textContent = '☆ Favorite';
+              console.log(`Ride ${rideId} removed from favorites`);
+            }).catch((error) => console.error("Error removing favorite: ", error));
+          } else {
+            // Add to favorites
+            setDoc(rideRef, {
+              id: rideId,
+              name: button.getAttribute('data-ride-name')
+            }).then(() => {
+              button.classList.add('favorited');
+              button.textContent = '★ Favorited';
+              console.log(`Ride ${rideId} added to favorites`);
+            }).catch((error) => console.error("Error adding favorite: ", error));
           }
-  
-          const rideRef = firebase.firestore().doc(`users/${user.uid}/favorites/${rideId}`);
-  
-          // Check if the ride is already in the user's favorites
-          rideRef.get().then((doc) => {
-              if (doc.exists) {
-                  // Ride is already a favorite, so remove it
-                  rideRef.delete().then(() => {
-                      button.classList.remove('favorited');
-                      button.textContent = '☆ Favorite';
-                      console.log(`Ride ${rideId} removed from favorites`);
-                  }).catch((error) => {
-                      console.error("Error removing favorite: ", error);
-                  });
-              } else {
-                  // Add ride to favorites
-                  rideRef.set({
-                      id: rideId,
-                      name: button.getAttribute('data-ride-name')
-                  }).then(() => {
-                      button.classList.add('favorited');
-                      button.textContent = '★ Favorited';
-                      console.log(`Ride ${rideId} added to favorites`);
-                  }).catch((error) => {
-                      console.error("Error adding favorite: ", error);
-                  });
-              }
-          }).catch((error) => {
-              console.error("Error checking favorite: ", error);
-          });
-      }
-  });
+        }).catch((error) => console.error("Error checking favorite: ", error));
+      });
+    }
+
   
     
 
