@@ -3,8 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Get Started Now</title> 
-    <link rel="stylesheet" href="./src/output.css"> 
+    <title>Get Started Now</title>
+    <link rel="stylesheet" href="./src/output.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
 
     <!-- Firebase SDK with non-module URLs -->
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
@@ -22,9 +25,108 @@
             measurementId: "G-6QHBHT0PPE"
         };
 
-        // Initialize Firebase with respect to the main.js file
+        // Initialize Firebase
         firebase.initializeApp(firebaseConfig);
     </script>
+
+    <style>
+        /* Background Overlay */
+        .background-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('Image.webp') center/cover no-repeat;
+            filter: blur(5px);
+            opacity: 0;
+            animation: fadeInBackground 1.5s ease-in forwards;
+            z-index: -1;
+        }
+
+        @keyframes fadeInBackground {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Wrapper for the form */
+        .wrapper {
+            width: 350px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.95);
+            border: 2px solid #6CB11B;
+            border-radius: 10px;
+            box-shadow: 0px 8px 30px rgba(0, 0, 0, 0.3);
+            position: absolute;
+            top: calc(50% + 192px); /* Adjusted to move 2 inches (192px) down */
+            left: 45%;
+            transform: translate(-50%, -50%);
+            opacity: 0;
+            transform: translateY(-20px);
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .form-container h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 25px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-container p {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 14px;
+            color: #666;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"] {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background: transparent;
+        }
+
+        button[type="submit"] {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            background-color: #6CB11B;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #5aa015;
+        }
+    </style>
 </head>
 
 <body class="bg-green-700 relative">
@@ -42,46 +144,7 @@
             </div>
         </nav>
     </header>
-    <style>
-        .wrapper {
-        width: 350px; /* Adjusted width to better fit the content */
-        padding: 20px;
-        background: rgba(255, 255, 255, 0.6); /* More transparency */
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        border-radius: 10px; /* Rounded corners */
-        backdrop-filter: blur(10px); /* Stronger blur effect */
-    }
-    
-    .form-container h2 {
-        text-align: center;
-        color: #333;
-        margin-bottom: 20px;
-        font-size: 25px; /* Larger text for visibility */
-    }
-    
-    form {
-        display: flex;
-        flex-direction: column;
-    }
-    .form-container p {
-        text-align: center;
-        margin-top: 15px; /* Existing margin, adjust if necessary */
-        font-size: 14px; /* Reduced font size for smaller appearance */
-        color: #666; /* Optional: a lighter color to make it less prominent */
-    }
-    
-    
-    input[type="text"], input[type="email"], input[type="password"] {
-        padding: 15px; /* Larger padding for easier interaction */
-        margin-bottom: 10px;
-        border: none; /* Removes border */
-        border-bottom: 2px solid #ccc; /* Adds underline */
-        border-radius: 0; /* Removes rounded corners */
-        background: transparent; /* Ensures inputs do not detract from transparency */
-    }
-    
-    
-    </style>
+
     <!-- Main Content Wrapper -->
     <div class="wrapper">
         <div class="form-container">
@@ -127,4 +190,3 @@
     </script>
 </body>
 </html>
-
