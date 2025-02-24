@@ -503,19 +503,20 @@ document.addEventListener('DOMContentLoaded', async () => {
       rideContainer.addEventListener('click', (e) => {
         if (e.target.classList.contains('favorite-button')) {
           const rideId = e.target.getAttribute('data-ride-id');
-          toggleFavorite(rideId, e.target);
+          const rideName = e.target.getAttribute('data-ride-name');
+          toggleFavorite(rideName, e.target);
         }
       });
     
     // Function to toggle favorite
-    function toggleFavorite(rideId, button) {
+    function toggleFavorite(rideName, button) {
       onAuthStateChanged(auth, (user) => {
         if (!user) {
           alert('You need to be logged in to favorite a ride!');
           return;
         }
     
-        const rideRef = doc(db, `users/${user.uid}/favorites/${rideId}`);
+        const rideRef = doc(db, `users/${user.uid}/favorites/${rideName}`);
     
         getDoc(rideRef).then((docSnap) => {
           if (docSnap.exists()) {
@@ -523,17 +524,17 @@ document.addEventListener('DOMContentLoaded', async () => {
             deleteDoc(rideRef).then(() => {
               button.classList.remove('favorited');
               button.textContent = '☆ Favorite';
-              console.log(`Ride ${rideId} removed from favorites`);
+              console.log(`Ride ${rideName} removed from favorites`);
             }).catch((error) => console.error("Error removing favorite: ", error));
           } else {
             // Add to favorites
             setDoc(rideRef, {
-              id: rideId,
+              id: rideName,
               name: button.getAttribute('data-ride-name')
             }).then(() => {
               button.classList.add('favorited');
               button.textContent = '★ Favorited';
-              console.log(`Ride ${rideId} added to favorites`);
+              console.log(`Ride ${rideName} added to favorites`);
             }).catch((error) => console.error("Error adding favorite: ", error));
           }
         }).catch((error) => console.error("Error checking favorite: ", error));
