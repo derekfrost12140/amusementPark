@@ -504,48 +504,54 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (e.target.classList.contains('favorite-button')) {
           const rideId = e.target.getAttribute('data-ride-id');
           const rideName = e.target.getAttribute('data-ride-name');
+          
           toggleFavorite(rideName, e.target);
         }
       });
     
-    // Function to toggle favorite
-    function toggleFavorite(rideName, button) {
-      onAuthStateChanged(auth, (user) => {
-        if (!user) {
-          alert('You need to be logged in to favorite a ride!');
-          return;
+
+        function toggleFavorite(rideName, button) {
+          onAuthStateChanged(auth, (user) => {
+            if (!user) {
+              alert('You need to be logged in to favorite a ride!');
+              return;
+            }
+
+            const rideRef = doc(db, `users/${user.uid}/favorites/${rideName}`);
+
+            getDoc(rideRef).then((docSnap) => {
+              if (docSnap.exists()) {
+                // If it exists, the ride is already a favorite, so remove it
+                deleteDoc(rideRef).then(() => {
+                  button.classList.remove('favorited');
+                  button.textContent = '☆ Favorite';
+                  console.log(`Ride ${rideName} removed from favorites`);
+                }).catch((error) => console.error("Error removing favorite: ", error));
+              } else {
+                // If it doesn't exist, the ride is not a favorite, so add it
+                setDoc(rideRef, {
+                  id: rideName,
+                  name: button.getAttribute('data-ride-name')
+                }).then(() => {
+                  button.classList.add('favorited');
+                  button.textContent = '★ Favorited';
+                  console.log(`Ride ${rideName} added to favorites`);
+                }).catch((error) => console.error("Error adding favorite: ", error));
+              }
+            }).catch((error) => console.error("Error checking favorite: ", error));
+          });
         }
-    
-        const rideRef = doc(db, `users/${user.uid}/favorites/${rideName}`);
-    
-        getDoc(rideRef).then((docSnap) => {
-          if (docSnap.exists()) {
-            // Remove from favorites
-            deleteDoc(rideRef).then(() => {
-              button.classList.remove('favorited');
-              button.textContent = '☆ Favorite';
-              console.log(`Ride ${rideName} removed from favorites`);
-            }).catch((error) => console.error("Error removing favorite: ", error));
-          } else {
-            // Add to favorites
-            setDoc(rideRef, {
-              id: rideName,
-              name: button.getAttribute('data-ride-name')
-            }).then(() => {
-              button.classList.add('favorited');
-              button.textContent = '★ Favorited';
-              console.log(`Ride ${rideName} added to favorites`);
-            }).catch((error) => console.error("Error adding favorite: ", error));
-          }
-        }).catch((error) => console.error("Error checking favorite: ", error));
-      });
-    }
 
-  
-    
+        // Adding event listener to favorite buttons dynamically
+          ridesContainer.addEventListener('click', (e) => {
+            if (e.target.classList.contains('favorite-button')) {
+              const rideId = e.target.getAttribute('data-ride-id');
+              const rideName = e.target.getAttribute('data-ride-name');
+              toggleFavorite(rideName, e.target);  // Call the function to toggle the favorite
+            }
+          });
 
 
-  
       // Insert accessibility tags
       const accessibilityData = rideContainer.querySelector('.accessibility-data');
       let accText = [];
