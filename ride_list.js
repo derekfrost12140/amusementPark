@@ -789,6 +789,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     // Create the modal element
     const filterModal = document.createElement('div');
     filterModal.classList.add('filter-modal');
+    filterModal.style.display = 'none'; // Ensure the modal is hidden on page load
 
     // Create the modal content container
     const modalContent = document.createElement('div');
