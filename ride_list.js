@@ -761,7 +761,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     /*********************************
      * 7. Tag Click -> Update Filters
      *********************************/
-    document.addEventListener('click', (event) => {
+    /*document.addEventListener('click', (event) => {
       if (event.target && event.target.classList.contains('filter-tag')) {
         const filterType = event.target.getAttribute('data-filter');
         const filterValue = event.target.getAttribute('data-number');
@@ -780,6 +780,110 @@ document.addEventListener('DOMContentLoaded', async () => {
           document.getElementById(`${filterType}Slide`).value = filterValue;
         }
         applyFilters();
+      }
+    });*/
+
+    /*********************************
+     * 8. Tag Click -> Modal Similar Rides
+     *********************************/
+    // Create the modal element
+    const filterModal = document.createElement('div');
+    filterModal.classList.add('filter-modal');
+
+    // Create the modal content container
+    const modalContent = document.createElement('div');
+    modalContent.classList.add('filter-modal-content');
+
+    // Add the modal title
+    const modalTitle = document.createElement('h2');
+    modalTitle.classList.add('text-2xl', 'font-semibold', 'text-center', 'text-white');
+    modalTitle.textContent = 'Similar Rides';
+
+    // Create a container for the filtered ride list
+    const modalRideList = document.createElement('div');
+    modalRideList.id = 'modalRideList';
+
+    // Add the close button
+    const closeBtn = document.createElement('button');
+    closeBtn.id = 'closeFilterModalBtn';
+    closeBtn.textContent = 'Close';
+
+    // Append the modal content and title
+    modalContent.appendChild(modalTitle);
+    modalContent.appendChild(modalRideList);
+    modalContent.appendChild(closeBtn);
+
+    // Append the modal content to the modal container
+    filterModal.appendChild(modalContent);
+
+    // Append the modal to the body
+    document.body.appendChild(filterModal);
+
+    // Function to show filtered rides in the modal
+    function showFilteredRides(filter, filterValue) {
+      const rides = document.querySelectorAll('.ride-container');
+      const filteredRides = [];
+
+      rides.forEach(ride => {
+        const rideFilterValue = ride.getAttribute(`data-${filter}`);
+        
+        // Check if the filter is a boolean or a numerical value
+        if (filter === 'wheelchair' || filter === 'serviceAnimal' || filter === 'pregnant') {
+          if (rideFilterValue === 'true') {
+            filteredRides.push(ride);
+          }
+        } else {
+          if (parseInt(rideFilterValue, 10) <= parseInt(filterValue, 10)) {
+            filteredRides.push(ride);
+          }
+        }
+      });
+
+      // Sort filtered rides alphabetically by name
+      filteredRides.sort((a, b) => {
+        const nameA = a.querySelector('h2').textContent.toLowerCase();
+        const nameB = b.querySelector('h2').textContent.toLowerCase();
+        return nameA.localeCompare(nameB);
+      });
+
+      // Clear previous ride list in the modal
+      modalRideList.innerHTML = '';
+
+      // Append each filtered ride to the modal
+      filteredRides.forEach(ride => {
+        const rideName = ride.querySelector('h2').textContent;
+        const rideImage = ride.querySelector('img').src;
+        const rideDescription = ride.querySelector('p').textContent;
+
+        const rideDetails = document.createElement('div');
+        rideDetails.classList.add('ride-modal-detail');
+        rideDetails.innerHTML = `
+          <div class="ride-modal-image-container" >
+            <img src="${rideImage}" alt="Ride Image">
+          </div>
+          <div class="ride-modal-text">
+            <h3>${rideName}</h3>
+            <p>${rideDescription}</p>
+          </div>
+        `;
+        modalRideList.appendChild(rideDetails);
+      });
+
+      // Display the modal
+      filterModal.style.display = 'flex';
+    }
+
+    // Close the modal when the "Close" button is clicked
+    closeBtn.addEventListener('click', () => {
+      filterModal.style.display = 'none';
+    });
+
+    // Open the modal when a filter tag is clicked
+    document.addEventListener('click', function(event) {
+      if (event.target && event.target.classList.contains('filter-tag')) {
+        const filter = event.target.getAttribute('data-filter');
+        const filterValue = event.target.getAttribute('data-number');
+        showFilteredRides(filter, filterValue);
       }
     });
   });

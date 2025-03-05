@@ -137,3 +137,94 @@ input[type="radio"] {
     transition: background-color 0.3s ease;
 }
 
+/* Modal container (overlay background) */
+.filter-modal {
+    position: fixed; /* Fix position on the screen */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 50;
+    overflow-y: auto; /* Allow scrolling if content overflows */
+}
+  
+/* Modal content (rides list) */
+.filter-modal-content {
+    background-color: #8C4114;  /* Darker amber solid background for the content */
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 70%;
+    width: 100%;
+    max-height: 80vh; /* Ensure it doesn't grow too large */
+    overflow-y: auto; /* Allow scrolling for long lists */
+    position: relative;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    margin: 20px; /* Add space around modal content */
+}
+
+/* Close button */
+#closeFilterModalBtn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+#closeFilterModalBtn:hover {
+    background-color: #c0392b;
+}
+
+/* Ride container inside the modal */
+.ride-modal-detail {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-bottom: 20px; /* Space between rides */
+    border-bottom: 1px solid #ccc; /* Break between rides */
+    padding-bottom: 10px;
+}
+
+/* Image container for each ride */
+.ride-modal-image-container {
+    width: 80px;
+    height: 80px;
+    margin-right: 15px;
+    flex-shrink: 0; /* Prevent image from shrinking */
+}
+
+.ride-modal-image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px; /* Slight rounding for image */
+}
+
+/* Text container for each ride */
+.ride-modal-text {
+    flex: 1;
+    color: #fefefe; /* Lighter text color for readability */
+}
+
+.ride-modal-text h3 {
+    font-size: 20px; /* Slightly larger font for the ride name */
+    font-weight: bold;
+    color: #fff; /* White text for better contrast */
+    margin-bottom: 10px;
+}
+
+.ride-modal-text p {
+    font-size: 16px; /* Larger font for descriptions */
+    color: #f2f2f2; /* Light gray text for better contrast */
+    line-height: 1.5; /* Better spacing between lines */
+    margin-bottom: 10px;
+}
+  
