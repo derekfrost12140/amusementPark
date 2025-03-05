@@ -821,7 +821,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     // Append the modal close button and title
     modalHeader.appendChild(modalTitle);
     modalHeader.appendChild(closeBtn);
-    
+
     modalContent.appendChild(modalHeader);
     modalContent.appendChild(modalRideList);
     // Append the modal content to the modal container
@@ -834,6 +834,26 @@ document.addEventListener('DOMContentLoaded', async () => {
     function showFilteredRides(filter, filterValue) {
       const rides = document.querySelectorAll('.ride-container');
       const filteredRides = [];
+
+      if (typeof filterValue == 'string') {
+        modalTitle.textContent = `Rides with ${filter} \u2264 ${filterValue}`
+      }
+      else if (filter == 'wheelchair') {
+        modalTitle.textContent = `Rides Wheelchair Accessible`
+        console.log(typeof filterValue)
+      }
+      else if (filter == 'serviceAnimal') {
+        modalTitle.textContent = `Rides Allowing Service Animals`
+        console.log(typeof filterValue)
+      }
+      else if (filter == 'pregnant') {
+        modalTitle.textContent = `Rides Suitable for Pregnant People`
+        console.log(typeof filterValue)
+      }
+      else{
+        modalTitle.textContent = `Rides with ${filter}`
+      }
+      
 
       rides.forEach(ride => {
         const rideFilterValue = ride.getAttribute(`data-${filter}`);
