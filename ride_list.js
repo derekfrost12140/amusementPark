@@ -790,10 +790,14 @@ document.addEventListener('DOMContentLoaded', async () => {
     const filterModal = document.createElement('div');
     filterModal.classList.add('filter-modal');
     filterModal.style.display = 'none'; // Ensure the modal is hidden on page load
+    
 
     // Create the modal content container
     const modalContent = document.createElement('div');
     modalContent.classList.add('filter-modal-content');
+
+    const modalHeader = document.createElement('div');
+    modalHeader.classList.add('modal-header');
 
     // Add the modal title
     const modalTitle = document.createElement('h2');
@@ -807,13 +811,19 @@ document.addEventListener('DOMContentLoaded', async () => {
     // Add the close button
     const closeBtn = document.createElement('button');
     closeBtn.id = 'closeFilterModalBtn';
+    closeBtn.id = 'closeFilterModalBtn';
     closeBtn.textContent = 'Close';
+    closeBtn.style.position = 'absolute'; // Position it absolutely within the modal
+    closeBtn.style.top = '10px'; // Adjust top distance
+    closeBtn.style.right = '10px'; // Adjust right distance
+    closeBtn.style.zIndex = '9999'; // Make sure it's on top of other content
 
-    // Append the modal content and title
-    modalContent.appendChild(modalTitle);
+    // Append the modal close button and title
+    modalHeader.appendChild(modalTitle);
+    modalHeader.appendChild(closeBtn);
+    
+    modalContent.appendChild(modalHeader);
     modalContent.appendChild(modalRideList);
-    modalContent.appendChild(closeBtn);
-
     // Append the modal content to the modal container
     filterModal.appendChild(modalContent);
 

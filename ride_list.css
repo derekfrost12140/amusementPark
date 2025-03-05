@@ -148,26 +148,39 @@ input[type="radio"] {
     justify-content: center;
     align-items: center;
     z-index: 50;
-    overflow-y: auto; /* Allow scrolling if content overflows */
 }
   
 /* Modal content (rides list) */
 .filter-modal-content {
     background-color: #8C4114;  /* Darker amber solid background for the content */
-    padding: 20px;
+    padding: 0px 20px;
     border-radius: 10px;
-    max-width: 70%;
-    width: 100%;
     max-height: 80vh; /* Ensure it doesn't grow too large */
     overflow-y: auto; /* Allow scrolling for long lists */
     position: relative;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    margin: 20px; /* Add space around modal content */
+}
+
+.modal-header {
+    position: sticky;  /* Make it sticky */
+    top: 0px;  /* Stick to the top */
+    background-color: #8C4114;  /* Same background as modal content */
+    padding: 15px 0;
+    z-index: 1;  /* Ensure it stays on top of the content */
+    text-align: center;
+    color: #fff;
+}
+
+/* Title inside modal header */
+.modal-header h2 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-left: 20px;  /* Add left margin for some spacing */
 }
 
 /* Close button */
 #closeFilterModalBtn {
-    position: absolute;
+    position: sticky;
     top: 10px;
     right: 10px;
     background-color: #e74c3c;
@@ -177,6 +190,7 @@ input[type="radio"] {
     border-radius: 5px;
     cursor: pointer;
     font-size: 16px;
+    z-index: 1000; /* Ensure the button stays on top */
 }
 
 #closeFilterModalBtn:hover {
