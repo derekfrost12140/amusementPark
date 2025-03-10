@@ -1,5 +1,9 @@
 // Import Firebase SDK modules
-console.log("Current window host:", window.location.host);
+console.log("🔥 Firebase Debug Info:");
+console.log("Project ID:", firebaseConfig.projectId);
+console.log("Auth Domain:", firebaseConfig.authDomain);
+console.log("Current Host:", window.location.host);
+console.log("Firestore Instance:", db);
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
