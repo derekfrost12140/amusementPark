@@ -1,8 +1,8 @@
-// Importing the Firebase SDK modules
+// Import Firebase SDK modules
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
-// Firebase configuration 
+// Firebase Configuration
 const firebaseConfig = {
   apiKey: "AIzaSyBn7xE-jaEuixzyDROnbHrQo6-YtOR5LaU",
   authDomain: "amusement-park-4039d.firebaseapp.com",
@@ -17,17 +17,20 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
+// Debugging to ensure Firebase initialized correctly
+console.log("✅ Firebase initialized successfully");
+
 // Get submit button and add event listener
 const submit = document.getElementById("submit");
-submit.addEventListener("click", function (event) {
+submit.addEventListener("click", async function (event) {
     event.preventDefault(); // Prevent form submission
 
     // Get email and password values
-    const email = document.getElementById("email").value;
-    const password = document.getElementById("password").value;
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value.trim();
 
     // Input validation
-    if (email.trim() === "" || password.trim() === "") {
+    if (!email || !password) {
         alert("Email and password cannot be empty");
         return;
     }
@@ -43,17 +46,23 @@ submit.addEventListener("click", function (event) {
         return;
     }
 
-    // Create user with email and password using Firebase Authentication
-    createUserWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-            // Account created successfully
-            const user = userCredential.user;
-            alert("Account created successfully. Redirecting...");
-            window.location.href = "home.html";  // Adjust to your desired page after account creation
-        })
-        .catch((error) => {
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            alert("Error: " + errorMessage);
-        });
+    try {
+        // Create user with email and password
+        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+        const user = userCredential.user;
+
+        console.log("✅ User created successfully:", user.uid);
+
+        alert("Account created successfully. Redirecting...");
+
+        // Redirect after signup (using a delay for reliability)
+        setTimeout(() => {
+            window.location.assign("home.html"); // Adjust to your target page
+        }, 2000);
+        
+    } catch (error) {
+        console.error("❌ Error creating user:", error.code, error.message);
+        alert("Error: " + error.message);
+    }
 });
+
