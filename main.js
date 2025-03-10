@@ -1,5 +1,5 @@
 // Import Firebase SDK modules
-console.log("🔥 Firebase Debug Info:");
+console.log(" Firebase Debug Info:");
 console.log("Project ID:", firebaseConfig.projectId);
 console.log("Auth Domain:", firebaseConfig.authDomain);
 console.log("Current Host:", window.location.host);
