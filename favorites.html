@@ -121,6 +121,7 @@
   
         favoritesSnap.forEach(async (docSnap) => {
           const rideData = docSnap.data();
+          console.log("Ride data: ", rideData)
   
           const rideElement = document.createElement("div");
           rideElement.className = "ride-card shadow-lg";
