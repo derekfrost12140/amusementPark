@@ -4,541 +4,106 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rides List</title>
-    <link rel="stylesheet" href="./src/output.css"> 
-    <link rel="stylesheet" href="ride_list.css"> 
- 
-
-<body class="bg-green-700 relative">
-        <div class="fixed top-0 left-0 w-full h-full bg-green-700 bg-cover bg-center filter blur-md -z-10" style="background-image: url('Image.webp');"></div>
-        
-    <header class="bg-amber-800 text-white shadow-lg rounded-xl">
-        <nav class="container mx-auto flex justify-between items-center py-4 px-4">
+    <link rel="stylesheet" href="./src/output.css">
+    <link rel="stylesheet" href="ride_list.css">
+    <script>
+        function toggleCard(cardId) {
+            const card = document.getElementById(cardId);
+            card.classList.toggle("expanded");
+        }
+    </script>
+</head>
+<body>
+    <div class="fixed bg-black top-0 left-0 w-full h-full bg-cover bg-center filter blur-md -z-10" style="background-image: url('movie-toy_story_4-bo_peep-buzz_lightyear-forky_toy_story-jessie_toy_story-woody_toy_story-948011.jpeg');"></div>
+    
+    <header class="bg-amber-800 bg-cover bg-opacity-50 text-white shadow-lg ">
+        <nav class="bg-amber-90 mx-auto flex justify-between items-center py-2 px-4">
             <div class="flex space-x-6">
-                <a href="signup.html" class="text-lg px-1 font-semibold hover:text-white hover:scale-150 transition-transform duration-200">Signup</a>
-                <a href="login.html" class="text-lg px-1 font-semibold hover:text-white hover:scale-150 transition-transform duration-200">Sign in</a>
-                <a href="mapNav.html" class="text-lg px-1 font-semibold hover:text-white hover:scale-150 transition-transform duration-200">Map</a>
-                <a href="help.html" class="text-lg px-1 font-semibold hover:text-white hover:scale-150 transition-transform duration-200">Help</a>
+                <a href="signup.html" class="text-l px-1 font-semibold hover:text-white hover:scale-125 transition-transform duration-200">Signup</a>
+                <a href="login.html" class="text-l px-1 font-semibold hover:text-white hover:scale-125 transition-transform duration-200">Sign in</a>
+                <a href="mapNav.html" class="text-l px-1 font-semibold hover:text-white hover:scale-125 transition-transform duration-200">Map</a>
+                <a href="help.html" class="text-l px-1 font-semibold hover:text-white hover:scale-125 transition-transform duration-200">Help</a>
             </div>
             <div class="flex space-x-4">  
-                <a href="#" class="bg-amber-950 text-white px-5 py-3 rounded-full shadow-lg hover:scale-100 hover:bg-white hover:text-black hover:shadow-xl transition-transform duration-200" id="filterBtn">Filter</a> 
-                <a href="#" class="bg-amber-950 text-white px-5 py-3 rounded-full shadow-lg hover:scale-100 hover:bg-white hover:text-black hover:shadow-xl transition-transform duration-200" id="sortBtn">Sort</a> 
-                <a href="settings.html" class="bg-amber-950 text-white px-5 py-3 rounded-full shadow-lg hover:scale-100 hover:bg-white hover:text-black hover:shadow-xl transition-transform duration-200">Settings</a>
+                <a href="#" class="bg-amber-950 text-white px-4 py-3 rounded-full shadow-lg hover:bg-white hover:text-black transition-transform duration-200" id="filterBtn">Filter</a> 
+                <a href="#" class="bg-amber-950 text-white px-4 py-3 rounded-full shadow-lg hover:bg-white hover:text-black transition-transform duration-200" id="sortBtn">Sort</a> 
+                <a href="settings.html" class="bg-amber-950 text-white px-4 py-3 rounded-full shadow-lg hover:bg-white hover:text-black transition-transform duration-200">Settings</a>
             </div>
-            
         </nav>
-        
     </header>
-
-    <div class="blank">
-    </div>
-    <div class="rides-container">
-        <div class="ride-container bg-green-900" data-wheelchair="false" data-serviceAnimal="true" data-pregnant="false" data-inaccessible="true"  data-sensory="false" data-name="Aquaman: Power Wave" data-minHeight="48" data-duration="80">
-            <img src="rideImages/Aquaman.png" alt="Ride Image" class="ride-container-image rounded-xl">
-            <div class="ride-container-text">
-                <h2>AQUAMAN: Power Wave</h2>
-                <p>
-                    Experience the powerful force of this aquatic attraction as you’re pulled back and forth, mimicking the mighty waves of the ocean. 
-                    Plunge into the thrill of the ride, feeling the rush of the water and the exhilaration of the sea’s might, 
-                    until finally splashing down in a tidal wave of excitement and adrenaline-pumping wah-hoooooos!
-                </p>
-                <p>
-                    Twin 150’ towers rock this coaster to and fro, with multiple 90° drops that plunge passengers through the water at a rapid 63 mph, 
-                    embodying the power and agility of the superhero!
-                </p>
-                <p>
-                    If your group is looking for a way to cool down, no other super hero beats the villainous summer heat quite like the Aquaman roller coaster. 
-                    Grab some cold beverages and treats nearby, then climb aboard and let Aquaman do the rest!
-                </p>
-                <p><u>Minimum height</u>: 48"</p>
-                <p><u>Duration</u>: 1 min 20 sec</p>
-                <p><b>Accessibility Constraints: </b><span class="accessibility-data"></span></p>
-                <div class="button-container bg-green-950 text-white hover:scale-125 hover:bg-amber-950 rounded-2xl">
-                    
-                    <a href="mapNav.html?lat=32.75694774660049&lng=-97.06858634954958" class="directions-button">Directions</a> 
+    
+    <div class="container mx-auto px-4">
+        <div class="rides-container space-x-6">
+            <!-- Ride Cards with Accessibility Data-->
+            <div id="ride1" class="ride-container" data-wheelchair="false" data-serviceAnimal="true" data-pregnant="false" data-inaccessible="true" data-sensory="false">
+                <div class="image-container" onclick="toggleCard('ride1')">
+                    <img src="rideImages/Aquaman.png" alt="Aquaman Power Wave" class="ride-container-image">
+                </div>
+                <div class="ride-container-text">
+                    <h2>AQUAMAN: Power Wave</h2>
+                </div>
+                <div class="ride-details">
+                    <p>Experience the thrill of waves at 63 mph!</p>
+                    <p><u>Minimum height</u>: 48"</p>
+                    <p><u>Duration</u>: 1 min 20 sec</p>
+                    <p class="font-bold mt-2">Accessibility:</p>
+                    <ul>
+                        <li>🚫 Inaccessible for wheelchair users</li>
+                        <li>✅ Service animals allowed</li>
+                        <li>🚫 Not suitable for pregnant individuals</li>
+                        <li>🚫 Not sensory-friendly</li>
+                    </ul>
+                    <div class="button-container">
+                        <a href="mapNav.html?lat=32.75694774660049&lng=-97.06858634954958" class="directions-button">Get Directions</a>
+                    </div>
                 </div>
             </div>
-        </div>
-
-        <div class="ride-container" data-wheelchair="true" data-serviceAnimal="false" data-pregnant="false" data-inaccessible="true" data-sensory="false" data-name="Batman The Ride" data-minHeight="54" data-duration="135">
             
-            <img src="rideImages/Batman.jpg" alt="Ride Image" class="ride-container-image rounded-xl">
-            <div class="ride-container-text">
-                <h2>BATMAN&trade; The Ride</h2>
-                <p> 
-                    See what it’s like behind the mask on this deeply inaccessible, 
-                    50-mph juggernaut as you star in your own GOTHAM adventure in this thrilling BATMAN roller coaster.
-                    <br><br>
-                    Climb aboard the BATMOBILE and prepare to sweep through the city suspended from an overhead track, your feet dangling in the air. 
-                    With five inversions and enough G-force to plaster you to your seat, this ride is not for the timid.
-                    <br><br>
-                    Following a 10-story lift to the top of the world, brace yourself for a full 360-degree loop right from the start. 
-                    Then, brace yourself for a fully inverted roll and a second loop about ten seconds later.
-                    <br><br>
-                    Next, you’ll be propelled into pure adrenaline by a double set of wingover loops and corkscrew descents. 
-                    Watch the city below as you’re swept away just like the criminals of GOTHAM CITY.
-                    <br><br>
-                    Defy gravity as you quadruple it. As you soar above the park, you’ll briefly experience 4 G-force, 
-                    pressing you to your seat with four-times the amount of typical gravity; all while taking on the ultimate gravity-defying twists and turns. 
-                </p>
-                <p><u>Minimum height</u>: 54"</p>
-                <p><u>Duration</u>: 2 min 15 sec</p>
-                <p><b>Accessibility Constraints:</b><span class="accessibility-data"></span></p>
-                <div class="button-container bg-green-950 text-white hover:scale-125 hover:bg-amber-950 rounded-2xl">
-                    <a href="mapNav.html?lat=32.75867956518985&lng=-97.0665944558818" class="directions-button">Directions</a> 
+            <!-- Batman Ride -->
+            <div id="ride2" class="ride-container" data-wheelchair="true" data-serviceAnimal="false" data-pregnant="false" data-inaccessible="true" data-sensory="false">
+                <div class="image-container" onclick="toggleCard('ride2')">
+                    <img src="rideImages/Batman.jpg" alt="Batman The Ride" class="ride-container-image">
+                </div>
+                <div class="ride-container-text">
+                    <h2>BATMAN™ The Ride</h2>
+                </div>
+                <div class="ride-details">
+                    <p>High-speed 50-mph GOTHAM adventure!</p>
+                    <p><u>Minimum height</u>: 54"</p>
+                    <p><u>Duration</u>: 2 min 15 sec</p>
+                    <p class="font-bold mt-2">Accessibility:</p>
+                    <ul>
+                        <li>✅ Wheelchair accessible</li>
+                        <li>🚫 No service animals allowed</li>
+                        <li>🚫 Not suitable for pregnant individuals</li>
+                        <li>🚫 Not sensory-friendly</li>
+                    </ul>
+                    <div class="button-container">
+                        <a href="mapNav.html?lat=32.75867956518985&lng=-97.0665944558818" class="directions-button">Get Directions</a>
+                    </div>
                 </div>
             </div>
-        </div>
-
-        <div class="ride-container" data-wheelchair="true" data-serviceAnimal="true" data-pregnant="false" data-inaccessible="true" data-sensory="false" data-name="Batwing" data-minHeight="48" data-duration="105">
             
-            <img src="rideImages/Batwing.png" alt="Ride Image" class="ride-container-image rounded-xl">
-            <div class="ride-container-text">
-                <h2>BATWING</h2>
-                <p>
-                    Here’s a ride fit for brave young batboys and batgirls, perfect for toddlers and young children seeking adventure. 
-                    Glide along in Batman’s very own plane, designed as an entry-level superhero experience for the youngest adventurers.  
-                    <br><br>
-                    These sleek jets provide a super cool ride for aspiring heroes, while saving BATMAN™’s most thrilling tricks for another day. 
-                    That way, everyone gets to feel what it’s like to be The Bat, but with a much smoother takeoff and landing, 
-                    making it an ideal adventure ride for young children and their families.
-                </p>
-                <p><u>Minimum height</u>: None with adult, 48" to ride alone</p>
-                <p><u>Duration</u>: 1 min 45 sec</p>
-                <p><b>Accessibility Constraints:</b><span class="accessibility-data"></span></p>
-                <div class="button-container bg-green-950 text-white hover:scale-125 hover:bg-amber-950 rounded-2xl">
-                    <a href="mapNav.html?lat=32.757562316535875&lng=-97.067054891455" class="directions-button">Directions</a>
+            <!-- Batwing Ride -->
+            <div id="ride3" class="ride-container" data-wheelchair="true" data-serviceAnimal="true" data-pregnant="false" data-inaccessible="true" data-sensory="false">
+                <div class="image-container" onclick="toggleCard('ride3')">
+                    <img src="rideImages/Batwing.png" alt="Batwing" class="ride-container-image">
                 </div>
-            </div>
-        </div>
-
-        <div class="ride-container" data-wheelchair="true" data-serviceAnimal="true" data-pregnant="true" data-inaccessible="false" data-sensory="false" data-name="Boomtown Depot" data-minHeight="0" data-duration="480">
-            <img src="rideImages/BoomtownDepot.jpg" alt="Ride Image" class="ride-container-image rounded-xl">
-            <div class="ride-container-text">
-                <h2>Boomtown Depot</h2>
-                <p>Climb aboard one of our most classic and cherished amusement park train rides for a scenic cruise around the park. 
-                    For more than one hundred years, the Jefferson Patton train has offered passengers the chance to relax 
-                    and experience the novelty and nostalgia of traveling by authentic steam engine.
-                    <br><br>
-                    Our timeless train has been circling the original one-mile track since 1961. With its authentic grille and wheels, 
-                    this leisurely locomotive offers guests a relaxing way to take in the park’s rich history and scenic beauty.
-                </p>
-                <p><u>Minimum height</u>: None</p>
-                <p><u>Duration</u>: 8 min</p>
-                <p><b>Accessibility Constraints:</b><span class="accessibility-data"></span></p>
-                      <div class="button-container bg-green-950 text-white hover:scale-125 hover:bg-amber-950 rounded-2xl">
-                    <a href="mapNav.html?lat=32.75775980664769&lng=-97.06749839143542" class="directions-button">Directions</a>
+                <div class="ride-container-text">
+                    <h2>BATWING</h2>
                 </div>
-            </div>
-        </div>
-
-        <div class="ride-container" data-wheelchair="true" data-serviceAnimal="true" data-pregnant="true" data-inaccessible="true" data-sensory="false" data-name="Boot Scootin'" data-minHeight="36" data-duration="105">
-            <img src="rideImages/BootScootin.jpg" alt="Ride Image" class="ride-container-image rounded-xl">
-            <div class="ride-container-text">
-                <h2>Boot Scootin'</h2>
-                <p>
-                    No spurs or lasso are required for this gently ‘bucking’ ride, making it one of the best rides for kids. 
-                    These boots were made for bouncing!
-                    <br><br>
-                    Bobbing up and down, this western-themed carousel is the perfect ‘first rodeo’ for young riders.
-                    <br><br>
-                    Enjoy the west without too much “wild”.
-                </p>
-                <p><u>Minimum height</u>: None with adult, 36" to ride alone</p>
-                <p><u>Duration</u>: 1 min 45 sec</p>
-                <p><b>Accessibility Constraints:</b><span class="accessibility-data"></span></p>
-                      <div class="button-container bg-green-950 text-white hover:scale-125 hover:bg-amber-950 rounded-2xl">
-                    <a href="mapNav.html?lat=32.757154197253314&lng=-97.0720959368577" class="directions-button">Directions</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="ride-container" data-wheelchair="true" data-serviceAnimal="true" data-pregnant="true" data-inaccessible="true" data-sensory="false" data-name="Bugs Bunny Cloud Bouncer" data-minHeight="42" data-duration="60">
-            <img src="rideImages/BugsBunnyCloud.jpg" alt="Ride Image" class="ride-container-image rounded-xl"> 
-            <div class="ride-container-text">
-                <h2>Bugs Bunny Cloud Bouncer</h2>
-                <p>
-                    Soar to new heights with the Bugs Bunny Cloud Bouncer, the perfect gentle beginner drop tower ride for young thrill-seekers. 
-                    This ride offers a kid-friendly introduction to the excitement of free fall, lifting riders up to twelve feet into the air before providing a series of soft, cushioned drops. 
-                    It’s an ideal way for kids to safely experience the thrill of a drop tower, building their confidence and hunger for heights.
-                    <br><br>
-                    Step into Bugs’ world for a gentle ascent followed by light, buoyant drops. With each bounce, 
-                    young riders will feel a thrilling lift, making it a perfect first step into the world of amusement park adventures.
-                </p>
-                <p><u>Minimum height</u>: None with adult, 42" to ride alone</p>
-                <p><u>Duration</u>: 1 min</p>
-                <p><b>Accessibility Constraints:</b><span class="accessibility-data"></span></p>
-                      <div class="button-container bg-green-950 text-white hover:scale-125 hover:bg-amber-950 rounded-2xl">
-                    <a href="mapNav.html?lat=32.75637875518429&lng=-97.06841704130149" class="directions-button">Directions</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="ride-container" data-wheelchair="true" data-serviceAnimal="true" data-pregnant="false" data-inaccessible="true" data-sensory="false" data-name="Catwoman Whip" data-minHeight="48" data-duration="240">
-            <img src="rideImages/Catwoman.jpg" alt="Ride Image" class="ride-container-image rounded-xl"> 
-            <div class="ride-container-text">
-                <h2>CATWOMAN Whip</h2>
-                <p>
-                    Hold onto the whip’s handle tightly as this GOTHAM ride spins you around, fluctuating your trajectory at every turn. 
-                    As the name suggests, this thrilling ride is about as ‘snappy’ as it gets, offering a unique experience that captures the essence of CATWOMAN’s agility and cunning.
-                    <br><br>
-                    Raising and expanding arms spin, twirl, and ‘whip’ riders swiftly through the air at heights up to 68 feet. 
-                    This attraction perfectly embodies the chaos of GOTHAM CITY, providing an adrenaline-packed experience that simulates the unpredictability of chasing or being chased by CATWOMAN herself.
-                    <br><br>
-                    The unique combination of dangling, swirling, and undulating circular motions make CATWOMAN Whip the only ride of its kind in North America. 
-                    Thrill-seekers hunting for something with ‘teeth’ will not want to miss a chance to ride CATWOMAN’s whirling whip.
-                </p>
-                <p><u>Minimum height</u>: 48"</p>
-                <p><u>Duration</u>: 4 min</p>
-                <p><b>Accessibility Constraints:</b><span class="accessibility-data"></span></p>
-                      <div class="button-container bg-green-950 text-white hover:scale-125 hover:bg-amber-950 rounded-2xl">
-                    <a href="mapNav.html?lat=32.75726920754156&lng=-97.06628719155061" class="directions-button">Directions</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="ride-container" data-wheelchair="true" data-serviceAnimal="true" data-pregnant="true" data-inaccessible="true" data-sensory="false" data-name="Cloud Bouncer" data-minHeight="42" data-duration="120">
-            <img src="rideImages/CloudBouncer.jpg" alt="Ride Image" class="ride-container-image rounded-xl"> 
-            <div class="ride-container-text">
-                <h2>Cloud Bouncer</h2>
-                <p>
-                    Ever wish you could reach up and touch the clouds? Now you can, in your very own hot air balloon! When you need a breath of fresh air, 
-                    it’s time to lift off, flying high over Goodtimes Square. Climb into a basket under one of the colorfully striped balloons, 
-                    and then you’re ready to soar! Up, up, and away, more than a dozen feet high! Now you’re cruising, as your personal hot air balloon circles, 
-                    floating up and around the center cluster of bright white clouds. You can simply enjoy a great view of the park on your mellow flight, 
-                    or your little flying aces can grab hold of the center disk and give it a spin it, to make the entire balloon spin around. 
-                    The harder you twist the wheel, the faster you spin. Teens with some muscle can really make these balloons twirl hard! 
-                    But any which way, you’ll be a balloon-master of the sky!
-                </p>
-                <p><u>Minimum height</u>: None with adult, 42" to ride alone</p>
-                <p><u>Duration</u>: 2 min</p>
-                <p><b>Accessibility Constraints:</b><span class="accessibility-data"></span></p>
-                      <div class="button-container bg-green-950 text-white hover:scale-125 hover:bg-amber-950 rounded-2xl">
-                    <a href="mapNav.html?lat=32.75687916891457&lng=-97.06778361202024" class="directions-button">Directions</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="ride-container" data-wheelchair="true" data-serviceAnimal="true" data-pregnant="true" data-inaccessible="true" data-sensory="false" data-name="Daffy Duck Bucket Blasters" data-minHeight="48" data-duration="100">
-            <img src="rideImages/BucketBlasters.jpg" alt="Ride Image" class="ride-container-image rounded-xl"> 
-            <div class="ride-container-text">
-                <h2>Daffy Duck Bucket Blasters</h2>
-                <p>
-                    Daffy Duck Bucket Blasters gets the entire family engaged in a fun water battle. You’re always in for a wacky, crazy ride when you’re with Daffy Duck.
-                    <br><br>
-                    Hold on tight because you’ll spin round and round in water barrels. Riders aren’t the only ones who will experience the excitement.
-                    These buckets are equipped with water guns! Riders will not only be able to splash each other, but guests can even get in on the fun. 
-                    How refreshing, right? From the center of the barrels, riders are able to splash anyone within reach as they go on their twisting adventure. 
-                    There’s so much twisting and turning in these buckets, you’ll never know where the water will spray next!
-                    <br><br>
-                    Daffy Duck Bucket Blasters sits on top of the ground where the legendary Big Bend coaster once stood. 
-                    Like Big Bend, tons of memories will be made as a new generation of little thrill seekers in-training take on Daffy Duck Bucket Blasters.
-                </p>
-                <p><u>Minimum height</u>: 36" with adult, 48" to ride alone</p>
-                <p><u>Duration</u>: 1 min 40 sec</p>
-                <p><b>Accessibility Constraints:</b><span class="accessibility-data"></span></p>
-                      <div class="button-container bg-green-950 text-white hover:scale-125 hover:bg-amber-950 rounded-2xl">
-                    <a href="mapNav.html?lat=32.75912726546584&lng=-97.06800230384427" class="directions-button">Directions</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="ride-container" data-wheelchair="true" data-serviceAnimal="true" data-pregnant="false" data-inaccessible="true" data-sensory="false" data-name="El Diablo" data-minHeight="48" data-duration="90">
-            
-            <img src="rideImages/ElDiablo.png" alt="Ride Image" class="ride-container-image rounded-xl">
-            <div class="ride-container-text">
-                <h2>El Diablo</h2>
-                <p>
-                    Don’t worry—you don’t have to sell your soul to ride this devil of a coaster; however, you might feel it leave your body a few times. 
-                    This deceptively simple-looking ride throws its passengers around for six full 180s, at a breathtaking 6.66 seconds per loop. 
-                    Climb in, if you dare, and experience the heart-pounding sensation of the biggest loops at the park.
-                    <br><br>
-                    This 100 foot super loop spins riders around and around for six full inversions, offering the ultimate adrenaline rush for thrill-seekers.
-                    <br><br>
-                    Ever wonder what someone’s face looks like in a state of perpetual thrills? El Diablo has face-to-face seating, so there’s no need to wonder any longer. 
-                </p>
-                <p><u>Minimum height</u>: 48"</p>
-                <p><u>Duration</u>: 1 min 30 sec</p>
-                <p><b>Accessibility Constraints:</b><span class="accessibility-data"></span></p>
-                      <div class="button-container bg-green-950 text-white hover:scale-125 hover:bg-amber-950 rounded-2xl">
-                    <a href="mapNav.html?lat=32.755825529397704&lng=-97.07200652921023" class="directions-button">Directions</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="ride-container" data-wheelchair="true" data-serviceAnimal="true" data-pregnant="false" data-inaccessible="true" data-sensory="false" data-name="El Sombrero" data-minHeight="42" data-duration="60">
-            <img src="rideImages/Sombrero.png" alt="Ride Image" class="ride-container-image rounded-xl"> 
-            <div class="ride-container-text">
-                <h2>El Sombrero</h2>
-                <p>
-                    Hang on to your hats. Once you climb aboard the brim of this giant, heaving headwear, you’re in for a wild ride. 
-                    El Sombrero’s bill does more than just tip. It whirls, whips, tilts, and dips! So,  find your seat and hang on tight for an exhilarating spinning ride experience.
-                    <br><br>
-                    This exciting carousel-style ride spins around fast, pulling passengers toward the edges, so lighter riders might want to sit on the inside, 
-                    toward the middle of the hat.
-                </p>
-                <p><u>Minimum height</u>: None with adult, 42" to ride alone</p>
-                <p><u>Duration</u>: 1 min</p>
-                <p><b>Accessibility Constraints:</b><span class="accessibility-data"></span></p>
-                      <div class="button-container bg-green-950 text-white hover:scale-125 hover:bg-amber-950 rounded-2xl">
-                    <a href="mapNav.html?lat=32.755489433620255&lng=-97.0709131848416" class="directions-button">Directions</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="ride-container" data-wheelchair="true" data-serviceAnimal="true" data-pregnant="false" data-inaccessible="true" data-sensory="false" data-name="Gunslinger" data-minHeight="42" data-duration="100">
-            <img src="rideImages/Gunslinger.jpg" alt="Ride Image" class="ride-container-image rounded-xl"> 
-            <div class="ride-container-text">
-                <h2>Gunslinger</h2>
-                <p>
-                    Holster yourself into one of the bucket seats and let yourself dangle like a pistol from a gun slinger’s hip. 
-                    But get ready for the Gun Slinger’s quick draw. As the axis starts spinning, your seat will wind around it wider and wider. 
-                    The faster you spin, the further out you’ll fly!
-                    <br><br>
-                    The seats of this spinning ride hang like tassels on a cowboy’s cuff, so let your feet dangle and let out a yee-haw as you enjoy the giggle-inducing gravity pulling you further and further sideways.
-                    <br><br>
-                    The pretty lights along the Gun Slinger’s arms make this ride especially nice to ride in the evenings.
-                </p>
-                <p><u>Minimum height</u>: 42"</p>
-                <p><u>Duration</u>: 1 min 40 sec</p>
-                <p><b>Accessibility Constraints:</b><span class="accessibility-data"></span></p>
-                      <div class="button-container bg-green-950 text-white hover:scale-125 hover:bg-amber-950 rounded-2xl">
-                    <a href="mapNav.html?lat=32.75323847916851&lng=-97.06802371184325" class="directions-button">Directions</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="ride-container" data-wheelchair="true" data-serviceAnimal="true" data-pregnant="true" data-inaccessible="true" data-sensory="false" data-name="Justice League: Battle for Metropolis" data-minHeight="48" data-duration="240">
-            <img src="rideImages/JusticeLeague.jpg" alt="Ride Image" class="ride-container-image rounded-xl"> 
-            <div class="ride-container-text">
-                <h2>JUSTICE LEAGUE&trade;: Battle for METROPOLIS</h2>
-                <p>
-                    The superheroes of the JUSTICE LEAGUE have been kidnapped by THE JOKER and LEX LUTHOR, and it’s up to you to rescue them in this interactive super hero ride.
-                    <br><br>
-                    Step into the Hall of Justice and prepare for battle. You’ll grab a working stun gun and climb into a motion-based vehicle before setting off to destroy the villains’ evil plans.
-                    <br><br>
-                    Fight THE JOKER and LEX LUTHOR using your laser gun as you cruise through the streets of METROPOLIS. 
-                    Can you destroy their plan to infect the city with laughing gas? Only if you’re brave enough to take your spot on the JUSTICE LEAGUE Reserve Team! 
-                </p>
-                <p><u>Minimum height</u>: 42" with adult over 54", 48" to ride alone</p>
-                <p><u>Duration</u>: 4 min</p>
-                <p><b>Accessibility Constraints:</b><span class="accessibility-data"></span></p>
-                      <div class="button-container bg-green-950 text-white hover:scale-125 hover:bg-amber-950 rounded-2xl">
-                    <a href="mapNav.html?lat=32.757991473958874&lng=-97.0677503492011" class="directions-button">Directions</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="ride-container" data-wheelchair="true" data-serviceAnimal="true" data-pregnant="true" data-inaccessible="true" data-sensory="false" data-name="La Fiesta de las Tazas" data-minHeight="42" data-duration="90">
-            <img src="rideImages/TeaCups.png" alt="Ride Image" class="ride-container-image rounded-xl"> 
-            <div class="ride-container-text">
-                <h2>La Fiesta de las Tazas</h2>
-                <p>
-                    If spinning inside of something that’s spinning on top of something that’s spinning around spinning things sounds like your cup of tea, then wowzers, 
-                    have we brewed up the ultimate discombobulating ride for your family! These might look like ornately beautiful cups full of soothing sips to you, but these teas are not settling. Take one for a spin and see!
-                    <br><br>
-                    There’s room in each tea party for five, so fill up your cup and prepare for the rambunctious table manners to begin!
-                    <br><br>
-                    If your teacup still isn’t ‘spinny’ enough for you, give the wheel in the middle of your cup a twist and add a little extra spin of your own!
-                </p>
-                <p><u>Minimum height</u>: None with adult, 42" to ride alone</p>
-                <p><u>Duration</u>: 1 min 30 sec</p>
-                <p><b>Accessibility Constraints:</b><span class="accessibility-data"></span></p>
-                      <div class="button-container bg-green-950 text-white hover:scale-125 hover:bg-amber-950 rounded-2xl">
-                    <a href="mapNav.html?lat=32.75731315275531&lng=-97.06689389616429" class="directions-button">Directions</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="ride-container" data-wheelchair="true" data-serviceAnimal="true" data-pregnant="false" data-inaccessible="true" data-sensory="false" data-name="La Vibora" data-minHeight="42" data-duration="100">
-            <img src="rideImages/Vibora.jpg" alt="Ride Image" class="ride-container-image rounded-xl"> 
-            <div class="ride-container-text">
-                <h2>La Vibora</h2>
-                <p>
-                    The name of this weaving ride translates to “The Viper”. 
-                    The ominous black, red, and yellow stripes are meant to be a warning: you never quite know how each twist and turn of this undulating beast is going to strike. 
-                    *Gulp* Guess there’s only one way to find out…
-                    <br><br>
-                    Buckle yourself inside this bobsled-style coaster and slither your way through this winding, snaking ride, sliding up the walls as you barrel your way around each unpredictable turn.
-                    <br><br>
-                    Luckily, this ride isn’t actually poisonous; however, the whiplashing turns might make your blood run a little cold with excitement.
-                </p>
-                <p><u>Minimum height</u>: 42"</p>
-                <p><u>Duration</u>: 1 min 40 sec</p>
-                <p><b>Accessibility Constraints:</b><span class="accessibility-data"></span></p>
-                      <div class="button-container bg-green-950 text-white hover:scale-125 hover:bg-amber-950 rounded-2xl">
-                    <a href="mapNav.html?lat=32.755669332272035&lng=-97.07129106781014" class="directions-button">Directions</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="ride-container" data-wheelchair="true" data-serviceAnimal="true" data-pregnant="false" data-inaccessible="true" data-sensory="false" data-name="Mr. Freeze" data-minHeight="54" data-duration="90">
-            
-            <img src="rideImages/Freeze.png" alt="Ride Image" class="ride-container-image rounded-xl">
-            <div class="ride-container-text">
-                <h2>Mr. Freeze</h2>
-                <p>
-                    Step into the chilling lair of MR. FREEZE, BATMAN’S cold-blooded arch nemesis. This evil guy’s home decor might look a bit fridged, 
-                    but the acceleration of his coaster is absolutely scorching. Using cutting-edge electromagnetic technology, this mad man launches his victims from a chilling tunnel, sending them flying from 0-70 miles per hour in a mind-melting 3.8 seconds!
-                    <br><br>
-                    As soon as you exit the tunnel, you’re sent flying up a staggeringly high “top hat” loop. As you hurtle up and then back down this loop at 90 degrees, 
-                    your train spins around sideways like the corkscrewing blades of a giant slushy machine. And that’s only the beginning.
-                    <br><br>
-                    Just when you think you’ve had all the twists and turns you can take, you’re rocketed up a 236-foot tall tower to do it all over again… in reverse!
-                </p>
-                <p><u>Minimum height</u>: 54"</p>
-                <p><u>Duration</u>: 1 min 30 sec</p>
-                <p><b>Accessibility Constraints:</b><span class="accessibility-data"></span></p>
-                      <div class="button-container bg-green-950 text-white hover:scale-125 hover:bg-amber-950 rounded-2xl">
-                    <a href="mapNav.html?lat=32.75548781011889&lng=-97.07155711109925" class="directions-button">Directions</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="ride-container" data-wheelchair="true" data-serviceAnimal="true" data-pregnant="true" data-inaccessible="true" data-sensory="false" data-name="Oil Derrick" data-minHeight="0" data-duration="90">
-            <img src="rideImages/OilDerrick.png" alt="Ride Image" class="ride-container-image rounded-xl"> 
-            <div class="ride-container-text">
-                <h2>Oil Derrick</h2>
-                <p>
-                    Standing tall near the center of the park, the beautiful orange beams of this steel tower dwarf even the biggest of rides below. Ah! Smell that fresh ozone!
-                    <br><br>
-                    Board the elevator at the base and ride it to the sky for an expansive bird’s eye view of the DFW skyline that’ll make even the birds jealous. With a view like this, who needs a map?
-                </p>
-                <p><u>Minimum height</u>: None</p>
-                <p><u>Duration</u>: 1 min 30 sec</p>
-                <p><b>Accessibility Constraints:</b><span class="accessibility-data"></span></p>
-                      <div class="button-container bg-green-950 text-white hover:scale-125 hover:bg-amber-950 rounded-2xl">
-                    <a href="mapNav.html?lat=32.75784178390764&lng=-97.06661224784125" class="directions-button">Directions</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="ride-container" data-wheelchair="true" data-serviceAnimal="true" data-pregnant="false" data-inaccessible="true" data-sensory="false" data-name="Silver Star Carousel" data-minHeight="42" data-duration="210">
-            <img src="rideImages/SilverStar.jpg" alt="Ride Image" class="ride-container-image rounded-xl"> 
-            <div class="ride-container-text">
-                <h2>Silver Star Carousel</h2>
-                <p>
-                    You’re sure to spot this iconic vintage carousel as you enter through the gates of the park. 
-                    And who can pass by such twinkling beauty and nostalgia without climbing onto one of these pretty ponies for a quick photo op?
-                    <br><br>
-                    Don’t be shy! Our horsies are all very well behaved. 
-                    The only trouble is deciding which one of these stunningly photogenic steeds has your name on it!
-                    <br><br>
-                    There are over sixty shiny saddles to sit in—just take your pic already!
-                </p>
-                <p><u>Minimum height</u>: None with adult, 42" to ride alone</p>
-                <p><u>Duration</u>: 3 min 30 sec</p>
-                <p><b>Accessibility Constraints:</b><span class="accessibility-data"></span></p>
-                      <div class="button-container bg-green-950 text-white hover:scale-125 hover:bg-amber-950 rounded-2xl">
-                    <a href="mapNav.html?lat=32.758886637131965&lng=-97.07057433567623" class="directions-button">Directions</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="ride-container" data-wheelchair="true" data-serviceAnimal="true" data-pregnant="false" data-inaccessible="true" data-sensory="false" data-name="Superman: Tower of Power" data-minHeight="52" data-duration="120">
-            <img src="rideImages/Superman.png" alt="Ride Image" class="ride-container-image rounded-xl"> 
-            <div class="ride-container-text">
-                <h2>SUPERMAN: Tower of Power</h2>
-                <p>
-                    As every fan knows, Superman can leap tall buildings in a single bound. But why stop at only one leap when you can make several?! 
-                    Leap onto this ride to find out what it’s like to sit on the man of steel’s brawny shoulders!
-                    <br><br>
-                    Think you’re ready to fly “faster than a speeding bullet”? How about rocketing 325 feet into the air? Can you stomach multiple 10+ story drops? 
-                    If you can handle this one without screaming, then you deserve a cape of your own!
-                </p>
-                <p><u>Minimum height</u>: 52"</p>
-                <p><u>Duration</u>: 2 min</p>
-                <p><b>Accessibility Constraints:</b><span class="accessibility-data"></span></p>
-                      <div class="button-container bg-green-950 text-white hover:scale-125 hover:bg-amber-950 rounded-2xl">
-                    <a href="mapNav.html?lat=32.758384840744206&lng=-97.06868454595156" class="directions-button">Directions</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="ride-container" data-wheelchair="true" data-serviceAnimal="true" data-pregnant="true" data-inaccessible="true" data-sensory="false" data-name="Texas Depot" data-minHeight="0" data-duration="480">
-            <img src="rideImages/TexasDepot.jpg" alt="Ride Image" class="ride-container-image rounded-xl"> 
-            <div class="ride-container-text">
-                <h2>Texas Depot</h2>
-                <p>
-                    It’s not every day you get a chance to board a real steam engine train. The Sam Houston is a classic engine, built more than a century ago, 
-                    and has been giving Six Flags passengers pleasant tours around the Texas ‘countryside’ of the park for over five decades. All aboard!
-                    <br><br>
-                    What better way to get a leisurely and scenic tour around the park than by an authentic steam engine? 
-                    For train routes, scheduling, and other information about this enchanting amusement park train ride, drop by the Texas Depot.
-                    <br><br>    
-                    Classic train rides around the park are a wonderfully unique experience for family, friends, and train enthusiasts alike.
-                    Make sure to catch a ride while you’re here!
-                </p>
-                <p><u>Minimum height</u>: None</p>
-                <p><u>Duration</u>: 8 min</p>
-                <p><b>Accessibility Constraints:</b><span class="accessibility-data"></span></p>
-                      <div class="button-container bg-green-950 text-white hover:scale-125 hover:bg-amber-950 rounded-2xl">
-                    <a href="mapNav.html?lat=32.7570749439281&lng=-97.07255299151078" class="directions-button">Directions</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="ride-container" data-wheelchair="true" data-serviceAnimal="true" data-pregnant="false" data-inaccessible="true" data-sensory="false" data-name="Texas SkyScreamer" data-minHeight="48" data-duration="165">
-            <img src="rideImages/SkyScreamer.png" alt="Ride Image" class="ride-container-image rounded-xl"> 
-            <div class="ride-container-text">
-                <h2>Texas SkyScreamer</h2>
-                <p>
-                    Like the Taz Tornado Swings and Gunslinger, here’s another fun, spinning carousel of swings for you to let your legs hang out! 
-                    What’s the difference? Oh, ya know, about 40 stories. It has “Texas” in the name, after all, so of course it’s gonna be bigger! 
-                    Good luck staying quiet on this one.
-                    <br><br>
-                    Flying around 400 feet about the park seems like a pretty great way to check it out to us! 
-                    Some folks find their way around with maps. For others, there’s the Texas Skyscreamer.
-                    We’d say, “Don’t look down”, but it’s pretty hard when you’re flying sideways!
-                </p>
-                <p><u>Minimum height</u>: 48"</p>
-                <p><u>Duration</u>: 2 min 45 sec</p>
-                <p><b>Accessibility Constraints:</b><span class="accessibility-data"></span></p>
-                      <div class="button-container bg-green-950 text-white hover:scale-125 hover:bg-amber-950 rounded-2xl">
-                    <a href="mapNav.html?lat=32.75676784036096&lng=-97.0658927520594" class="directions-button">Directions</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="ride-container" data-wheelchair="true" data-serviceAnimal="true" data-pregnant="false" data-inaccessible="true" data-sensory="false" data-name="The Riddler Revenege" data-minHeight="52" data-duration="180">
-            <img src="rideImages/Riddler.png" alt="Ride Image" class="ride-container-image rounded-xl"> 
-            <div class="ride-container-text">
-                <h2>THE RIDDLER Revenege</h2>
-                <p>
-                    Here’s one hypnotist act that definitely won’t be putting anyone to sleep. If you think your mind can handle high-flying speeds and discombobulating moves on multiple axes, 
-                    then step right up to THE RIDDLER for a thrilling standing roller coaster experience that’ll truly puzzle your understanding.
-                    <br><br>
-                    This wacky pendulum ride swoops back and forth at mind-boggling speeds up to 70-mph, while simultaneously spinning passengers counterclockwise. 
-                    If you can walk away from this one unshaken, you must be an actual superhero!
-                    <br><br>
-                    You’re getting dizzzzzyyyyyyyyyyy…
-                </p>
-                <p><u>Minimum height</u>: 52"</p>
-                <p><u>Duration</u>: 3 min</p>
-                <p><b>Accessibility Constraints:</b><span class="accessibility-data"></span></p>
-                      <div class="button-container bg-green-950 text-white hover:scale-125 hover:bg-amber-950 rounded-2xl">
-                    <a href="mapNav.html?lat=32.75685106292408&lng=-97.0652765520594" class="directions-button">Directions</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="ride-container" data-wheelchair="true" data-serviceAnimal="true" data-pregnant="false" data-inaccessible="true" data-sensory="true" data-name="Titan" data-minHeight="48" data-duration="200">
-            <img src="rideImages/Titan.jpg" alt="Ride Image" class="ride-container-image rounded-xl"> 
-            <div class="ride-container-text">
-                <h2>Titan</h2>
-                <p>
-                    Are you looking for the biggest, baddest coaster in the park? Well, guess what? You found it. 
-                    This massive beast of a roller coaster is so huge it practically needs its own zip code. In addition to being the tallest ride in the park, 
-                    it’s also the longest, smashing passenger faces with G-force for a crushing 3 minutes and 20 seconds. What more could anyone ask for?
-                    <br><br>
-                    Standing at an impressive 245 feet tall, this steel behemoth rockets riders down even further, whipping them through a tunnel into a camelback, double-helix turn. And that’s only the beginning!
-                    <br><br>
-                    Through seemingly endless twists and turns, you’ll be melded with your seat by a crushing 4.5 Gs, then pulled right back apart with the same force as the ride shifts directions without warning. Enjoy!
-                </p>
-                <p><u>Minimum height</u>: 48"</p>
-                <p><u>Duration</u>: 3 min 20 sec</p>
-                <p><b>Accessibility Constraints:</b><span class="accessibility-data"></span></p>
-                      <div class="button-container bg-green-950 text-white hover:scale-125 hover:bg-amber-950 rounded-2xl">
-                    <a href="mapNav.html?lat=32.7557677102804&lng=-97.07418512037097" class="directions-button">Directions</a>
+                <div class="ride-details">
+                    <p>Perfect for young batboys and batgirls!</p>
+                    <p><u>Minimum height</u>: 48"</p>
+                    <p><u>Duration</u>: 1 min 45 sec</p>
+                    <p class="font-bold mt-2">Accessibility:</p>
+                    <ul>
+                        <li>✅ Wheelchair accessible</li>
+                        <li>✅ Service animals allowed</li>
+                    </ul>
+                    <div class="button-container">
+                        <a href="mapNav.html?lat=32.757562316535875&lng=-97.067054891455" class="directions-button">Get Directions</a>
+                    </div>
                 </div>
             </div>
         </div>
