@@ -28,6 +28,18 @@
       border-radius: 15px;
     }
 
+    .ride-name {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      right: 10px;
+      font-size: 1.2em;
+      font-weight: bold;
+      color: white;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+      z-index: 2;
+    }
+
     .ride-details {
       position: absolute;
       bottom: 0;
@@ -108,7 +120,7 @@
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
     import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-    import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+    import { getFirestore, collection, getDocs, doc, deleteDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
     import { favoriteRides } from "./favorites.js";
 
     // Firebase configuration
@@ -167,8 +179,8 @@
         rideElement.className = "ride-card shadow-lg";
         rideElement.innerHTML = `
           <img src="${rideData.imageUrl || 'default-image.jpg'}" alt="Ride Image">
+          <div class="ride-name">${rideData.name}</div>
           <div class="ride-details">
-            <h2 class="text-xl font-bold">${rideData.name}</h2>
             <p>${rideData.description || 'No description available.'}</p>
             <p><b>Min Height:</b> ${rideData.minHeight || 'N/A'}"</p>
             <p><b>Duration:</b> ${rideData.duration ? formatDuration(rideData.duration) : 'N/A'}</p>
@@ -181,15 +193,39 @@
         `;
         favoriteRidesContainer.appendChild(rideElement);
       });
+
+      // Add event listeners to the remove buttons
+      const removeButtons = document.querySelectorAll('.remove-favorite');
+      removeButtons.forEach(button => {
+        button.addEventListener('click', async (event) => {
+          const rideName = event.target.getAttribute('data-name');
+          await removeFavoriteRide(rideName);
+          event.target.parentElement.parentElement.remove(); // Remove the ride card from the DOM
+        });
+      });
+    }
+
+    // Function to remove a favorite ride from Firestore
+    async function removeFavoriteRide(rideName) {
+      const user = auth.currentUser;
+      if (user) {
+        const userId = user.uid;
+        const favoritesRef = collection(db, 'users', userId, 'favorites');
+        const querySnapshot = await getDocs(favoritesRef);
+        querySnapshot.forEach(async (doc) => {
+          if (doc.data().name === rideName) {
+            await deleteDoc(doc.ref); // Delete the document from Firestore
+          }
+        });
+      }
     }
 
     // Function to format duration
     function formatDuration(seconds) {
       const m = Math.floor(seconds / 60);
       const s = seconds % 60;
-      return `${m} min ${s} sec`;
+      return `${m}m ${s}s`;
     }
   </script>
-
 </body>
 </html>
