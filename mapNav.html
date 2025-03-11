@@ -14,7 +14,7 @@
             align-items: center;
             width: 100%;
             height: calc(100vh - 60px); /* Fullscreen minus navbar */
-            padding: 15px;
+            padding: 10px;
         }
 
         /* Map container with border */
@@ -23,7 +23,7 @@
             width: 100%;
             height: 100%;
             background-color: #e5e5e5;
-            border: .5px solid #205520;
+            border: .5px solid 5E503F;
             border-radius: 15px;
             overflow: hidden;
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
@@ -110,20 +110,19 @@
     </script>
 </head>
 
-<body class="bg-green-700 relative">
-    <div class="fixed top-0 left-0 w-full h-full bg-green-400 bg-cover bg-center filter blur-md -z-10" style="background-image: url('Image.webp');"></div>
+<body class="bg-[#EAE0D5] relative">
     
-    <header class="bg-amber-800 text-white shadow-lg">
+    <header class="bg-[#0A0908] text-[#F1FAEE] shadow-lg">
         <nav class="container mx-auto flex justify-between items-center py-2 px-4">
             <div class="flex space-x-6">
-                <a href="login.html" class="text-l font-semibold hover:text-white hover:scale-110 transition-transform duration-200">Sign in</a>
-                <a href="home.html" class="text-l font-semibold hover:text-white hover:scale-120 transition-transform duration-200">Home</a>
-                <a href="ride_list.html" class="text-l font-semibold hover:text-white hover:scale-120 transition-transform duration-200">Rides</a>
-                <a href="mapNav.html" class="text-l font-semibold hover:text-white hover:scale-120 transition-transform duration-200">Map</a>
-                <a href="favorites.html" class="text-l font-semibold hover:text-white hover:scale-110 transition-transform duration-200">Favorites</a>
-                <a href="help.html" class="text-l font-semibold hover:text-white hover:scale-110 transition-transform duration-200">Help</a>
+                <a href="login.html" class="text-l font-semibold hover:text-[#F1FAEE] hover:scale-110 transition-transform duration-200">Sign in</a>
+                <a href="home.html" class="text-l font-semibold hover:text-[#F1FAEE] hover:scale-120 transition-transform duration-200">Home</a>
+                <a href="ride_list.html" class="text-l font-semibold hover:text-[#F1FAEE] hover:scale-120 transition-transform duration-200">Rides</a>
+                <a href="mapNav.html" class="text-l font-semibold hover:text-[#F1FAEE] hover:scale-120 transition-transform duration-200">Map</a>
+                <a href="favorites.html" class="text-l font-semibold hover:text-[#F1FAEE] hover:scale-110 transition-transform duration-200">Favorites</a>
+                <a href="help.html" class="text-l font-semibold hover:text-[#F1FAEE] hover:scale-110 transition-transform duration-200">Help</a>
             </div>
-            <a href="settings.html" class="bg-amber-950 text-white px-4 py-2 rounded-full shadow-lg hover:bg-white hover:text-black hover:shadow-xl transition-transform duration-200">
+            <a href="settings.html" class="bg-[#22333B] text-[#F1FAEE] px-4 py-2 rounded-full shadow-lg  hover:scale-105  hover:shadow-xl transition-transform duration-200">
                 Settings
             </a>
         </nav>
@@ -231,7 +230,7 @@ function addMarker({ lat, lng, title, categories }) {
     google.maps.event.addListener(marker, 'click', function () {
         infoWindow.setContent(
     title + 
-    '<br><button onclick="navigateToMarker(' + lat + ', ' + lng + ')" style="border: 2px solid #007bff; background-color: #007bff; color: white; padding: 5px 10px; border-radius: 5px; cursor: pointer;">Navigate Here</button>'
+    '<br><button onclick="navigateToMarker(' + lat + ', ' + lng + ')" style="border: 2px solid #007bff; background-color: #007bff; color: [#F1FAEE]; padding: 5px 10px; border-radius: 5px; cursor: pointer;">Navigate Here</button>'
 );
         infoWindow.open(map, marker);
     });

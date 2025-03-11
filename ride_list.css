@@ -1,6 +1,6 @@
 
 .ride-container {
-    background-color: #cff7d3;
+    background-color: #C6AC8F;
     display: flex;
     align-items: center;
     margin-top: 30px; 
@@ -17,10 +17,10 @@
 
 .ride-container-text {
     flex: 1; 
-    background-color: #cff7d3; 
+    background-color: #5E503F; 
     padding: 20px; 
     border-radius: 8px; 
-    color: rgb(0, 0, 0); 
+    color: #EAE0D5; 
     position: relative;
 }
 
@@ -29,8 +29,8 @@
 }
 
 .button-container {
-    background-color: #004d00; /* Dark green */
-    color: white;
+    background-color: #22333B;
+    color: #EAE0D5;
     border-radius: 1rem;
     padding: 7px 20px;
     display: inline-block;
@@ -63,16 +63,13 @@
 
 button {
     padding: 10px 20px;
-    background-color: #4CAF50;
+    background-color: #22333B;
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
 }
 
-button:hover {
-    background-color: #45a049;
-}
 
 .accessibility-data {
     font-weight: normal;       
@@ -126,7 +123,7 @@ input[type="radio"] {
 
 .filter-tag {
     display: inline-block;
-    background-color: #002fff;
+    background-color: #0A0908;
     color: rgb(255, 255, 255);
     padding: 5px 10px;
     margin: 5px;
@@ -152,7 +149,7 @@ input[type="radio"] {
   
 /* Modal content (rides list) */
 .filter-modal-content {
-    background-color: #8C4114;  /* Darker amber solid background for the content */
+    background-color: #5E503F;  /* Darker amber solid background for the content */
     padding: 0px 20px;
     border-radius: 10px;
     max-height: 80vh; /* Ensure it doesn't grow too large */
@@ -164,7 +161,7 @@ input[type="radio"] {
 .modal-header {
     position: sticky;  /* Make it sticky */
     top: 0px;  /* Stick to the top */
-    background-color: #8C4114;  /* Same background as modal content */
+    background-color: #5E503F;  /* Same background as modal content */
     padding: 15px 0;
     z-index: 1;  /* Ensure it stays on top of the content */
     text-align: center;
@@ -183,7 +180,7 @@ input[type="radio"] {
     position: sticky;
     top: 10px;
     right: 10px;
-    background-color: #e74c3c;
+    background-color: #0A0908;
     color: white;
     border: none;
     padding: 10px;
@@ -194,7 +191,7 @@ input[type="radio"] {
 }
 
 #closeFilterModalBtn:hover {
-    background-color: #c0392b;
+    background-color: #0A0908;
 }
 
 /* Ride container inside the modal */

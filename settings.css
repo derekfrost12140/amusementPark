@@ -13,8 +13,7 @@ body::before {
     position: fixed;
     top: 0;
     left: 0;
-    background-color: #008236;
-    background-image: url('Image.webp');
+ 
     background-size: cover;
     background-position: center;
     height: 100vh;
@@ -25,7 +24,7 @@ body::before {
 
 /* Header */
 .header {
-    background-color: #973C00; /* amber-800 */
+    background-color: #5E503F; /* amber-800 */
     color: white;
     border-radius: 12px;
 }
@@ -99,11 +98,11 @@ body::before {
 /* Settings panel styling */
 .settings-panel {
     margin-top: -96px;
-    background-color: rgba(160, 103, 79, 0.95); 
+    background-color: #5E503F; 
     padding: 30px;
     border-radius: 30px;
     max-width: 1000px;
-    transform: skewY(-2.5deg);
+   
     height: 75%;
     width: 100%;
     color: white;
@@ -114,7 +113,7 @@ body::before {
     margin-top: 0;
     font-size: 48px;
     text-align: center;
-    transform: skewY(2.5deg);
+ 
 }
 
 /* Individual setting rows */
@@ -123,7 +122,7 @@ body::before {
     justify-content: space-between;
     align-items: center;
     margin-top: 20px;
-    transform: skewY(2.5deg);
+  
 }
 
 .setting span {
@@ -179,12 +178,12 @@ input:checked + .slider:before {
     position: absolute;
     bottom: 30px;
     right: 30px;
-    transform: skewY(2.5deg);
+ 
 }
 
 .save-button {
     display: inline-block;
-    background-color: #4CAF50   ; 
+    background-color: #22333B  ; 
     color: rgb(255, 255, 255); 
     padding: 10px 20px; 
     margin-right: 10px; 
@@ -194,7 +193,7 @@ input:checked + .slider:before {
 }
 
 .save-button:hover{
-    background-color: #1f7122;
+    background-color: #0A0908;
 }
 
 .close-button {
@@ -218,7 +217,7 @@ input:checked + .slider:before {
     font-size: 18px;
     color: white;
     line-height: 1.6;
-    transform: skewY(2.5deg);
+ 
 }
 
 .settings-description a {
