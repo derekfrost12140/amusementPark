@@ -2,6 +2,119 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebas
 import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 import { getFirestore, collection, getDocs, getDoc, setDoc, addDoc, doc, deleteDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
+// Define styles as a string
+const styles = `
+  .ride-card {
+    position: relative;
+    width: 100%;
+    max-width: 250px;
+    height: 350px;
+    overflow: hidden;
+    border-radius: 15px;
+    transition: transform 0.3s ease-in-out;
+  }
+
+  .ride-card:hover {
+    transform: scale(1.05);
+  }
+
+  .ride-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 15px;
+  }
+
+  .ride-name {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    font-size: 1.2em;
+    font-weight: bold;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+    z-index: 2;
+  }
+
+  .ride-details {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 10px;
+    transform: translateY(100%);
+    transition: transform 0.3s ease-in-out;
+  }
+
+  .ride-card:hover .ride-details {
+    transform: translateY(0);
+  }
+
+  .remove-favorite {
+    background-color: red;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+
+  .remove-favorite:hover {
+    background-color: darkred;
+  }
+
+  /* Grid setup for 3 cards per row */
+  #favorite-rides {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    padding: 20px;
+  }
+
+  /* Responsiveness */
+  @media (max-width: 1024px) {
+    #favorite-rides {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 640px) {
+    #favorite-rides {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .directions-button,
+  .favorite-button {
+    display: inline-block;
+    text-align: center;
+    margin-top: 10px;
+  }
+
+  .favorite-button {
+    background-color: #f7c600;
+    padding: 10px 20px;
+    color: white;
+    border-radius: 5px;
+    text-align: center;
+  }
+
+  .favorite-button:hover {
+    background-color: #e6b200;
+  }
+`;
+
+
+const styleSheet = document.createElement("style");
+styleSheet.type = "text/css";
+styleSheet.innerText = styles;
+
+document.head.appendChild(styleSheet);
+
+
 
 document.addEventListener('DOMContentLoaded', async () => {
   /*********************************
@@ -441,9 +554,8 @@ document.addEventListener('DOMContentLoaded', async () => {
       }
     }
   
-    /*********************************
-     * 3. Dynamically Load Rides
-     *********************************/
+/*********************************/
+
     const ridesContainer = document.querySelector('.rides-container');
   
     // Or do a one-time load:
@@ -483,74 +595,99 @@ document.addEventListener('DOMContentLoaded', async () => {
       if (!rideContainer) {
         console.error("Error: rideContainer not found.");
       } else {
-        // Set innerHTML for rides
-        rideContainer.innerHTML = `
-          <img src="${ride.imageUrl}" alt="Ride Image" class="ride-container-image rounded-xl">
-          <div class="ride-container-text">
-            <h2>${ride.name}</h2>
-            <p>${ride.description}</p>
-            <p><u>Minimum height</u>: ${ride.minHeight}"</p>
-            <p><u>Duration</u>: ${formatDuration(ride.duration)}</p>
-            <p><b>Accessibility Constraints: </b><span class="accessibility-data"></span></p>
-            <div class="button-container  text-white hover:scale-105  rounded-2xl">
-              <a href="mapNav.html?lat=${ride.lat}&lng=${ride.lng}" class="directions-button">Directions</a>
+        // Create a ride card element
+        const rideCard = document.createElement("div");
+        rideCard.classList.add("ride-card", "shadow-lg", "rounded-lg", "overflow-hidden");
+      
+        // Set the inner HTML with styling for the card
+        rideCard.innerHTML = `
+          <img src="${ride.imageUrl || 'default-image.jpg'}" alt="Ride Image" class="ride-card-image w-full h-48 object-cover">
+          <div class="ride-card-content p-4 bg-white">
+            <h2 class="ride-name text-xl font-bold text-[#333]">${ride.name}</h2>
+            <p class="ride-description text-sm text-[#555]">${ride.description || "No description available."}</p>
+            <p class="ride-minHeight text-sm text-[#333]"><u>Minimum height</u>: ${ride.minHeight || "N/A"}"</p>
+            <p class="ride-duration text-sm text-[#333]"><u>Duration</u>: ${formatDuration(ride.duration) || "N/A"}</p>
+            <p><b>Accessibility Constraints: </b><span class="accessibility-data text-sm"></span></p>
+            <div class="ride-details">
+              <p><b>Duration: </b>${formatDuration(ride.duration) || "N/A"}</p>
+              <p><b>Description: </b>${ride.description || "No description available."}</p>
+              <p><b>Accessibility:</b> ${ride.wheelchair ? 'Wheelchair Accessible' : 'Not Accessible'}</p>
+              <div class="button-container mt-4">
+                <a href="mapNav.html?lat=${ride.lat}&lng=${ride.lng}" class="directions-button bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition duration-200">Directions</a>
+              </div>
+              <button class="favorite-button mt-3 w-full py-2 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600 transition duration-200" data-ride-id="${ride.id}" data-ride-name="${ride.name}">
+                ☆ Favorite
+              </button>
             </div>
-            <button class="favorite-button" data-ride-id="${ride.id}" data-ride-name="${ride.name}">☆ Favorite</button>
           </div>
         `;
-      }
-    
-      // Add event delegation directly to rideContainer
-      rideContainer.addEventListener('click', (e) => {
-        if (e.target.classList.contains('favorite-button')) {
-          const rideId = e.target.getAttribute('data-ride-id');
-          const rideName = e.target.getAttribute('data-ride-name');
-          
-          toggleFavorite(rideName, e.target);
+      
+        // Append the ride card to the rideContainer
+        rideContainer.appendChild(rideCard);
+      
+        // Add accessibility tags
+        const accessibilityData = rideCard.querySelector('.accessibility-data');
+        let accText = [];
+        if (ride.wheelchair) {
+          accText.push("<span class='filter-tag' data-filter='wheelchair'>Wheelchair Accessible</span>");
         }
-      });
-    
-
-        function toggleFavorite(rideName, button) {
-          onAuthStateChanged(auth, (user) => {
-            if (!user) {
-              alert('You need to be logged in to favorite a ride!');
-              return;
-            }
-
-            const rideRef = doc(db, `users/${user.uid}/favorites/${rideName}`);
-
-            getDoc(rideRef).then((docSnap) => {
-              if (docSnap.exists()) {
-                // If it exists, the ride is already a favorite, so remove it
-                deleteDoc(rideRef).then(() => {
-                  button.classList.remove('favorited');
-                  button.textContent = '☆ Favorite';
-                  console.log(`Ride ${rideName} removed from favorites`);
-                }).catch((error) => console.error("Error removing favorite: ", error));
-              } else {
-                // If it doesn't exist, the ride is not a favorite, so add it
-                setDoc(rideRef, {
-                  id: rideName,
-                  name: button.getAttribute('data-ride-name')
-                }).then(() => {
-                  button.classList.add('favorited');
-                  button.textContent = '★ Favorited';
-                  console.log(`Ride ${rideName} added to favorites`);
-                }).catch((error) => console.error("Error adding favorite: ", error));
+        if (ride.serviceAnimal) {
+          accText.push("<span class='filter-tag' data-filter='serviceAnimal'>Service Animal Allowed</span>");
+        }
+        if (ride.pregnant) {
+          accText.push("<span class='filter-tag' data-filter='pregnant'>Accessible to Pregnant People</span>");
+        }
+        accText.push(`<span class='filter-tag' data-filter='touch' data-number='${ride.touch}'>Touch Level: ${ride.touch}</span>`);
+        accText.push(`<span class='filter-tag' data-filter='taste' data-number='${ride.taste}'>Taste Level: ${ride.taste}</span>`);
+        accText.push(`<span class='filter-tag' data-filter='sound' data-number='${ride.sound}'>Sound Level: ${ride.sound}</span>`);
+        accText.push(`<span class='filter-tag' data-filter='smell' data-number='${ride.smell}'>Smell Level: ${ride.smell}</span>`);
+        accText.push(`<span class='filter-tag' data-filter='sight' data-number='${ride.sight}'>Sight Level: ${ride.sight}</span>`);
+        accessibilityData.innerHTML += accText.join(' ');
+      
+        // Add event delegation for favorite button
+        rideContainer.addEventListener('click', (e) => {
+          if (e.target.classList.contains('favorite-button')) {
+            const rideId = e.target.getAttribute('data-ride-id');
+            const rideName = e.target.getAttribute('data-ride-name');
+            
+            toggleFavorite(rideName, e.target);
+          }
+        });
+      
+  
+          function toggleFavorite(rideName, button) {
+            onAuthStateChanged(auth, (user) => {
+              if (!user) {
+                alert('You need to be logged in to favorite a ride!');
+                return;
               }
-            }).catch((error) => console.error("Error checking favorite: ", error));
-          });
+  
+              const rideRef = doc(db, `users/${user.uid}/favorites/${rideName}`);
+  
+              getDoc(rideRef).then((docSnap) => {
+                if (docSnap.exists()) {
+                  // If it exists, the ride is already a favorite, so remove it
+                  deleteDoc(rideRef).then(() => {
+                    button.classList.remove('favorited');
+                    button.textContent = '☆ Favorite';
+                    console.log(`Ride ${rideName} removed from favorites`);
+                  }).catch((error) => console.error("Error removing favorite: ", error));
+                } else {
+                  // If it doesn't exist, the ride is not a favorite, so add it
+                  setDoc(rideRef, {
+                    id: rideName,
+                    name: button.getAttribute('data-ride-name')
+                  }).then(() => {
+                    button.classList.add('favorited');
+                    button.textContent = '★ Favorited';
+                    console.log(`Ride ${rideName} added to favorites`);
+                  }).catch((error) => console.error("Error adding favorite: ", error));
+                }
+              }).catch((error) => console.error("Error checking favorite: ", error));
+            });
+          }
         }
-
-        // Adding event listener to favorite buttons dynamically
-          ridesContainer.addEventListener('click', (e) => {
-            if (e.target.classList.contains('favorite-button')) {
-              const rideId = e.target.getAttribute('data-ride-id');
-              const rideName = e.target.getAttribute('data-ride-name');
-              toggleFavorite(rideName, e.target);  // Call the function to toggle the favorite
-            }
-          });
+      
 
 
       // Insert accessibility tags
