@@ -492,7 +492,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             <p><u>Minimum height</u>: ${ride.minHeight}"</p>
             <p><u>Duration</u>: ${formatDuration(ride.duration)}</p>
             <p><b>Accessibility Constraints: </b><span class="accessibility-data"></span></p>
-            <div class="button-container bg-green-950 text-white hover:scale-110 hover:bg-green-950 rounded-2xl">
+            <div class="button-container  text-white hover:scale-105  rounded-2xl">
               <a href="mapNav.html?lat=${ride.lat}&lng=${ride.lng}" class="directions-button">Directions</a>
             </div>
             <button class="favorite-button" data-ride-id="${ride.id}" data-ride-name="${ride.name}">☆ Favorite</button>
