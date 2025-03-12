@@ -1,100 +1,58 @@
+/* Existing Styles */
 
-
-/* General Styling */
-body {
-    font-family: Arial, sans-serif;
-}
-
-/* Grid layout for rides (max 3 per row) */
-.rides-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Max 3 columns */
-    gap: 20px;
-    padding: 20px;
-    justify-content: center;
-}
-
-/* Card Styling */
 .ride-container {
-    background-color: #f1f1f1;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease-in-out, height 0.3s ease-in-out;
-    cursor: pointer;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    height: 250px; /* Default height */
+  background-color: #f1f1f1;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out, height 0.3s ease-in-out;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 250px; /* Default height */
 }
 
 .ride-container:hover {
-    transform: scale(1.05);
+  transform: scale(1.05);
 }
 
 /* Expanded state */
 .ride-container.expanded {
-    height: auto;
+  height: auto;
 }
 
-/* Image Container */
-.image-container {
-    width: 100%;
-    height: 180px;
-    overflow: hidden;
-}
-
-.ride-container-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-/* Ride Name */
-.ride-container-text {
-    padding: 10px;
-    text-align: center;
-    color: #000;
-    font-weight: bold;
-    font-size: 1.1rem;
-}
-
-/* Ride Details (Initially Hidden) */
+/* Hide details initially */
 .ride-details {
-    display: none;
-    text-align: left;
-    font-size: 0.9rem;
-    padding: 10px;
+  width: 100%;
+  padding: 10px;
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  text-align: center;
+  display: none;
 }
 
-/* Expand Effect */
+/* Show details when expanded */
 .ride-container.expanded .ride-details {
-    display: block;
+  display: block;
 }
 
-/* Button Container */
+
 .button-container {
-    width: 100%;
-    text-align: center;
-    margin-top: 10px;
+    float: right;
 }
 
-.directions-button {
+.button-container {
+    background-color: #22333B;
+    color: #EAE0D5;
+    border-radius: 1rem;
+    padding: 7px 20px;
     display: inline-block;
-    padding: 8px 16px;
-    margin-top: 10px;
-    background-color: #2f855a;
-    color: white;
-    border-radius: 9999px;
-    text-decoration: none;
-    font-size: 0.9rem;
-    transition: background-color 0.3s;
+    transition: transform 0.2s ease-in-out;
+    margin-top: 20px; /* Adjust this value to move it slightly above */
 }
 
-.directions-button:hover {
-    background-color: #1f6b46;
-}
-
+/* Modal styling */
 .preferences-modal {
     display: none; 
     position: fixed;
@@ -119,16 +77,13 @@ body {
 
 button {
     padding: 10px 20px;
-    background-color: #4CAF50;
+    background-color: #22333B;
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
 }
 
-button:hover {
-    background-color: #45a049;
-}
 
 .accessibility-data {
     font-weight: normal;       
@@ -182,7 +137,7 @@ input[type="radio"] {
 
 .filter-tag {
     display: inline-block;
-    background-color: #002fff;
+    background-color: #0A0908;
     color: rgb(255, 255, 255);
     padding: 5px 10px;
     margin: 5px;
@@ -193,17 +148,221 @@ input[type="radio"] {
     transition: background-color 0.3s ease;
 }
 
-
-
-/* Responsive Design */
-@media (max-width: 768px) {
-    .rides-container {
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* 2 cards per row */
-    }
+/* Modal container (overlay background) */
+.filter-modal {
+    position: fixed; /* Fix position on the screen */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 50;
+}
+  
+/* Modal content (rides list) */
+.filter-modal-content {
+    background-color: #5E503F;  /* Darker amber solid background for the content */
+    padding: 0px 20px;
+    border-radius: 10px;
+    max-height: 80vh; /* Ensure it doesn't grow too large */
+    overflow-y: auto; /* Allow scrolling for long lists */
+    position: relative;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-@media (max-width: 480px) {
-    .rides-container {
-        grid-template-columns: repeat(auto-fit, minmax(100%, 1fr)); /* 1 card per row */
-    }
+.modal-header {
+    position: sticky;  /* Make it sticky */
+    top: 0px;  /* Stick to the top */
+    background-color: #5E503F;  /* Same background as modal content */
+    padding: 15px 0;
+    z-index: 1;  /* Ensure it stays on top of the content */
+    text-align: center;
+    color: #fff;
+}
+
+/* Title inside modal header */
+.modal-header h2 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-left: 20px;  /* Add left margin for some spacing */
+}
+
+/* Close button */
+#closeFilterModalBtn {
+    position: sticky;
+    top: 10px;
+    right: 10px;
+    background-color: #0A0908;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    z-index: 1000; /* Ensure the button stays on top */
+}
+
+#closeFilterModalBtn:hover {
+    background-color: #0A0908;
+}
+
+/* Ride container inside the modal */
+.ride-modal-detail {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-bottom: 20px; /* Space between rides */
+    border-bottom: 1px solid #ccc; /* Break between rides */
+    padding-bottom: 10px;
+}
+
+/* Image container for each ride */
+.ride-modal-image-container {
+    width: 80px;
+    height: 80px;
+    margin-right: 15px;
+    flex-shrink: 0; /* Prevent image from shrinking */
+}
+
+.ride-modal-image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px; /* Slight rounding for image */
+}
+
+/* Text container for each ride */
+.ride-modal-text {
+    flex: 1;
+    color: #fefefe; /* Lighter text color for readability */
+}
+
+.ride-modal-text h3 {
+    font-size: 20px; /* Slightly larger font for the ride name */
+    font-weight: bold;
+    color: #fff; /* White text for better contrast */
+    margin-bottom: 10px;
+}
+
+.ride-modal-text p {
+    font-size: 16px; /* Larger font for descriptions */
+    color: #f2f2f2; /* Light gray text for better contrast */
+    line-height: 1.5; /* Better spacing between lines */
+}
+
+/* New Card System Styles */
+/* Container for the ride cards */
+#rideContainer {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  padding: 20px;
+}
+
+/* Individual ride card styles */
+.ride-card {
+  background-color: white;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out;
+}
+
+.ride-card .button-container a {
+  background-color: #f7c600;
+  padding: 10px 20px;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+  width: 100%;
+  transition: background-color 0.3s;
+}
+
+
+/* Image styles */
+.ride-card-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-bottom: 2px solid #ddd;
+}
+
+/* Content of the card */
+.ride-card-content {
+  padding: 15px;
+}
+
+/* Ride name styles */
+.ride-name {
+  font-size: 1.25rem;
+  color: #333;
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+/* Description and other text */
+.ride-description {
+  font-size: 0.875rem;
+  color: #555;
+  margin-bottom: 10px;
+}
+
+.ride-minHeight, .ride-duration {
+  font-size: 0.875rem;
+  color: #333;
+}
+
+.accessibility-data {
+  font-size: 0.875rem;
+  color: #333;
+  margin-top: 5px;
+}
+
+/* Button styles */
+.directions-button {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 0.875rem;
+  background-color: #3498db;
+  color: white;
+  border-radius: 5px;
+  text-align: center;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.directions-button:hover {
+  background-color: #2980b9;
+}
+
+/* Favorite button styles */
+.favorite-button {
+  background-color: #f39c12;
+  padding: 10px;
+  font-size: 1rem;
+  color: white;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.favorite-button:hover {
+  background-color: #e67e22;
+}
+
+/* Responsive Design: Adjust for smaller screens */
+@media (max-width: 1024px) {
+  #rideContainer {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  #rideContainer {
+    grid-template-columns: 1fr;
+  }
 }

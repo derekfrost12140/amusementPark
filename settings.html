@@ -4,21 +4,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Settings Page</title>
+
+    <link rel="stylesheet" href="./src/output.css">
     <link rel="stylesheet" href="settings.css">
 </head>
-<body>
-    <!-- Navigation Bar -->
-    <div class="navbar">
-        <div class="left-nav">
-            <a href="home.html" class="nav-link">Home</a> 
-            <a href="ride_list.html" class="nav-link">Rides</a>
-            <a href="mapNav.html" class="nav-link">Map</a>
-            <a href="help.html" class="nav-link">Help</a>
-        </div>
-        <div class="right-nav">
-            <a href="settings.html" class="nav-link">Settings</a> 
-        </div> 
-    </div>
+ <!-- Background blur image -->
+ <div
+ class="fixed top-0 left-0 w-full h-full bg-[#EAE0D5] bg-cover bg-center filter blur-md -z-10"
+ 
+></div>
+
+<header class="bg-[#0A0908] text-[#F1FAEE] shadow-lg">
+ <nav class="container mx-auto flex justify-between items-center py-2 px-4">
+     <div class="flex space-x-6">
+       
+       <a href="home.html" class="text-l font-semibold hover:text-[#F1FAEE] hover:scale-110 transition-transform duration-200">Home</a>
+       <a href="ride_list.html" class="text-l font-semibold hover:text-[#F1FAEE] hover:scale-110 transition-transform duration-200">Rides</a>
+       <a href="mapNav.html" class="text-l font-semibold hover:text-[#F1FAEE] hover:scale-110 transition-transform duration-200">Map</a>
+       <a href="favorites.html" class="text-l font-semibold hover:text-[#F1FAEE] hover:scale-110 transition-transform duration-200">Favorites</a>
+       <a href="help.html" class="text-l font-semibold hover:text-[#F1FAEE] hover:scale-110 transition-transform duration-200">Help</a>
+     </div>
+     <div class="flex space-x-4">
+        <!-- Filter and Sort Buttons -->
+    
+        <a href="settings.html" class="bg-[#22333B] text-[#F1FAEE] px-4 py-2 rounded-full shadow-lg hover:scale-105  hover:shadow-xl transition-transform duration-200">Settings</a>
+      </div>
+  
+ </nav>
+
+</header>
+    </header>
 
     <div class="background">
         <div class="settings-panel">
@@ -38,7 +53,7 @@
             <div class="setting">
                 <span>Show Wheelchair Accessible Rides</span>
                 <label class="switch">
-                    <input type="checkbox" id="categoryA">
+                    <input type="checkbox" id="categoryA" checked="checked">
                     <span class="slider round"></span>
                 </label>
             </div>
@@ -46,7 +61,7 @@
             <div class="setting">
                 <span>Show Service Animal Friendly Rides</span>
                 <label class="switch">
-                    <input type="checkbox" id="categoryB">
+                    <input type="checkbox" id="categoryB" checked="checked">
                     <span class="slider round"></span>
                 </label>
             </div>
@@ -54,25 +69,49 @@
             <div class="setting">
                 <span>Show Rides Accessible to Pregnant People</span>
                 <label class="switch">
-                    <input type="checkbox" id="categoryC">
+                    <input type="checkbox" id="categoryC" checked="checked">
                     <span class="slider round"></span>
                 </label>
             </div>
 
             <div class="setting">
-                <span>Show Inaccessible Rides</span>
-                <label class="switch">
-                    <input type="checkbox" id="categoryD">
-                    <span class="slider round"></span>
-                </label>
+                <span>Touch Sensory Level</span>
+                <span>
+                    <input type="range" id="sensoryTouchSlide" min="0" max="10" value="10" oninput="this.form.sensoryTouchNum.value=this.value">
+                    <input type="number" id="sensoryTouchNum" min="0" max="10" value="10" oninput="this.form.sensoryTouchSlide.value=this.value">
+                </span>
             </div>
 
             <div class="setting">
-                <span>Show Sensory Friendly Rides</span>
-                <label class="switch">
-                    <input type="checkbox" id="categoryE">
-                    <span class="slider round"></span>
-                </label>
+                <span>Taste Sensory Level</span>
+                <span>
+                    <input type="range" id="sensoryTastSlide" min="0" max="10" value="10" oninput="this.form.sensoryTasteNum.value=this.value">
+                    <input type="number" id="sensoryTasteNum" min="0" max="10" value="10" oninput="this.form.sensoryTastSlide.value=this.value">
+                </span>
+            </div>
+
+            <div class="setting">
+                <span>Sound Sensory Level</span>
+                <span>
+                    <input type="range" id="sensorySoundSlide" min="0" max="10" value="10" oninput="this.form.sensorySoundNum.value=this.value">
+                    <input type="number" id="sensorySoundNum" min="0" max="10" value="10" oninput="this.form.sensorySoundSlide.value=this.value">
+                </span>
+            </div>
+
+            <div class="setting">
+                <span>Smell Sensory Level</span>
+                <span>
+                    <input type="range" id="sensorySmellSlide" min="0" max="10" value="10" oninput="this.form.sensorySmellNum.value=this.value">
+                    <input type="number" id="sensorySmellNum" min="0" max="10" value="10" oninput="this.form.sensorySmellSlide.value=this.value">
+                </span>
+            </div>
+
+            <div class="setting">
+                <span>Sight Sensory Level</span>
+                <span>
+                    <input type="range" id="sensorySightSlide" min="0" max="10" value="10" oninput="this.form.sensorySightNum.value=this.value">
+                    <input type="number" id="sensorySightNum" min="0" max="10" value="10" oninput="this.form.sensorySightSlide.value=this.value">
+                </span>
             </div>
             
             <div class="save-button-container">
@@ -88,16 +127,74 @@
             localStorage.setItem('showCategoryA', document.getElementById('categoryA').checked);
             localStorage.setItem('showCategoryB', document.getElementById('categoryB').checked);
             localStorage.setItem('showCategoryC', document.getElementById('categoryC').checked);
-            localStorage.setItem('showCategoryD', document.getElementById('categoryD').checked);
-            localStorage.setItem('showCategoryE', document.getElementById('categoryE').checked);
+
+            // Save the slider and number input values
+            localStorage.setItem('sensoryTouchValue', document.getElementById('sensoryTouchSlide').value);
+            localStorage.setItem('sensoryTasteValue', document.getElementById('sensoryTastSlide').value);
+            localStorage.setItem('sensorySoundValue', document.getElementById('sensorySoundSlide').value);
+            localStorage.setItem('sensorySmellValue', document.getElementById('sensorySmellSlide').value);
+            localStorage.setItem('sensorySightValue', document.getElementById('sensorySightSlide').value);
+
+            // Save the number input values
+            localStorage.setItem('sensoryTouchNum', document.getElementById('sensoryTouchNum').value);
+            localStorage.setItem('sensoryTasteNum', document.getElementById('sensoryTasteNum').value);
+            localStorage.setItem('sensorySoundNum', document.getElementById('sensorySoundNum').value);
+            localStorage.setItem('sensorySmellNum', document.getElementById('sensorySmellNum').value);
+            localStorage.setItem('sensorySightNum', document.getElementById('sensorySightNum').value);
         }
         // Ensuring checkboxes are updated based on local storage on page load
         window.onload = function() {
             document.getElementById('categoryA').checked = localStorage.getItem('showCategoryA') === 'true';
             document.getElementById('categoryB').checked = localStorage.getItem('showCategoryB') === 'true';
             document.getElementById('categoryC').checked = localStorage.getItem('showCategoryC') === 'true';
-            document.getElementById('categoryD').checked = localStorage.getItem('showCategoryD') === 'true';
-            document.getElementById('categoryE').checked = localStorage.getItem('showCategoryE') === 'true';
+
+            document.getElementById('sensoryTouchSlide').value = localStorage.getItem('sensoryTouchValue') || 0;
+            document.getElementById('sensoryTastSlide').value = localStorage.getItem('sensoryTasteValue') || 0;
+            document.getElementById('sensorySoundSlide').value = localStorage.getItem('sensorySoundValue') || 0;
+            document.getElementById('sensorySmellSlide').value = localStorage.getItem('sensorySmellValue') || 0;
+            document.getElementById('sensorySightSlide').value = localStorage.getItem('sensorySightValue') || 0;
+
+            document.getElementById('sensoryTouchNum').value = localStorage.getItem('sensoryTouchNum') || 0;
+            document.getElementById('sensoryTasteNum').value = localStorage.getItem('sensoryTasteNum') || 0;
+            document.getElementById('sensorySoundNum').value = localStorage.getItem('sensorySoundNum') || 0;
+            document.getElementById('sensorySmellNum').value = localStorage.getItem('sensorySmellNum') || 0;
+            document.getElementById('sensorySightNum').value = localStorage.getItem('sensorySightNum') || 0;
+
+            // Sync sliders with number inputs (without using a function)
+            document.getElementById('sensoryTouchSlide').addEventListener('input', function() {
+                document.getElementById('sensoryTouchNum').value = this.value;
+            });
+            document.getElementById('sensoryTouchNum').addEventListener('input', function() {
+                document.getElementById('sensoryTouchSlide').value = this.value;
+            });
+
+            document.getElementById('sensoryTastSlide').addEventListener('input', function() {
+                document.getElementById('sensoryTasteNum').value = this.value;
+            });
+            document.getElementById('sensoryTasteNum').addEventListener('input', function() {
+                document.getElementById('sensoryTastSlide').value = this.value;
+            });
+
+            document.getElementById('sensorySoundSlide').addEventListener('input', function() {
+                document.getElementById('sensorySoundNum').value = this.value;
+            });
+            document.getElementById('sensorySoundNum').addEventListener('input', function() {
+                document.getElementById('sensorySoundSlide').value = this.value;
+            });
+
+            document.getElementById('sensorySmellSlide').addEventListener('input', function() {
+                document.getElementById('sensorySmellNum').value = this.value;
+            });
+            document.getElementById('sensorySmellNum').addEventListener('input', function() {
+                document.getElementById('sensorySmellSlide').value = this.value;
+            });
+
+            document.getElementById('sensorySightSlide').addEventListener('input', function() {
+                document.getElementById('sensorySightNum').value = this.value;
+            });
+            document.getElementById('sensorySightNum').addEventListener('input', function() {
+                document.getElementById('sensorySightSlide').value = this.value;
+            });
         };
  </script>
 </body>

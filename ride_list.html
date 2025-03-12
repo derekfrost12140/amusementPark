@@ -1,113 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rides List</title>
-    <link rel="stylesheet" href="./src/output.css">
-    <link rel="stylesheet" href="ride_list.css">
-    <script>
-        function toggleCard(cardId) {
-            const card = document.getElementById(cardId);
-            card.classList.toggle("expanded");
-        }
-    </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Rides List (Firestore)</title>
+  <!-- Tailwind or other CSS frameworks if needed -->
+  <link rel="stylesheet" href="./src/output.css">
+  <link rel="stylesheet" href="ride_list.css">
 </head>
-<body>
-    <div class="fixed bg-black top-0 left-0 w-full h-full bg-cover bg-center filter blur-md -z-10" style="background-image: url('movie-toy_story_4-bo_peep-buzz_lightyear-forky_toy_story-jessie_toy_story-woody_toy_story-948011.jpeg');"></div>
+<body >
+  
+  <!-- Background blur image -->
+  <div
+    class="fixed top-0 left-0 w-full h-full bg-[#EAE0D5] bg-cover bg-center filter blur-md -z-10"
     
-    <header class="bg-amber-800 bg-cover bg-opacity-50 text-white shadow-lg ">
-        <nav class="bg-amber-90 mx-auto flex justify-between items-center py-2 px-4">
-            <div class="flex space-x-6">
-                <a href="signup.html" class="text-l px-1 font-semibold hover:text-white hover:scale-125 transition-transform duration-200">Signup</a>
-                <a href="login.html" class="text-l px-1 font-semibold hover:text-white hover:scale-125 transition-transform duration-200">Sign in</a>
-                <a href="mapNav.html" class="text-l px-1 font-semibold hover:text-white hover:scale-125 transition-transform duration-200">Map</a>
-                <a href="help.html" class="text-l px-1 font-semibold hover:text-white hover:scale-125 transition-transform duration-200">Help</a>
-            </div>
-            <div class="flex space-x-4">  
-                <a href="#" class="bg-amber-950 text-white px-4 py-3 rounded-full shadow-lg hover:bg-white hover:text-black transition-transform duration-200" id="filterBtn">Filter</a> 
-                <a href="#" class="bg-amber-950 text-white px-4 py-3 rounded-full shadow-lg hover:bg-white hover:text-black transition-transform duration-200" id="sortBtn">Sort</a> 
-                <a href="settings.html" class="bg-amber-950 text-white px-4 py-3 rounded-full shadow-lg hover:bg-white hover:text-black transition-transform duration-200">Settings</a>
-            </div>
-        </nav>
-    </header>
-    
-    <div class="container mx-auto px-4">
-        <div class="rides-container space-x-6">
-            <!-- Ride Cards with Accessibility Data-->
-            <div id="ride1" class="ride-container" data-wheelchair="false" data-serviceAnimal="true" data-pregnant="false" data-inaccessible="true" data-sensory="false">
-                <div class="image-container" onclick="toggleCard('ride1')">
-                    <img src="rideImages/Aquaman.png" alt="Aquaman Power Wave" class="ride-container-image">
-                </div>
-                <div class="ride-container-text">
-                    <h2>AQUAMAN: Power Wave</h2>
-                </div>
-                <div class="ride-details">
-                    <p>Experience the thrill of waves at 63 mph!</p>
-                    <p><u>Minimum height</u>: 48"</p>
-                    <p><u>Duration</u>: 1 min 20 sec</p>
-                    <p class="font-bold mt-2">Accessibility:</p>
-                    <ul>
-                        <li>🚫 Inaccessible for wheelchair users</li>
-                        <li>✅ Service animals allowed</li>
-                        <li>🚫 Not suitable for pregnant individuals</li>
-                        <li>🚫 Not sensory-friendly</li>
-                    </ul>
-                    <div class="button-container">
-                        <a href="mapNav.html?lat=32.75694774660049&lng=-97.06858634954958" class="directions-button">Get Directions</a>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Batman Ride -->
-            <div id="ride2" class="ride-container" data-wheelchair="true" data-serviceAnimal="false" data-pregnant="false" data-inaccessible="true" data-sensory="false">
-                <div class="image-container" onclick="toggleCard('ride2')">
-                    <img src="rideImages/Batman.jpg" alt="Batman The Ride" class="ride-container-image">
-                </div>
-                <div class="ride-container-text">
-                    <h2>BATMAN™ The Ride</h2>
-                </div>
-                <div class="ride-details">
-                    <p>High-speed 50-mph GOTHAM adventure!</p>
-                    <p><u>Minimum height</u>: 54"</p>
-                    <p><u>Duration</u>: 2 min 15 sec</p>
-                    <p class="font-bold mt-2">Accessibility:</p>
-                    <ul>
-                        <li>✅ Wheelchair accessible</li>
-                        <li>🚫 No service animals allowed</li>
-                        <li>🚫 Not suitable for pregnant individuals</li>
-                        <li>🚫 Not sensory-friendly</li>
-                    </ul>
-                    <div class="button-container">
-                        <a href="mapNav.html?lat=32.75867956518985&lng=-97.0665944558818" class="directions-button">Get Directions</a>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Batwing Ride -->
-            <div id="ride3" class="ride-container" data-wheelchair="true" data-serviceAnimal="true" data-pregnant="false" data-inaccessible="true" data-sensory="false">
-                <div class="image-container" onclick="toggleCard('ride3')">
-                    <img src="rideImages/Batwing.png" alt="Batwing" class="ride-container-image">
-                </div>
-                <div class="ride-container-text">
-                    <h2>BATWING</h2>
-                </div>
-                <div class="ride-details">
-                    <p>Perfect for young batboys and batgirls!</p>
-                    <p><u>Minimum height</u>: 48"</p>
-                    <p><u>Duration</u>: 1 min 45 sec</p>
-                    <p class="font-bold mt-2">Accessibility:</p>
-                    <ul>
-                        <li>✅ Wheelchair accessible</li>
-                        <li>✅ Service animals allowed</li>
-                    </ul>
-                    <div class="button-container">
-                        <a href="mapNav.html?lat=32.757562316535875&lng=-97.067054891455" class="directions-button">Get Directions</a>
-                    </div>
-                </div>
-            </div>
+  ></div>
+
+  <header class="bg-[#0A0908] text-[#F1FAEE] shadow-lg">
+    <nav class="container mx-auto flex justify-between items-center py-2 px-4">
+        <div class="flex space-x-6">
+          <a href="login.html" class="text-l font-semibold hover:text-[#F1FAEE] hover:scale-110 transition-transform duration-200">Sign in</a>
+          <a href="home.html" class="text-l font-semibold hover:text-[#F1FAEE] hover:scale-110 transition-transform duration-200">Home</a>
+          <a href="ride_list.html" class="text-l font-semibold hover:text-[#F1FAEE] hover:scale-110 transition-transform duration-200">Rides</a>
+          <a href="mapNav.html" class="text-l font-semibold hover:text-[#F1FAEE] hover:scale-110 transition-transform duration-200">Map</a>
+          <a href="favorites.html" class="text-l font-semibold hover:text-[#F1FAEE] hover:scale-110 transition-transform duration-200">Favorites</a>
+          <a href="help.html" class="text-l font-semibold hover:text-[#F1FAEE] hover:scale-110 transition-transform duration-200">Help</a>
         </div>
-    </div>
-    <script src="ride_list.js"></script>
+      <div class="flex space-x-4">
+        <!-- Filter and Sort Buttons -->
+        <a href="#" class="bg-[#22333B] text-[#F1FAEE] px-4 py-2 rounded-full shadow-lg hover:scale-105  hover:shadow-xl transition-transform duration-200" id="filterBtn">Filter</a>
+        <a href="#" class="bg-[#22333B] text-[#F1FAEE] px-4 py-2 rounded-full shadow-lg hover:scale-105  hover:shadow-xl transition-transform duration-200" id="sortBtn">Sort</a>
+        <a href="settings.html" class="bg-[#22333B] text-[#F1FAEE] px-4 py-2 rounded-full shadow-lg hover:scale-105  hover:shadow-xl transition-transform duration-200">Settings</a>
+      </div>
+    </nav>
+  </header>
+
+  <div class="blank"></div>
+
+  <!-- Container where rides will be injected dynamically -->
+  <div class="rides-container"></div>
+
+  <!-- Firebase SDK (Compat version) -->
+    <!-- Firebase SDK (Compat version) -->
+    <script src="https://www.gstatic.com/firebasejs/9.1.3/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.1.3/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.1.3/firebase-auth-compat.js"></script>
+  
+    <!-- Your JS File (Must be after Firebase is loaded) -->
+    <script type="module" src="ride_list.js"></script>
+  
 </body>
 </html>

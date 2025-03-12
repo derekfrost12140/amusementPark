@@ -1,13 +1,19 @@
 {
   "devDependencies": {
-    "husky": "^4.3.8"
+    "husky": "^4.3.8",
+    "tailwindcss": "^4.0.13"
   },
   "dependencies": {
     "@tailwindcss/cli": "^4.0.5",
     "@tailwindcss/vite": "^4.0.5",
-    "tailwindcss": "^4.0.5"
+    "cors": "^2.8.5"
   },
   "editor.quickSuggestions": {
     "strings": true
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "tailwindcss -i ./src/index.css -o ./src/output.css --minify",
+    "watch": "tailwindcss -i ./src/index.css -o ./src/output.css --watch"
   }
 }

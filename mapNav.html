@@ -3,38 +3,152 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="mapstyles.css">
-    <title>Map</title>
+    <title>Theme Park Map</title>
+    <link rel="stylesheet" href="./src/output.css">
+    
     <style>
-        #map {
-            height: 500px;
+        /* Fullscreen Map */
+        .map-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
             width: 100%;
+            height: calc(100vh - 60px); /* Fullscreen minus navbar */
+            padding: 10px;
         }
+
+        /* Map container with border */
+        .map-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            background-color: #e5e5e5;
+            border: .5px solid 5E503F;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Map styling */
+        #map {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Floating Directions Panel - Draggable & Resizable */
         #directionsPanel {
-            margin-top: 20px;
-            font-family: Arial, sans-serif;
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            width: 300px; /* Increased default width */
+            height: 200px; /* Increased default height */
+            min-width: 250px;
+            min-height: 150px;
+            max-width: 600px; /* Prevents excessive width */
+            max-height: 600px; /* Prevents excessive height */
+            background: rgba(255, 255, 255, 0.8);
+            color: black;
+            padding: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            font-size: 14px;
+            font-weight: 600;
+            overflow: auto; /* Enables scrolling if content exceeds max height */
+            border: 0.5px solid black;
+            cursor: move; /* Shows draggable cursor */
+            resize: both; /* Enables resizing */
+            display: flex;
+            flex-direction: column;
         }
+
+       
     </style>
+
+    <script>
+        // Function to make the panel draggable
+        function makeDraggable(element, header) {
+            let posX = 0, posY = 0, mouseX = 0, mouseY = 0;
+
+            header.onmousedown = function(event) {
+                event.preventDefault();
+                mouseX = event.clientX;
+                mouseY = event.clientY;
+
+                document.onmousemove = function(e) {
+                    e.preventDefault();
+                    posX = mouseX - e.clientX;
+                    posY = mouseY - e.clientY;
+                    mouseX = e.clientX;
+                    mouseY = e.clientY;
+
+                    element.style.top = (element.offsetTop - posY) + "px";
+                    element.style.left = (element.offsetLeft - posX) + "px";
+                };
+
+                document.onmouseup = function() {
+                    document.onmousemove = null;
+                    document.onmouseup = null;
+                };
+            };
+        }
+
+        // Auto-expand height based on content
+        function autoExpand(panel) {
+            panel.style.height = "auto";
+            panel.style.height = panel.scrollHeight + "px";
+        }
+
+        // Apply functions when the document is loaded
+        document.addEventListener("DOMContentLoaded", function() {
+            const panel = document.getElementById("directionsPanel");
+            const header = document.getElementById("directionsHeader");
+
+            makeDraggable(panel, header);
+            panel.addEventListener("input", function() {
+                autoExpand(panel);
+            });
+        });
+    </script>
 </head>
-<body>
-    <div class="navbar">
-        <div class="left-nav">
-            <a href="home.html" class="nav-link">Home</a> 
-            <a href="ride_list.html" class="nav-link">Rides</a>
-            
-            <a href="help.html" class="nav-link">Help</a>
+
+<body class="bg-[#EAE0D5] relative">
+    
+    <header class="bg-[#0A0908] text-[#F1FAEE] shadow-lg">
+        <nav class="container mx-auto flex justify-between items-center py-2 px-4">
+            <div class="flex space-x-6">
+                <a href="login.html" class="text-l font-semibold hover:text-[#F1FAEE] hover:scale-110 transition-transform duration-200">Sign in</a>
+                <a href="home.html" class="text-l font-semibold hover:text-[#F1FAEE] hover:scale-120 transition-transform duration-200">Home</a>
+                <a href="ride_list.html" class="text-l font-semibold hover:text-[#F1FAEE] hover:scale-120 transition-transform duration-200">Rides</a>
+                <a href="mapNav.html" class="text-l font-semibold hover:text-[#F1FAEE] hover:scale-120 transition-transform duration-200">Map</a>
+                <a href="favorites.html" class="text-l font-semibold hover:text-[#F1FAEE] hover:scale-110 transition-transform duration-200">Favorites</a>
+                <a href="help.html" class="text-l font-semibold hover:text-[#F1FAEE] hover:scale-110 transition-transform duration-200">Help</a>
+            </div>
+            <a href="settings.html" class="bg-[#22333B] text-[#F1FAEE] px-4 py-2 rounded-full shadow-lg  hover:scale-105  hover:shadow-xl transition-transform duration-200">
+                Settings
+            </a>
+        </nav>
+    </header>
+
+    <!-- Fullscreen Map -->
+    <main class="relative w-full h-[calc(100vh-60px)] mt-[60px]">
+        <div class="map-wrapper">
+            <div class="map-container">
+                <div id="map"></div>
+
+                <!-- Floating Directions Panel (Draggable & Resizable) -->
+                <div id="directionsPanel">
+                    <div id="directionsHeader">Directions</div>
+                    <p>Follow the directions to your destination.</p>
+                </div>
+            </div>
         </div>
-        <div class="right-nav">
-            <a href="settings.html" class="nav-link">Settings</a> 
-        </div> 
-    </div>
-<h3>Rides Map</h3>
-<div id="map"></div>
-<div class="brown-window">
-    <div id="directionsPanel"><strong>Directions:</strong> Follow the steps below to navigate.</div>
-</div>
-<script>
-// Global variables to hold map and markers
+    </main>
+    
+    
+    
+</main>
+
+
+    <script>
 var map;
 var markers = [];
 var infoWindow;
@@ -114,7 +228,10 @@ function addMarker({ lat, lng, title, categories }) {
 
     // Add a click event to show marker info
     google.maps.event.addListener(marker, 'click', function () {
-        infoWindow.setContent(title + '<br><button onclick="navigateToMarker(' + lat + ', ' + lng + ')">Navigate Here</button>');
+        infoWindow.setContent(
+    title + 
+    '<br><button onclick="navigateToMarker(' + lat + ', ' + lng + ')" style="border: 2px solid #007bff; background-color: #007bff; color: [#F1FAEE]; padding: 5px 10px; border-radius: 5px; cursor: pointer;">Navigate Here</button>'
+);
         infoWindow.open(map, marker);
     });
 }
@@ -127,7 +244,10 @@ function navigateToMarker(lat, lng) {
 
 // Function to calculate and display the route
 function calculateAndDisplayRoute(destination) {
+    
     var start = { lat: 32.7561025211987, lng: -97.07243375722175 };
+    directionsRenderer.setDirections({ routes: [] });
+
 
     directionsService.route(
         {
@@ -184,7 +304,7 @@ window.addEventListener('storage', function (event) {
 });
 
 // Load the map when the page is ready
-window.onload = initMap;
+//window.onload = initMap;
 
 </script>
 

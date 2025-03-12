@@ -2,8 +2,10 @@
 body, html {
     margin: 0;
     padding: 0;
-    font-family: Arial, sans-serif;
+    font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     box-sizing: border-box;
+    overflow-y: hidden; 
 }
 
 body::before {
@@ -11,8 +13,7 @@ body::before {
     position: fixed;
     top: 0;
     left: 0;
-    background-color: #6CB11B;
-    background-image: url('back.png'); 
+ 
     background-size: cover;
     background-position: center;
     height: 100vh;
@@ -21,49 +22,67 @@ body::before {
     filter: blur(2px);
 }
 
-/* Navbar styling */
-.navbar {
-    background-color: #a0674f;
-    padding: 10px 30px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: fixed;
-    width: 100%;
-}
-
-.left-nav,
-.right-nav {
-    display: flex;
-}
-
-.left-nav .nav-link {
-    margin: 0 15px; 
-    color: rgb(249, 237, 237);
-    padding: 15px 10px;
-    text-decoration: none; 
-    font-size: 18px;
-    font-weight: bold; 
-    align-self: center;
-}
-
-.right-nav .nav-link {
-    margin: 0 15px; 
+/* Header */
+.header {
+    background-color: #5E503F; /* amber-800 */
     color: white;
-    padding: 15px 75px 10px 10px;
-    text-decoration: none; 
-    font-size: 18px;
-    font-weight: bold; 
-    align-self: center;
+    border-radius: 12px;
 }
 
-.preference:hover{
-    background-color: #9a6900;
-    color: rgb(250, 250, 250);
+/* Navbar container */
+.nav {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 1.125rem 1.125rem;
+    max-width: 1500px;
+    margin: 0 auto;
+}
+
+/* Navbar links */
+.nav-links {
+    display: flex;
+    gap: 24px;
+    margin-left: 0;
+}
+
+/* Individual link */
+.nav-link {
+    font-size: 1.125rem;
+    padding: 0.25rem 0.25rem;
+    font-weight: 648;
+    text-decoration: none;
+    color: white;
+    transition: transform 0.2s, color 0.2s;
 }
 
 .nav-link:hover {
-    color:rgb(0, 0, 0);
+    color: white;
+    transform: scale(1.5);
+}
+
+/* Settings button container */
+.settings-btn-container {
+    display: flex;
+    margin-left: auto;
+}
+
+/* Settings button */
+.settings-btn {
+    background-color: #461901; /* amber-950 */
+    color: white;
+    padding: 0.75rem 1.25rem;
+    border-radius: 9999px;
+    transition: transform 0.2s, background-color 0.2s, color 0.2s, box-shadow 0.2s;
+    text-decoration: none;
+    font-size: 1rem;
+}
+
+.settings-btn:hover {
+    transform: scale(1);
+    background-color: white;
+    color: black;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
 }
 
 
@@ -78,12 +97,12 @@ body::before {
 
 /* Settings panel styling */
 .settings-panel {
-    margin-top: 80px;
-    background-color: rgba(160, 103, 79, 0.95); 
+    margin-top: -96px;
+    background-color: #5E503F; 
     padding: 30px;
     border-radius: 30px;
     max-width: 1000px;
-    transform: skewY(-2.5deg);
+   
     height: 75%;
     width: 100%;
     color: white;
@@ -94,7 +113,7 @@ body::before {
     margin-top: 0;
     font-size: 48px;
     text-align: center;
-    transform: skewY(2.5deg);
+ 
 }
 
 /* Individual setting rows */
@@ -103,7 +122,7 @@ body::before {
     justify-content: space-between;
     align-items: center;
     margin-top: 20px;
-    transform: skewY(2.5deg);
+  
 }
 
 .setting span {
@@ -159,12 +178,12 @@ input:checked + .slider:before {
     position: absolute;
     bottom: 30px;
     right: 30px;
-    transform: skewY(2.5deg);
+ 
 }
 
 .save-button {
     display: inline-block;
-    background-color: #4CAF50   ; 
+    background-color: #22333B  ; 
     color: rgb(255, 255, 255); 
     padding: 10px 20px; 
     margin-right: 10px; 
@@ -174,7 +193,7 @@ input:checked + .slider:before {
 }
 
 .save-button:hover{
-    background-color: #1f7122;
+    background-color: #0A0908;
 }
 
 .close-button {
@@ -198,7 +217,7 @@ input:checked + .slider:before {
     font-size: 18px;
     color: white;
     line-height: 1.6;
-    transform: skewY(2.5deg);
+ 
 }
 
 .settings-description a {

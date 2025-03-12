@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Favorites</title>
+  <link rel="stylesheet" href="./src/output.css">
+  <link rel="stylesheet" href="ride_list.css">
+  <style>
+    .ride-card {
+      position: relative;
+      width: 100%;
+      max-width: 250px;
+      height: 350px;
+      overflow: hidden;
+      border-radius: 15px;
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .ride-card:hover {
+      transform: scale(1.05);
+    }
+
+    .ride-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 15px;
+    }
+
+    .ride-name {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      right: 10px;
+      font-size: 1.2em;
+      font-weight: bold;
+      color: white;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+      z-index: 2;
+    }
+
+    .ride-details {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      color: white;
+      padding: 10px;
+      transform: translateY(100%);
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .ride-card:hover .ride-details {
+      transform: translateY(0);
+    }
+
+    .remove-favorite {
+      background-color: red;
+      color: white;
+      padding: 5px 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .remove-favorite:hover {
+      background-color: darkred;
+    }
+
+    /* Grid setup for 3 cards per row */
+    #favorite-rides {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr); /* Creates 3 equal-width columns */
+      gap: 16px; /* Space between cards */
+      padding: 20px;
+    }
+
+    /* Responsiveness */
+    @media (max-width: 1024px) {
+      #favorite-rides {
+        grid-template-columns: repeat(2, 1fr); /* 2 cards per row on medium screens */
+      }
+    }
+
+    @media (max-width: 640px) {
+      #favorite-rides {
+        grid-template-columns: 1fr; /* 1 card per row on small screens */
+      }
+    }
+  </style>
+</head>
+<body >
+  <!-- Background blur image -->
+  <div
+    class="fixed top-0 left-0 w-full h-full bg-[#EAE0D5] bg-cover bg-center filter blur-md -z-10"
+    
+  ></div>
+  
+  <header class="bg-[#0A0908] text-[#F1FAEE] shadow-lg">
+    <nav class="container mx-auto flex justify-between items-center py-2 px-4">
+        <div class="flex space-x-6">
+          <a href="login.html" class="text-l font-semibold hover:text-[#F1FAEE] hover:scale-110 transition-transform duration-200">Sign in</a>
+          <a href="home.html" class="text-l font-semibold hover:text-[#F1FAEE] hover:scale-110 transition-transform duration-200">Home</a>
+          <a href="ride_list.html" class="text-l font-semibold hover:text-[#F1FAEE] hover:scale-110 transition-transform duration-200">Rides</a>
+          <a href="mapNav.html" class="text-l font-semibold hover:text-[#F1FAEE] hover:scale-110 transition-transform duration-200">Map</a>
+          <a href="help.html" class="text-l font-semibold hover:text-[#F1FAEE] hover:scale-110 transition-transform duration-200">Help</a>
+        </div>
+      <div class="flex space-x-4">
+        <!-- Filter and Sort Buttons -->
+    
+        <a href="settings.html" class="bg-[#22333B] text-[#F1FAEE] px-4 py-2 rounded-full shadow-lg hover:scale-105  hover:shadow-xl transition-transform duration-200">Settings</a>
+      </div>
+    </nav>
+  </header>
+
+  <div class="container mx-auto mt-6">
+    <div id="favorite-rides">
+      <p class="text-black text-center">Loading your favorite rides...</p>
+    </div>
+  </div>
+
+  <!-- Include Firebase SDK as a module -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+    import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+    import { getFirestore, collection, getDocs, doc, deleteDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+    import { favoriteRides } from "./favorites.js";
+
+    // Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyBn7xE-jaEuixzyDROnbHrQo6-YtOR5LaU",
+      authDomain: "amusement-park-4039d.firebaseapp.com",
+      projectId: "amusement-park-4039d",
+      storageBucket: "amusement-park-4039d.firebasestorage.app",
+      messagingSenderId: "625618396056",
+      appId: "1:625618396056:web:ff2907be3a1958ed9041ed",
+      measurementId: "G-6QHBHT0PPE"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+    const auth = getAuth(app);
+
+    // Function to fetch the user's favorite rides from Firestore
+    async function fetchFavoriteRides(userId) {
+      const favoritesRef = collection(db, 'users', userId, 'favorites');
+      const querySnapshot = await getDocs(favoritesRef);
+      const favoriteNames = [];
+      querySnapshot.forEach(doc => {
+        favoriteNames.push(doc.data().name); // Assuming each document has a 'name' field
+      });
+      return favoriteNames;
+    }
+
+    // Listen for user authentication state change
+    onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        const userId = user.uid;
+        const favoriteNames = await fetchFavoriteRides(userId);
+        
+        // Filter rides based on the user's favorites
+        const filteredRides = favoriteRides.filter(ride => favoriteNames.includes(ride.name));
+
+        if (filteredRides.length === 0) {
+          document.getElementById("favorite-rides").innerHTML = "<p class='text-white text-center text-lg'>You have no favorite rides.</p>";
+        } else {
+          displayFavoriteRides(filteredRides);
+        }
+      } else {
+        console.log("No user signed in.");
+      }
+    });
+
+    // Function to display the filtered favorite rides
+    function displayFavoriteRides(rides) {
+      const favoriteRidesContainer = document.getElementById("favorite-rides");
+      favoriteRidesContainer.innerHTML = ""; // Clear any previous content
+
+      rides.forEach((rideData) => {
+        const rideElement = document.createElement("div");
+        rideElement.className = "ride-card shadow-lg";
+        rideElement.innerHTML = `
+          <img src="${rideData.imageUrl || 'default-image.jpg'}" alt="Ride Image">
+          <div class="ride-name">${rideData.name}</div>
+          <div class="ride-details">
+            <p>${rideData.description || 'No description available.'}</p>
+            <p><b>Min Height:</b> ${rideData.minHeight || 'N/A'}"</p>
+            <p><b>Duration:</b> ${rideData.duration ? formatDuration(rideData.duration) : 'N/A'}</p>
+            <p><b>Accessibility:</b> ${rideData.wheelchair ? 'Wheelchair Accessible' : 'Not Accessible'}</p>
+            <div class="button-container text-center mt-2">
+              <a href="mapNav.html?lat=${rideData.lat}&lng=${rideData.lng}" class="bg-blue-500 text-white px-3 py-1 rounded">Directions</a>
+            </div>
+            <button class="remove-favorite mt-2" data-name="${rideData.name}">Remove</button>
+          </div>
+        `;
+        favoriteRidesContainer.appendChild(rideElement);
+      });
+
+      // Add event listeners to the remove buttons
+      const removeButtons = document.querySelectorAll('.remove-favorite');
+      removeButtons.forEach(button => {
+        button.addEventListener('click', async (event) => {
+          const rideName = event.target.getAttribute('data-name');
+          await removeFavoriteRide(rideName);
+          event.target.parentElement.parentElement.remove(); // Remove the ride card from the DOM
+        });
+      });
+    }
+
+    // Function to remove a favorite ride from Firestore
+    async function removeFavoriteRide(rideName) {
+      const user = auth.currentUser;
+      if (user) {
+        const userId = user.uid;
+        const favoritesRef = collection(db, 'users', userId, 'favorites');
+        const querySnapshot = await getDocs(favoritesRef);
+        querySnapshot.forEach(async (doc) => {
+          if (doc.data().name === rideName) {
+            await deleteDoc(doc.ref); // Delete the document from Firestore
+          }
+        });
+      }
+    }
+
+    // Function to format duration
+    function formatDuration(seconds) {
+      const m = Math.floor(seconds / 60);
+      const s = seconds % 60;
+      return `${m}m ${s}s`;
+    }
+  </script>
+</body>
+</html>
