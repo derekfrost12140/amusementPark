@@ -658,7 +658,7 @@ document.addEventListener('DOMContentLoaded', async () => {
               <p><b>Description: </b>${ride.description || "No description available."}</p>
               <p><b>Min Height: </b>${ride.minHeight || "N/A"}"</p>
               <p><b>Duration: </b>${formatDuration(ride.duration) || "N/A"}</p>
-              <p><b>Accessibility: </b>${ride.wheelchair ? 'Wheelchair Accessible' : 'Not Accessible'}</p>
+              <p><b>Accessibility Constraints: </b><span class="accessibility-data text-sm"></span></p>
               <div class="button-container">
                   <a href="mapNav.html?lat=${ride.lat}&lng=${ride.lng}" class="directions-button">Directions</a>
               </div>
@@ -667,7 +667,27 @@ document.addEventListener('DOMContentLoaded', async () => {
               </button>
           </div>
       `;
+      
+      const accessibilityData = rideContainer.querySelector('.accessibility-data');
+      let accText = [];
+      if (ride.wheelchair) {
+        accText.push("<span class='filter-tag' data-filter='wheelchair'>Wheelchair Accessible</span>");
+      }
+      if (ride.serviceAnimal) {
+        accText.push("<span class='filter-tag' data-filter='serviceAnimal'>Service Animal Allowed</span>");
+      }
+      if (ride.pregnant) {
+        accText.push("<span class='filter-tag' data-filter='pregnant'>Accessible to Pregnant People</span>");
+      }
+      accText.push(`<span class='filter-tag' data-filter='touch' data-number='${ride.touch}'>Touch Level: ${ride.touch}</span>`);
+      accText.push(`<span class='filter-tag' data-filter='taste' data-number='${ride.taste}'>Taste Level: ${ride.taste}</span>`);
+      accText.push(`<span class='filter-tag' data-filter='sound' data-number='${ride.sound}'>Sound Level: ${ride.sound}</span>`);
+      accText.push(`<span class='filter-tag' data-filter='smell' data-number='${ride.smell}'>Smell Level: ${ride.smell}</span>`);
+      accText.push(`<span class='filter-tag' data-filter='sight' data-number='${ride.sight}'>Sight Level: ${ride.sight}</span>`);
+      accessibilityData.innerHTML = accText.join('');
   
+      ridesContainer.appendChild(rideContainer);
+
       // ✅ Hover event to expand and show details
       rideContainer.addEventListener("mouseenter", () => {
           rideContainer.classList.add("expanded");
@@ -684,16 +704,6 @@ document.addEventListener('DOMContentLoaded', async () => {
   
       ridesContainer.appendChild(rideContainer);
   }
-  
-  rideContainer.addEventListener('click', (e) => {
-    if (e.target.classList.contains('favorite-button')) {
-      const rideId = e.target.getAttribute('data-ride-id');
-      const rideName = e.target.getAttribute('data-ride-name');
-      
-      toggleFavorite(rideName, e.target);
-    }
-  });
-
 
     function toggleFavorite(rideName, button) {
       onAuthStateChanged(auth, (user) => {
@@ -920,31 +930,6 @@ document.addEventListener('DOMContentLoaded', async () => {
       rideContainers.forEach(ride => ridesContainer.appendChild(ride));
       sortModal.style.display = 'none';
     });
-  
-    /*********************************
-     * 7. Tag Click -> Update Filters
-     *********************************/
-    /*document.addEventListener('click', (event) => {
-      if (event.target && event.target.classList.contains('filter-tag')) {
-        const filterType = event.target.getAttribute('data-filter');
-        const filterValue = event.target.getAttribute('data-number');
-  
-        const filterElement =
-          document.getElementById(`${filterType}Checkbox`) ||
-          document.getElementById(`${filterType}Num`);
-  
-        // If it's a checkbox
-        if (filterElement && filterElement.type === 'checkbox') {
-          filterElement.checked = !filterElement.checked;
-        }
-        // If it's a number input
-        else if (filterElement && filterElement.type === 'number') {
-          filterElement.value = filterValue;
-          document.getElementById(`${filterType}Slide`).value = filterValue;
-        }
-        applyFilters();
-      }
-    });*/
 
     /*********************************
      * 8. Tag Click -> Modal Similar Rides
@@ -999,7 +984,8 @@ document.addEventListener('DOMContentLoaded', async () => {
       const filteredRides = [];
 
       if (typeof filterValue == 'string') {
-        modalTitle.textContent = `Rides with ${filter} \u2264 ${filterValue}`
+        const filterName = filter[0].toUpperCase() + filter.slice(1);
+        modalTitle.textContent = `Rides with ${filterName} Level \u2264 ${filterValue}`
       }
       else if (filter == 'wheelchair') {
         modalTitle.textContent = `Rides Wheelchair Accessible`
