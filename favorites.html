@@ -155,22 +155,51 @@
       return favoriteNames;
     }
 
-    // Listen for user authentication state change
+    // Function to display a message if no favorites are found
+    function displayNoFavoritesMessage() {
+      const favoriteRidesContainer = document.getElementById("favorite-rides");
+      favoriteRidesContainer.innerHTML = `
+        <div class="flex flex-col justify-center items-center min-h-screen text-center w-full">
+          <p class="text-gray-800 text-4xl font-extrabold">No Favorite Rides Yet</p>
+          <p class="text-gray-600 text-lg mt-2 max-w-md">
+            Your adventure starts here! Add your favorite rides to keep track of them.
+          </p>
+          <a href="ride_list.html" class="mt-6 px-6 py-3 bg-black text-white text-lg font-medium rounded-full shadow-lg hover:bg-red-700 transition-all duration-300">
+            Explore Rides
+          </a>
+        </div>
+      `;
+    }
+
+
+
+    
     onAuthStateChanged(auth, async (user) => {
       if (user) {
         const userId = user.uid;
         const favoriteNames = await fetchFavoriteRides(userId);
-        
+
+        console.log("Favorite ride names:", favoriteNames); // Debugging output
+
+        if (!favoriteNames || favoriteNames.length === 0) {
+          console.log("No favorites found."); // Debugging output
+          displayNoFavoritesMessage();
+          return;
+        }
+
         // Filter rides based on the user's favorites
-        const filteredRides = favoriteRides.filter(ride => favoriteNames.includes(ride.name));
+        const filteredRides = favoriteRides?.filter(ride => favoriteNames.includes(ride.name)) || [];
+
+        console.log("Filtered rides:", filteredRides); // Debugging output
 
         if (filteredRides.length === 0) {
-          document.getElementById("favorite-rides").innerHTML = "<p class='text-white text-center text-lg'>You have no favorite rides.</p>";
+          displayNoFavoritesMessage();
         } else {
           displayFavoriteRides(filteredRides);
         }
       } else {
         console.log("No user signed in.");
+        displayNoFavoritesMessage();
       }
     });
 
