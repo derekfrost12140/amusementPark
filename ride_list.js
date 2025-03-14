@@ -689,7 +689,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       ridesContainer.appendChild(rideContainer);
 
       // ✅ Hover event to expand and show details
-      rideContainer.addEventListener("mouseenter", () => {
+      rideContainer.addEventListener("click", () => {
           rideContainer.classList.add("expanded");
       });
   
