@@ -3,54 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Settings Page</title>
-    <link rel="stylesheet" href="help.css">
+    <title>Help Page</title>
+    <link rel="stylesheet" href="./src/output.css">
 </head>
-<body >
-    <!-- Background blur image -->
-    <div
-      class="fixed top-0 left-0 w-full h-full bg-[#EAE0D5] bg-cover bg-center filter blur-md -z-10"
-      
-    ></div>
-    <!-- Background Blur Image -->
-
-
+<body>
+    <div class="fixed top-0 left-0 w-full h-full bg-[#EAE0D5] bg-cover bg-center filter blur-md -z-10"></div>
+    
     <!-- Navigation Bar -->
     <header class="bg-[#0A0908] text-[#F1FAEE] shadow-lg">
         <nav class="container mx-auto flex justify-between items-center py-2 px-4">
             <div class="flex space-x-6">
-             
-              <a href="home.html" class="text-l font-semibold hover:text-[#F1FAEE] hover:scale-110 transition-transform duration-200">Home</a>
-              <a href="ride_list.html" class="text-l font-semibold hover:text-[#F1FAEE] hover:scale-110 transition-transform duration-200">Rides</a>
-              <a href="mapNav.html" class="text-l font-semibold hover:text-[#F1FAEE] hover:scale-110 transition-transform duration-200">Map</a>
-              <a href="favorites.html" class="text-l font-semibold hover:text-[#F1FAEE] hover:scale-110 transition-transform duration-200">Favorites</a>
-              
+                <a href="login.html" class="text-l font-semibold hover:text-[#F1FAEE] hover:scale-110 transition-transform duration-200">Sign in</a>
+                <a href="home.html" class="text-l font-semibold hover:text-[#F1FAEE] hover:scale-110 transition-transform duration-200">Home</a>
+                <a href="ride_list.html" class="text-l font-semibold hover:text-[#F1FAEE] hover:scale-110 transition-transform duration-200">Rides</a>
+                <a href="mapNav.html" class="text-l font-semibold hover:text-[#F1FAEE] hover:scale-110 transition-transform duration-200">Map</a>
+                <a href="favorites.html" class="text-l font-semibold hover:text-[#F1FAEE] hover:scale-110 transition-transform duration-200">Favorites</a>
+                <a href="help.html" class="text-l font-semibold hover:text-[#F1FAEE] hover:scale-110 transition-transform duration-200">Help</a>
             </div>
-          <div class="flex space-x-4">
-            <!-- Filter and Sort Buttons -->
-            
-           
-            <a href="settings.html" class="bg-[#22333B] text-[#F1FAEE] px-4 py-2 rounded-full shadow-lg hover:scale-105  hover:shadow-xl transition-transform duration-200">Settings</a>
-          </div>
         </nav>
-      </header>
-
-    <!-- Centered Help Section with Top Margin -->
-    <div class="flex justify-center items-center mt-8">
-        <div class="text-white max-w-xl w-full p-8 md:p-10 text-center">
-            <h2 class="text-3xl mx-40 font-bold text-[#0A0908] mb-4">Help</h2>
-            <p class="text-lg mx-7 text-gray-700 leading-relaxed">
-                Welcome to <span class="font-semibold text-[#0A0908]">Amusement Park Navigator</span>.
-                This application was created to help navigate <span class="font-semibold">Six Flags Over Texas.</span>
-                <br><br>
-                To use this app, explore the <span class="text-[#0A0908] font-semibold">Ride List Page</span> or the
-                <span class="text-[#0A0908] font-semibold">Settings & Map</span> pages. On the Ride List page, you can apply
-                <span class="text-[#0A0908] font-semibold">Sort & Filter</span> options to find the best rides. Once you find
-                a ride, simply click <span class="text-[#0A0908] font-semibold">"Directions"</span> and the map will take you to it.
-                <br><br>
-                In the <span class="font-semibold text-[#0A0908]">Settings</span> and <span class="font-semibold text-[#0A0908]">Map</span>
-                pages, you can customize which ride types appear on the map. Clicking a ride’s pin will show its details, and
-                settings updates will reflect automatically.
+    </header>
+    
+    <!-- Help Section -->
+    <div class="flex items-center justify-center min-h-screen px-4">
+        <div class="bg-[#22333A] bg-opacity-50 text-[#F1FAEE] p-8 rounded-lg shadow-lg max-w-3xl text-center">
+            <h2 class="text-2xl font-bold mb-4">How to Use The Amusement Park Navigator</h2>
+            <p class="text-lg leading-relaxed">
+                Welcome to our app! <br><br> Navigate using the menu above to access different sections. <br><br> Use the "Rides" page to browse available rides, 
+                the "Map" to find locations, and "Favorites" to keep track of saved items. <br><br> You can also use the filter and sort options on the "Rides" page for easier searching. 
             </p>
         </div>
     </div>
