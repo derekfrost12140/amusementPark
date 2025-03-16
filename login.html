@@ -9,7 +9,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
- 
     <!-- Firebase SDK (Modular) -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js";
@@ -63,138 +62,143 @@
         });
     </script>
 
-    <style>
-        .login-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
+<style>
+    body {
+        background: #D9D9D9; /* Lighter grey background for the body */
+        color: #333; /* Dark text color for contrast */
+        font-family: 'Poppins', sans-serif; /* Ensure consistent font */
+    }
 
-        .login-box {
-            background-color: rgba(255, 255, 255, 0.95);
-            border: 2px solid #6CB11B;
-            border-radius: 10px;
-            box-shadow: 0px 8px 30px rgba(0, 0, 0, 0.3);
-            padding: 40px;
-            width: 400px;
-            text-align: center;
+    .login-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 90vh;
+    }
+
+    .login-box {
+        background-color: #F2F2F2; /* Light grey for the login box */
+        border: 2px solid #22333B; /* Dark blue border for contrast */
+        border-radius: 10px;
+        box-shadow: 0px 8px 30px rgba(0, 0, 0, 0.2);
+        padding: 40px;
+        width: 400px;
+        text-align: center;
+        opacity: 0;
+        transform: translateY(-20px);
+        animation: fadeIn 0.8s ease-out forwards;
+    }
+
+    @keyframes fadeIn {
+        from {
             opacity: 0;
             transform: translateY(-20px);
-            animation: fadeIn 0.8s ease-out forwards;
         }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        to {
+            opacity: 1;
+            transform: translateY(0);
         }
+    }
 
-        .login-box h3 {
-            margin-bottom: 20px;
-            color: #333;
-            font-size: 24px;
-        }
+    .login-box h3 {
+        margin-bottom: 24px;
+        color: #1b1b1b; /* Dark text color for the heading */
+        font-size: 24px;
+    }
 
-        .login-box input {
+    .login-box input {
+        width: 100%;
+        padding: 12px;
+        margin: 10px 0;
+        border: 1px solid #ccc; /* Light border for inputs */
+        border-radius: 5px;
+        background-color: #FFFFFF; /* White background for inputs */
+        color: #333; /* Dark text color for inputs */
+    }
+
+    .login-box input::placeholder {
+        color: #B0B0B0; /* Placeholder text color */
+    }
+
+    .login-box button {
+        width: 100%;
+        padding: 12px;
+        margin: 10px 0;
+        background-color: #22333B; /* Bluish Grey for the login button */
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+    }
+
+    .login-box button:hover {
+        background-color: #0A0908; /* Slightly darker green on hover */
+    }
+
+    .social {
+        margin: 20px 0;
+    }
+
+    /* Google Sign-in Button Styling */
+    .social button {
+        background-color: #0A0908; /* Google Black */
+        color: white;
+        border: none;
+        padding: 12px;
+        font-size: 16px;
+        border-radius: 5px;
+        cursor: pointer;
+        width: 100%;
+    }
+
+    .social button:hover {
+        background-color: #C1351D; /* Darker red on hover */
+    }
+
+    .form p {
+        margin-top: 20px;
+        color: #333; /* Dark text color for the paragraph */
+    }
+
+    .form a {
+        color: #6CB11B; /* Green link color */
+        text-decoration: none;
+    }
+
+    .form a:hover {
+        text-decoration: underline;
+    }
+
+    /* Header Styling */
+     /* Header Styling */
+     header {
+            background-color: #22333B;
+            color: #e7e5e4;
+            padding: 20px 0;
+            text-align: center;
+            font-size: 1.8rem;
+            font-weight: bold;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+            position: relative;
             width: 100%;
-            padding: 12px;
-            margin: 10px 0;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-
-        .login-box button {
-            width: 100%;
-            padding: 12px;
-            margin: 10px 0;
-            background-color: #6CB11B;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            font-size: 16px;
-            cursor: pointer;
-        }
-
-        .login-box button:hover {
-            background-color: #5aa015;
-        }
-
-        .social {
-            margin: 20px 0;
-        }
-
-        .social button {
-            background-color: #4285F4;
-            color: white;
-            border: none;
-            padding: 12px;
-            font-size: 16px;
-            border-radius: 5px;
-            cursor: pointer;
-            width: 100%;
-        }
-
-        .social button:hover {
-            background-color: #357ae8;
-        }
-
-        .form p {
-            margin-top: 20px;
-        }
-
-        .form a {
-            color: #6CB11B;
-            text-decoration: none;
-        }
-
-        .form a:hover {
-            text-decoration: underline;
-        }
-
-        .background-overlay {
-            position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('Image.webp') center/cover no-repeat;
-            filter: blur(5px);
-            opacity: 0;
-            animation: fadeInBackground 1.5s ease-in forwards;
-            z-index: -1;
+            z-index: 10;
         }
 
-        @keyframes fadeInBackground {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
-        }
-    </style>
+      
+</style>
 </head>
 
-<body class="bg-green-700 relative">
-    <div class="background-overlay"></div>
-
+<body>
+     <!-- Background blur image -->
+     <div class="fixed top-0 left-0 w-full h-full bg-[#EAE0D5] bg-cover bg-center filter blur-md -z-10"></div>
+></div>
+<!-- Header -->
+<header>Amusement Park Navigator - Login</header>
     <header class="bg-gray text-white shadow-lg rounded-xl">
-        <nav class="container mx-auto flex justify-between items-center py-4 px-4">
-            <div class="flex space-x-6">
-                <a href="home.html" class="text-xl px-1 font-semibold hover:text-white hover:scale-150 transition-transform duration-200">Home</a>
-                <a href="mapNav.html" class="text-xl px-1 font-semibold hover:text-white hover:scale-150 transition-transform duration-200">Map</a>
-                <a href="help.html" class="text-xl px-1 font-semibold hover:text-white hover:scale-150 transition-transform duration-200">Help</a>
-            </div>
-            <div class="flex space-x-4">
-                <a href="settings.html" class="bg-amber-950 text-white px-5 py-3 rounded-full shadow-lg hover:scale-100 hover:bg-white hover:text-black hover:shadow-xl transition-transform duration-200">Settings</a>
-            </div>
-        </nav>
+        
     </header>
 
     <div class="login-container">
