@@ -3,33 +3,121 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Help Page</title>
+    <title>Help - Amusement Park Navigator</title>
     <link rel="stylesheet" href="./src/output.css">
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            box-sizing: border-box;
+            background-color: #e0e0e0;
+        }
+
+        /* Background Image */
+        .background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: url('theme-park-bg.jpg') no-repeat center center/cover;
+            filter: blur(3px);
+            z-index: -1;
+        }
+
+        /* Header Styling */
+        header {
+            background-color: #3a3a3a;
+            color: #ffffff;
+            padding: 20px 0;
+            text-align: center;
+            font-size: 1.8rem;
+            font-weight: bold;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+            position: relative;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 10;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            padding: 10px;
+            background-color: #3a3a3a;
+        }
+
+        nav a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.2rem;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+            transform: scale(1.1);
+        }
+
+        /* Help Section Styling */
+        .help-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 80vh;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .help-box {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 12px;
+            max-width: 600px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .help-box h2 {
+            color: #2a2a2a;
+            font-size: 2rem;
+            margin-bottom: 15px;
+        }
+
+        .help-box p {
+            font-size: 1.1rem;
+            color: #333;
+            line-height: 1.6;
+        }
+    </style>
 </head>
 <body>
-    <div class="fixed top-0 left-0 w-full h-full bg-[#EAE0D5] bg-cover bg-center filter blur-md -z-10"></div>
+    <div class="background"></div>
+
+    <!-- Header -->
+    <header>Amusement Park Navigator - Help</header>
     
     <!-- Navigation Bar -->
-    <header class="bg-[#0A0908] text-[#F1FAEE] shadow-lg">
-        <nav class="container mx-auto flex justify-between items-center py-2 px-4">
-            <div class="flex space-x-6">
-                <a href="login.html" class="text-l font-semibold hover:text-[#F1FAEE] hover:scale-110 transition-transform duration-200">Sign in</a>
-                <a href="home.html" class="text-l font-semibold hover:text-[#F1FAEE] hover:scale-110 transition-transform duration-200">Home</a>
-                <a href="ride_list.html" class="text-l font-semibold hover:text-[#F1FAEE] hover:scale-110 transition-transform duration-200">Rides</a>
-                <a href="mapNav.html" class="text-l font-semibold hover:text-[#F1FAEE] hover:scale-110 transition-transform duration-200">Map</a>
-                <a href="favorites.html" class="text-l font-semibold hover:text-[#F1FAEE] hover:scale-110 transition-transform duration-200">Favorites</a>
-                <a href="help.html" class="text-l font-semibold hover:text-[#F1FAEE] hover:scale-110 transition-transform duration-200">Help</a>
-            </div>
-        </nav>
-    </header>
+    <nav>
+        <a href="home.html">Home</a>
+        <a href="ride_list.html">Rides</a>
+        <a href="mapNav.html">Map</a>
+        <a href="favorites.html">Favorites</a>
+        <a href="help.html">Help</a>
+    </nav>
     
     <!-- Help Section -->
-    <div class="flex items-center justify-center min-h-screen px-4">
-        <div class="bg-[#22333A] bg-opacity-50 text-[#F1FAEE] p-8 rounded-lg shadow-lg max-w-3xl text-center">
-            <h2 class="text-2xl font-bold mb-4">How to Use The Amusement Park Navigator</h2>
-            <p class="text-lg leading-relaxed">
-                Welcome to our app! <br><br> Navigate using the menu above to access different sections. <br><br> Use the "Rides" page to browse available rides, 
-                the "Map" to find locations, and "Favorites" to keep track of saved items. <br><br> You can also use the filter and sort options on the "Rides" page for easier searching. 
+    <div class="help-container">
+        <div class="help-box">
+            <h2>Welcome to the Amusement Park Navigator!</h2>
+            <p>
+                Need help navigating the park? We've got you covered! <br>
+                - Use the <strong>Rides</strong> page to browse available attractions. <br>
+                - The <strong>Map</strong> will guide you to different locations within the park. <br>
+                - Save your favorite spots using the <strong>Favorites</strong> feature. <br>
             </p>
         </div>
     </div>
