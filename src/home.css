@@ -1,0 +1,105 @@
+
+@import "tailwindcss";
+body {
+    font-family: Arial, sans-serif;
+    background-image: url('/Users/vishantsavaliya/Desktop/colorlib-regform-26/images/back.jpg'); /* Adjust based on your actual image path */
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* Navbar styling */
+.navbar {
+    background-color: #a0674f;
+    padding: 10px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    width: 100%;
+}
+
+.left-nav,
+.right-nav {
+    display: flex;
+}
+
+.left-nav .nav-link {
+    margin: 0 15px; 
+    color: white;
+    padding: 15px 10px;
+    text-decoration: none; 
+    font-size: 18px;
+    font-weight: bold; 
+    align-self: center;
+}
+
+.right-nav .nav-link {
+    margin: 0 15px; 
+    color: white;
+    padding: 15px 75px 10px 10px;
+    text-decoration: none; 
+    font-size: 18px;
+    font-weight: bold; 
+    align-self: center;
+}
+
+.preference:hover{
+    background-color: #9a6900;
+    color: rgb(250, 250, 250);
+}
+
+.nav-link:hover {
+    color:rgb(0, 0, 0);
+}
+
+
+.map-button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80%; /* Adjusts the vertical position of the button */
+}
+
+.map-button {
+    display: inline-block;
+    background-color: #6B92BF; /* Green background for visibility */
+    color: white;
+    padding: 15px 30px;
+    font-size: 24px;
+    border-radius: 8px;
+    text-decoration: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.map-button:hover {
+    background-color: #367C36;
+}
+
+.map-button-container {
+    position: absolute;
+    top: 50%; /* Adjust this value as needed */
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.map-button {
+    background-color: #4CAF50; /* Green background */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-decoration: none;
+    font-size: 16px;
+    border-radius: 5px;
+    margin: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.map-button:hover {
+    background-color: #367c39; /* Darker green on hover */
+}

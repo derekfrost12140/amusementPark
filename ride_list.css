@@ -306,19 +306,16 @@ input[type="radio"] {
 /* Button styles */
 .directions-button {
   display: inline-block;
-  padding: 10px 20px;
+  padding: 10px 10px;
   font-size: 0.875rem;
-  background-color: #3498db;
+  background-color: #22333B;
   color: white;
-  border-radius: 5px;
+  border-radius:  1px;
   text-align: center;
   text-decoration: none;
   transition: background-color 0.3s ease;
 }
 
-.directions-button:hover {
-  background-color: #2980b9;
-}
 
 /* Favorite button styles */
 .favorite-button {
