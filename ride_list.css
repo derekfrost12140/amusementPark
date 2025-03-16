@@ -1,42 +1,32 @@
 /* Existing Styles */
-
 .ride-container {
-  background-color: #f1f1f1;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease-in-out, height 0.3s ease-in-out;
-  cursor: pointer;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  height: 250px; /* Default height */
+    background-color: #C6AC8F;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .favorite-button,
+  .directions-button {
+    padding: 10px;
+    border-radius: 8px; 
+    flex: 1;
 }
 
-.ride-container:hover {
-  transform: scale(1.05);
+.ride-container-image {
+    width: 300px; 
+    height: auto; 
+    margin-right: 20px; 
 }
 
-/* Expanded state */
-.ride-container.expanded {
-  height: auto;
+.ride-container-text {
+    flex: 1; 
+    background-color: #5E503F; 
+    padding: 20px; 
+    border-radius: 8px; 
+    color: #EAE0D5; 
+    position: relative;
 }
-
-/* Hide details initially */
-.ride-details {
-  width: 100%;
-  padding: 10px;
-  background: rgba(0, 0, 0, 0.8);
-  color: white;
-  text-align: center;
-  display: none;
-}
-
-/* Show details when expanded */
-.ride-container.expanded .ride-details {
-  display: block;
-}
-
 
 .button-container {
     float: right;
@@ -270,17 +260,9 @@ input[type="radio"] {
   transition: transform 0.3s ease-in-out;
 }
 
-.ride-card .button-container a {
-  background-color: #f7c600;
-  padding: 10px 20px;
-  color: white;
-  border-radius: 5px;
-  cursor: pointer;
-  text-align: center;
-  width: 100%;
-  transition: background-color 0.3s;
+.ride-card:hover {
+  transform: scale(1.05);
 }
-
 
 /* Image styles */
 .ride-card-image {
@@ -324,19 +306,16 @@ input[type="radio"] {
 /* Button styles */
 .directions-button {
   display: inline-block;
-  padding: 10px 20px;
+  padding: 10px 10px;
   font-size: 0.875rem;
-  background-color: #3498db;
+  background-color: #22333B;
   color: white;
-  border-radius: 5px;
+  border-radius:  1px;
   text-align: center;
   text-decoration: none;
   transition: background-color 0.3s ease;
 }
 
-.directions-button:hover {
-  background-color: #2980b9;
-}
 
 /* Favorite button styles */
 .favorite-button {
