@@ -219,11 +219,11 @@
             <p><b>Min Height:</b> ${rideData.minHeight || 'N/A'}"</p>
             <p><b>Duration:</b> ${rideData.duration ? formatDuration(rideData.duration) : 'N/A'}</p>
             <p><b>Accessibility:</b> ${rideData.wheelchair ? 'Wheelchair Accessible' : 'Not Accessible'}</p>
-            <div class="button-container text-center mt-2">
-              <a href="mapNav.html?lat=${rideData.lat}&lng=${rideData.lng}" class="bg-blue-500 text-white px-3 py-1 rounded">Directions</a>
-            </div>
-            <button class="remove-favorite mt-2" data-name="${rideData.name}">Remove</button>
+            <div class="flex justify-between items-center gap-2 mt-3">
+            <a href="mapNav.html?lat=${rideData.lat}&lng=${rideData.lng}" class="bg-blue-500 text-white px-3 py-1 rounded w-1/2 text-center">Directions</a>
+            <button class="remove-favorite w-1/2 py-1" data-name="${rideData.name}">Remove</button>
           </div>
+
         `;
         favoriteRidesContainer.appendChild(rideElement);
       });

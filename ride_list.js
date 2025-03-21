@@ -72,19 +72,29 @@ const styles = `
 }
 
 /* Favorite Button */
+.directions-button {
+  background-color: #34C759; /* Apple-style green */
+  color: white;
+  border-radius: 6px;
+  transition: background 0.3s;
+}
+
+.directions-button:hover {
+  background-color: #28a745; /* Darker green on hover */
+}
+
 .favorite-button {
-    background-color: #f7c600;
-    padding: 10px 20px;
-    color: white;
-    border-radius: 5px;
-    text-align: center;
-    cursor: pointer;
-    margin-top: 10px;
+  background-color: #FFD700; /* Gold */
+  color: black;
+  border-radius: 6px;
+  transition: background 0.3s;
 }
 
 .favorite-button:hover {
-    background-color: #e6b200;
+  background-color: #E6C200; /* Slightly darker gold */
 }
+
+
 
 /* Remove Favorite */
 .remove-favorite {
@@ -659,13 +669,13 @@ document.addEventListener('DOMContentLoaded', async () => {
               <p><b>Min Height: </b>${ride.minHeight || "N/A"}"</p>
               <p><b>Duration: </b>${formatDuration(ride.duration) || "N/A"}</p>
               <p><b>Accessibility Constraints: </b><span class="accessibility-data text-sm"></span></p>
-              <div class="button-container">
-                  <a href="mapNav.html?lat=${ride.lat}&lng=${ride.lng}" class="directions-button">Directions</a>
-              </div>
-              <button class="favorite-button" data-ride-id="${ride.id}" data-ride-name="${ride.name}">
+              <div class="flex justify-between items-center gap-2 mt-3">
+                <a href="mapNav.html?lat=${ride.lat}&lng=${ride.lng}" class="directions-button w-1/2 text-center py-1">Directions</a>
+                <button class="favorite-button w-1/2 py-1" data-ride-id="${ride.id}" data-ride-name="${ride.name}">
                   ☆ Favorite
-              </button>
-          </div>
+                </button>
+              </div>
+
       `;
       
       const accessibilityData = rideContainer.querySelector('.accessibility-data');
