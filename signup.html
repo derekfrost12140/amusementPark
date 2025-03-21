@@ -1,206 +1,170 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Get Started Now</title>
-    <link rel="stylesheet" href="./src/output.css">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Get Started Now</title>
+  <link rel="stylesheet" href="./src/output.css">
+  <link rel="stylesheet" href="ride_list.css">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
 
-    <!-- Firebase SDK with non-module URLs -->
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
 
-    <script>
-        // Firebase Configuration (Make sure to replace with your actual configuration values)
-        const firebaseConfig = {
-            apiKey: "AIzaSyBn7xE-jaEuixzyDROnbHrQo6-YtOR5LaU",
-            authDomain: "amusement-park-4039d.firebaseapp.com",
-            projectId: "amusement-park-4039d",
-            storageBucket: "amusement-park-4039d.appspot.com",
-            messagingSenderId: "625618396056",
-            appId: "1:625618396056:web:ff2907be3a1958ed9041ed",
-            measurementId: "G-6QHBHT0PPE"
-        };
+  <script>
+    const firebaseConfig = {
+        apiKey: "AIzaSyBn7xE-jaEuixzyDROnbHrQo6-YtOR5LaU",
+        authDomain: "amusement-park-4039d.firebaseapp.com",
+        projectId: "amusement-park-4039d",
+        storageBucket: "amusement-park-4039d.appspot.com",
+        messagingSenderId: "625618396056",
+        appId: "1:625618396056:web:ff2907be3a1958ed9041ed",
+        measurementId: "G-6QHBHT0PPE"
+    };
+    firebase.initializeApp(firebaseConfig);
+  </script>
 
-        // Initialize Firebase
-        firebase.initializeApp(firebaseConfig);
-    </script>
+  <style>
+    .wrapper {
+      width: 350px;
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.95);
+      border: 2px solid #6CB11B;
+      border-radius: 10px;
+      box-shadow: 0px 8px 30px rgba(0, 0, 0, 0.3);
+      position: absolute;
+      top: calc(50% + 192px);
+      left: 45%;
+      transform: translate(-50%, -50%);
+      opacity: 0;
+      transform: translateY(-20px);
+      animation: fadeIn 0.8s ease-out forwards;
+    }
 
-    <style>
-       
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
 
-        /* Wrapper for the form */
-        .wrapper {
-            width: 350px;
-            padding: 20px;
-            background: rgba(255, 255, 255, 0.95);
-            border: 2px solid #6CB11B;
-            border-radius: 10px;
-            box-shadow: 0px 8px 30px rgba(0, 0, 0, 0.3);
-            position: absolute;
-            top: calc(50% + 192px); /* Adjusted to move 2 inches (192px) down */
-            left: 45%;
-            transform: translate(-50%, -50%);
-            opacity: 0;
-            transform: translateY(-20px);
-            animation: fadeIn 0.8s ease-out forwards;
-        }
+    .form-container h2 {
+      text-align: center;
+      color: #333;
+      margin-bottom: 20px;
+      font-size: 25px;
+    }
 
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+    form {
+      display: flex;
+      flex-direction: column;
+    }
 
-        .form-container h2 {
-            text-align: center;
-            color: #333;
-            margin-bottom: 20px;
-            font-size: 25px;
-        }
+    .form-container p {
+      text-align: center;
+      margin-top: 15px;
+      font-size: 14px;
+      color: #666;
+    }
 
-        form {
-            display: flex;
-            flex-direction: column;
-        }
+    input[type="text"],
+    input[type="email"],
+    input[type="password"] {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      background: transparent;
+    }
 
-        .form-container p {
-            text-align: center;
-            margin-top: 15px;
-            font-size: 14px;
-            color: #666;
-        }
+    button[type="submit"] {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      background-color: #22333B;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+    }
 
-        input[type="text"],
-        input[type="email"],
-        input[type="password"] {
-            width: 100%;
-            padding: 12px;
-            margin: 10px 0;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            background: transparent;
-        }
-
-        button[type="submit"] {
-            width: 100%;
-            padding: 12px;
-            margin: 10px 0;
-            background-color: #22333B;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            font-size: 16px;
-            cursor: pointer;
-        }
-
-        button[type="submit"]:hover {
-            background-color: #22333B;
-        }
-     /* Header Styling */
-     header {
-            background-color: #22333B;
-            color: #e7e5e4;
-            padding: 20px 0;
-            text-align: center;
-            font-size: 1.8rem;
-            font-weight: bold;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
-            position: relative;
-            width: 100%;
-            top: 0;
-            left: 0;
-            z-index: 10;
-        }
-
-        nav {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            padding: 10px;
-            background-color: #0A0908;
-        }
-
-        nav a {
-            color: #ffffff;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 1.2rem;
-            transition: 0.3s;
-        }
-
-        nav a:hover {
-            text-decoration: underline;
-            transform: scale(1.1);
-        }
-</style>
+    button[type="submit"]:hover {
+      background-color: #22333B;
+    }
+  </style>
 </head>
 
 <body class="bg-green-700 relative">
-    <div class="fixed top-0 left-0 w-full h-full bg-[#EAE0D5] bg-cover bg-center filter blur-md -z-10"></div>
-    <header>Amusement Park Navigator</header>
-    <header class="bg-gray text-white shadow-lg rounded-xl">
-        <nav class="container mx-auto flex justify-between items-center py-4 px-4">
-            <div class="flex space-x-6">
-                <a href="home.html" class="text-xl px-1 font-semibold hover:text-white hover:scale-150 transition-transform duration-200">Home</a>
-                
-            </div>
-            <div class="flex space-x-4">
-                <a href="settings.html" class="bg-[#22333B] text-[#F1FAEE] px-4 py-2 rounded-full shadow-lg hover:scale-105  hover:shadow-xl transition-transform duration-200">Settings</a>
-            </div>
-        </nav>
-    </header>
+  <!-- Background Blur -->
+  <div class="fixed top-0 left-0 w-full h-full bg-[#EAE0D5] bg-cover bg-center filter blur-md -z-10"></div>
 
-    <!-- Main Content Wrapper -->
-    <div class="wrapper">
-        <div class="form-container">
-            <h2>Get Started Now</h2>
-            <form id="signupForm">
-                <input type="text" name="name" placeholder="Name" id="name" required>
-                <input type="email" name="email" placeholder="Email address" id="email" required>
-                <input type="password" name="password" placeholder="Password" id="password" required>
-                <input type="password" name="confirm_password" placeholder="Confirm Password" id="confirm_password" required>
-                <button type="submit">Signup</button>
-                <p>Have an account? <a href="login.html">Sign In</a></p>
-            </form>
-        </div>
+  <!-- Updated Navbar -->
+  <header class="bg-[#0A0908] text-[#F1FAEE] shadow-lg">
+    <nav class="container mx-auto flex justify-between items-center py-2 px-4">
+      <div class="flex space-x-6">
+        <a href="login.html" class="text-l font-semibold hover:text-[#F1FAEE] hover:scale-110 transition-transform duration-200">Sign in</a>
+        <a href="home.html" class="text-l font-semibold hover:text-[#F1FAEE] hover:scale-110 transition-transform duration-200">Home</a>
+        <a href="ride_list.html" class="text-l font-semibold hover:text-[#F1FAEE] hover:scale-110 transition-transform duration-200">Rides</a>
+        <a href="mapNav.html" class="text-l font-semibold hover:text-[#F1FAEE] hover:scale-110 transition-transform duration-200">Map</a>
+        <a href="favorites.html" class="text-l font-semibold hover:text-[#F1FAEE] hover:scale-110 transition-transform duration-200">Favorites</a>
+        <a href="help.html" class="text-l font-semibold hover:text-[#F1FAEE] hover:scale-110 transition-transform duration-200">Help</a>
+      </div>
+      <div class="flex space-x-4">
+
+        <a href="settings.html" class="bg-[#22333B] text-[#F1FAEE] px-4 py-2 rounded-full shadow-lg hover:scale-105 hover:shadow-xl transition-transform duration-200">Settings</a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Signup Form -->
+  <div class="wrapper">
+    <div class="form-container">
+      <h2>Get Started Now</h2>
+      <form id="signupForm">
+        <input type="text" name="name" placeholder="Name" id="name" required>
+        <input type="email" name="email" placeholder="Email address" id="email" required>
+        <input type="password" name="password" placeholder="Password" id="password" required>
+        <input type="password" name="confirm_password" placeholder="Confirm Password" id="confirm_password" required>
+        <button type="submit">Signup</button>
+        <p>Have an account? <a href="login.html">Sign In</a></p>
+      </form>
     </div>
+  </div>
 
-    <script>
-        const auth = firebase.auth();
-        const signupForm = document.getElementById('signupForm');
+  <script>
+    const auth = firebase.auth();
+    const signupForm = document.getElementById('signupForm');
 
-        signupForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
+    signupForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
 
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
-            const confirmPassword = document.getElementById('confirm_password').value;
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      const confirmPassword = document.getElementById('confirm_password').value;
 
-            // Check if passwords match
-            if (password !== confirmPassword) {
-                alert("Passwords do not match!");
-                return;
-            }
+      if (password !== confirmPassword) {
+        alert("Passwords do not match!");
+        return;
+      }
 
-            try {
-                // Create user with email and password
-                await auth.createUserWithEmailAndPassword(email, password);
-                alert("Signup successful! Redirecting to login page...");
-                window.location.href = "login.html";
-            } catch (error) {
-                console.error(error);
-                alert("Error: " + error.message);
-            }
-        });
-    </script>
+      try {
+        await auth.createUserWithEmailAndPassword(email, password);
+        alert("Signup successful! Redirecting to login page...");
+        window.location.href = "login.html";
+      } catch (error) {
+        console.error(error);
+        alert("Error: " + error.message);
+      }
+    });
+  </script>
 </body>
 </html>
