@@ -389,5 +389,5 @@ export const favoriteRides = [
       sound: 7,
       smell: 1,
       sight: 7
-    }
-  ];
+    }]
+  

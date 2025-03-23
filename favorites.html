@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="./src/output.css">
   <link rel="stylesheet" href="ride_list.css">
   <style>
+    
     .ride-card {
       position: relative;
       width: 100%;
@@ -89,6 +90,7 @@
         grid-template-columns: 1fr; /* 1 card per row on small screens */
       }
     }
+    
   </style>
 </head>
 <body >
@@ -107,14 +109,8 @@
         <a href="help.html" class="text-l font-semibold hover:text-[#F1FAEE] hover:scale-110 transition-transform duration-200">Help</a>
         <a href="favorites.html" class="text-l font-semibold hover:text-[#F1FAEE] hover:scale-110 transition-transform duration-200">Favorites</a>
       </div>
-  
+
       <div class="flex space-x-4">
-        <!-- Sort Button -->
-        <a href="sort.html" class="bg-[#22333B] text-[#F1FAEE] px-4 py-2 rounded-full shadow-lg hover:scale-105 hover:bg-[#F1FAEE] hover:text-black hover:shadow-xl transition-transform duration-200">Sort</a>
-  
-        <!-- Filter Button -->
-        <a href="filter.html" class="bg-[#22333B] text-[#F1FAEE] px-4 py-2 rounded-full shadow-lg hover:scale-105 hover:bg-[#F1FAEE] hover:text-black hover:shadow-xl transition-transform duration-200">Filter</a>
-  
         <!-- Settings Button -->
         <a href="settings.html" class="bg-[#22333B] text-[#F1FAEE] px-4 py-2 rounded-full shadow-lg hover:scale-105 hover:bg-[#F1FAEE] hover:text-black hover:shadow-xl transition-transform duration-200">Settings</a>
 
@@ -122,7 +118,6 @@
       </div>
     </nav>
   </header>
-  
 
   <div class="container mx-auto mt-6">
     <div id="favorite-rides">
@@ -243,9 +238,13 @@
         button.addEventListener('click', async (event) => {
           const rideName = event.target.getAttribute('data-name');
           await removeFavoriteRide(rideName);
-          event.target.parentElement.parentElement.remove(); // Remove the ride card from the DOM
+
+          // Remove the entire ride card, including image and overlay
+          const card = event.target.closest('.ride-card'); // Get the parent card
+          card.remove();
         });
       });
+
     }
 
     // Function to remove a favorite ride from Firestore
@@ -269,6 +268,9 @@
       const s = seconds % 60;
       return `${m}m ${s}s`;
     }
-  </script>
+  
+    
+</script>
+<script type="module" src="favorites.js"></script>
 </body>
 </html>
