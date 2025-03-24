@@ -32,7 +32,7 @@
       width: 350px;
       padding: 20px;
       background: rgba(255, 255, 255, 0.95);
-      border: 2px solid #6CB11B;
+      
       border-radius: 10px;
       box-shadow: 0px 8px 30px rgba(0, 0, 0, 0.3);
       position: absolute;
@@ -66,6 +66,21 @@
       display: flex;
       flex-direction: column;
     }
+   
+    header {
+            background-color: #22333B;
+            color: #e7e5e4;
+            padding: 20px 0;
+            text-align: center;
+            font-size: 1.8rem;
+            font-weight: bold;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+            position: relative;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 10;
+        }
 
     .form-container p {
       text-align: center;
@@ -107,24 +122,8 @@
   <!-- Background Blur -->
   <div class="fixed top-0 left-0 w-full h-full bg-[#EAE0D5] bg-cover bg-center filter blur-md -z-10"></div>
 
-  <!-- Updated Navbar -->
-  <header class="bg-[#0A0908] text-[#F1FAEE] shadow-lg">
-    <nav class="container mx-auto flex justify-between items-center py-2 px-4">
-      <div class="flex space-x-6">
-        <a href="home.html" class="text-l font-semibold hover:text-[#F1FAEE] hover:scale-110 transition-transform duration-200">Home</a>
-        <a href="ride_list.html" class="text-l font-semibold hover:text-[#F1FAEE] hover:scale-110 transition-transform duration-200">Rides</a>
-        <a href="mapNav.html" class="text-l font-semibold hover:text-[#F1FAEE] hover:scale-110 transition-transform duration-200">Map</a>
-        <a href="help.html" class="text-l font-semibold hover:text-[#F1FAEE] hover:scale-110 transition-transform duration-200">Help</a>
-        <a href="favorites.html" class="text-l font-semibold hover:text-[#F1FAEE] hover:scale-110 transition-transform duration-200">Favorites</a>
-      </div>
-  
-      <div class="flex space-x-4">
-        <a href="settings.html" class="bg-[#22333B] text-[#F1FAEE] px-4 py-2 rounded-full shadow-lg hover:scale-105 hover:bg-[#F1FAEE] hover:text-black hover:shadow-xl transition-transform duration-200">Settings</a>
-
-        <a href="login.html" class="bg-[#22333B] text-[#F1FAEE] px-4 py-2 rounded-full shadow-lg hover:scale-105 hover:bg-[#F1FAEE] hover:text-black hover:shadow-xl transition-transform duration-200">Sign In</a>
-      </div>
-    </nav>
-  </header>
+  <!-- Header -->
+<header>Amusement Park Navigator - SignUp</header>
 
   <!-- Signup Form -->
   <div class="wrapper">
