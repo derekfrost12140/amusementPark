@@ -25,7 +25,8 @@ const auth = getAuth(app);
 // Debugging to ensure Firebase initialized correctly
 console.log("✅ Firebase initialized successfully");
 
-// Get submit button and add event listener
+
+
 const submit = document.getElementById("submit");
 submit.addEventListener("click", async function (event) {
     event.preventDefault(); // Prevent form submission
