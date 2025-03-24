@@ -72,27 +72,23 @@ const styles = `
 }
 
 /* Favorite Button */
-.directions-button {
-  background-color: #34C759; /* Apple-style green */
-  color: white;
-  border-radius: 6px;
-  transition: background 0.3s;
+.directions-button, .favorite-button {
+  background-color: white; /* White background */
+  color: black; /* Black text */
+  border: 1px solid black; /* Thin black border */
+  border-radius: 20px; /* More rounded corners */
+  padding: 8px 16px; /* Keep a compact size */
+  font-size: 16px; /* Slightly larger text */
+  transition: background 0.3s, transform 0.3s, color 0.3s;
+  margin: 5px; /* Adds space between buttons */
 }
 
-.directions-button:hover {
-  background-color: #28a745; /* Darker green on hover */
+.directions-button:hover, .favorite-button:hover {
+  background-color: #f2f2f2; /* Light gray hover effect */
+  transform: scale(1.05); /* Scale up to 110% */
 }
 
-.favorite-button {
-  background-color: #FFD700; /* Gold */
-  color: black;
-  border-radius: 6px;
-  transition: background 0.3s;
-}
 
-.favorite-button:hover {
-  background-color: #E6C200; /* Slightly darker gold */
-}
 
 
 
